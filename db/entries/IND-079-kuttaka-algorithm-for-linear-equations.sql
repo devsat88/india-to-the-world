@@ -1,7 +1,7 @@
 -- IND-079: Kuttaka algorithm for linear equations
 
 INSERT INTO innovations (
-  id, slug, discipline_id, title, originator, period, year_start, year_end, source_text, description, background, significance, western_parallel, transmission_note, modern_relevance, modern_value, evidence_tier, confidence, caveat, region, verification, wikipedia, image_url, image_credit
+  id, slug, discipline_id, title, originator, period, year_start, year_end, source_text, description, background, significance, western_parallel, transmission_note, modern_relevance, modern_value, today, evidence_tier, confidence, caveat, region, verification, wikipedia, image_url, image_credit
 ) VALUES (
   'IND-079',                                   -- id
   'kuttaka-algorithm-for-linear-equations',    -- slug
@@ -19,6 +19,7 @@ INSERT INTO innovations (
   'Independent precursor.',                    -- transmission_note
   'Underpins modular arithmetic and cryptography (RSA, etc.).', -- modern_relevance
   NULL,                                        -- modern_value
+  'Modular arithmetic behind RSA encryption',  -- today
   'Documented',                                -- evidence_tier
   'High',                                      -- confidence
   'A close precursor to, not identical with, the modern extended Euclidean algorithm.', -- caveat

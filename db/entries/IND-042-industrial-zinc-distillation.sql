@@ -1,7 +1,7 @@
 -- IND-042: Industrial zinc distillation
 
 INSERT INTO innovations (
-  id, slug, discipline_id, title, originator, period, year_start, year_end, source_text, description, background, significance, western_parallel, transmission_note, modern_relevance, modern_value, evidence_tier, confidence, caveat, region, verification, wikipedia, image_url, image_credit
+  id, slug, discipline_id, title, originator, period, year_start, year_end, source_text, description, background, significance, western_parallel, transmission_note, modern_relevance, modern_value, today, evidence_tier, confidence, caveat, region, verification, wikipedia, image_url, image_credit
 ) VALUES (
   'IND-042',                                   -- id
   'industrial-zinc-distillation',              -- slug
@@ -19,6 +19,7 @@ INSERT INTO innovations (
   'Indian technique preceded and possibly informed later European methods. Craddock notes Bristol''s 1738 process closely matches Zawar''s, suggesting knowledge of it reached Europe.', -- transmission_note
   'Zinc is vital for galvanising, alloys and batteries.', -- modern_relevance
   NULL,                                        -- modern_value
+  'Galvanised steel and zinc batteries',       -- today
   'Documented',                                -- evidence_tier
   'High',                                      -- confidence
   'Small-scale zinc use existed elsewhere; the industrial distillation at Zawar is the notable first.', -- caveat

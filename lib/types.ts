@@ -14,16 +14,24 @@ export type Item = {
   year: number;
   yearEnd: number;
   description: string;
+  /** Where it lives today, in a few words; set on entries the games can use. */
+  today: string | null;
   evidence: Evidence;
   confidence: 'High' | 'Medium' | 'Low';
   image: string | null;
   hasJourney: boolean;
 };
 
+/** A point on the globe, from journey stops. */
+export type LatLon = { lat: number; lon: number };
+export type Place = LatLon & { label?: string };
+
 export type Atlas = { eras: Era[]; disciplines: Record<string, Discipline>; items: Item[] };
 
 export type SourceKind = 'reference' | 'primary_text' | 'translation' | 'museum_object' | 'image' | 'article';
 export type Source = {
+  /** Its number in the entry, as cited by [n] in chapters. */
+  position: number;
   kind: SourceKind;
   title: string;
   creator: string | null;
@@ -50,6 +58,9 @@ export type JourneyStop = {
 
 export type Branch = { item: Item; next: Branch[] };
 
+/** A section of the long read; paragraphs split on blank lines, [n] cites a source. */
+export type Chapter = { heading: string; body: string };
+
 export type Entry = Item & {
   background: string | null;
   significance: string | null;
@@ -64,6 +75,7 @@ export type Entry = Item & {
   wikipedia: string | null;
   imageCredit: string | null;
   sources: Source[];
+  chapters: Chapter[];
   outcomes: string[];
   /** What this entry led to, followed through to the most recent descendants. */
   legacy: Branch[];

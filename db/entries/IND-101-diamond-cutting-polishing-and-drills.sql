@@ -1,7 +1,7 @@
 -- IND-101: Diamond cutting, polishing and drills
 
 INSERT INTO innovations (
-  id, slug, discipline_id, title, originator, period, year_start, year_end, source_text, description, background, significance, western_parallel, transmission_note, modern_relevance, modern_value, evidence_tier, confidence, caveat, region, verification, wikipedia, image_url, image_credit
+  id, slug, discipline_id, title, originator, period, year_start, year_end, source_text, description, background, significance, western_parallel, transmission_note, modern_relevance, modern_value, today, evidence_tier, confidence, caveat, region, verification, wikipedia, image_url, image_credit
 ) VALUES (
   'IND-101',                                   -- id
   'diamond-cutting-polishing-and-drills',      -- slug
@@ -19,6 +19,7 @@ INSERT INTO innovations (
   'Al-Biruni (11th c.) records the lead-plate polishing method.', -- transmission_note
   'Diamond tooling is vital in modern industry.', -- modern_relevance
   NULL,                                        -- modern_value
+  'The tips of industrial drills and saws',    -- today
   'Documented',                                -- evidence_tier
   'Medium',                                    -- confidence
   'Modern faceting is a later European refinement.', -- caveat

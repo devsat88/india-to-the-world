@@ -1,7 +1,7 @@
 -- IND-046: Crystallised cane sugar
 
 INSERT INTO innovations (
-  id, slug, discipline_id, title, originator, period, year_start, year_end, source_text, description, background, significance, western_parallel, transmission_note, modern_relevance, modern_value, evidence_tier, confidence, caveat, region, verification, wikipedia, image_url, image_credit
+  id, slug, discipline_id, title, originator, period, year_start, year_end, source_text, description, background, significance, western_parallel, transmission_note, modern_relevance, modern_value, today, evidence_tier, confidence, caveat, region, verification, wikipedia, image_url, image_credit
 ) VALUES (
   'IND-046',                                   -- id
   'crystallised-cane-sugar',                   -- slug
@@ -19,6 +19,7 @@ INSERT INTO innovations (
   'Carried by traders and armies to Persia, the Arab world and Europe.', -- transmission_note
   'The foundation of the global sugar industry.', -- modern_relevance
   NULL,                                        -- modern_value
+  'The sweetness in your tea',                 -- today
   'Documented',                                -- evidence_tier
   'High',                                      -- confidence
   'Sugarcane itself likely originates in New Guinea; crystallisation is the Indian contribution.', -- caveat

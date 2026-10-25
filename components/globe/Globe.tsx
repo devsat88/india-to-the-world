@@ -1,19 +1,19 @@
 'use client';
 
 // The Earth in its true colours, lit from beside the viewer, with the route of
-// an idea drawn as glowing arcs between its stops.
+// an idea drawn as glowing arcs between its stops. Shared by the games.
 import { useEffect, useMemo, useRef } from 'react';
-import { useFrame, useLoader, useThree, type ThreeEvent } from '@react-three/fiber';
+import { useFrame, useLoader, useThree } from '@react-three/fiber';
 import { Html, OrbitControls } from '@react-three/drei';
 import gsap from 'gsap';
 import * as THREE from 'three';
-import type { JourneyStop } from '@/lib/types';
+import type { LatLon, Place } from '@/lib/types';
 
 // Public-domain NASA Blue Marble, from Wikimedia Commons
 // (Whole_world_-_land_and_oceans_12000.jpg, 1920px), served locally.
 const EARTH = '/earth.jpg';
 
-export type LatLon = { lat: number; lon: number };
+const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 /** Matches three.js SphereGeometry UVs, so the texture and coordinates agree. */
 export function toVec({ lat, lon }: LatLon, r = 1) {
@@ -55,14 +55,14 @@ const atmosphereShader = {
     }`,
 };
 
-function Arc({ from, to, color, animate, width = 0.009 }: { from: LatLon; to: LatLon; color: string; animate: boolean; width?: number }) {
+function Arc({ from, to, color, delay, width = 0.009 }: { from: LatLon; to: LatLon; color: string; delay: number; width?: number }) {
   const geometry = useMemo(() => new THREE.TubeGeometry(arcCurve(from, to), 96, width, 8, false), [from, to, width]);
-  const progress = useRef({ v: animate ? 0 : 1 });
+  const progress = useRef({ v: reduced() ? 1 : 0 });
   useEffect(() => {
-    if (!animate) return;
-    const tween = gsap.to(progress.current, { v: 1, duration: 1.6, ease: 'power2.inOut' });
+    if (reduced()) return;
+    const tween = gsap.to(progress.current, { v: 1, duration: 1.4, delay, ease: 'power2.inOut' });
     return () => { tween.kill(); };
-  }, [animate]);
+  }, [delay]);
   useFrame(() => geometry.setDrawRange(0, Math.floor(geometry.index!.count * progress.current.v / 6) * 6));
   return <mesh geometry={geometry}><meshBasicMaterial color={color} toneMapped={false} /></mesh>;
 }
@@ -72,7 +72,7 @@ function Marker({ at, color, label, pulse }: { at: LatLon; color: string; label?
   const pos = useMemo(() => toVec(at, 1.003), [at]);
   const quat = useMemo(() => new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(0, 0, 1), pos.clone().normalize()), [pos]);
   useFrame(({ clock }) => {
-    if (!ring.current || !pulse) return;
+    if (!ring.current || !pulse || reduced()) return;
     const k = (clock.elapsedTime % 1.6) / 1.6;
     ring.current.scale.setScalar(1 + k * 3);
     (ring.current.material as THREE.MeshBasicMaterial).opacity = 1 - k;
@@ -87,15 +87,14 @@ function Marker({ at, color, label, pulse }: { at: LatLon; color: string; label?
 }
 
 type Props = {
-  stops: JourneyStop[];       // revealed stops
-  animateLast: boolean;       // draw the newest arc in
-  guess: LatLon | null;
-  guessLine: boolean;         // after a reveal, join the guess to the true place
-  focus: LatLon;
-  onPick?: (p: LatLon) => void;
+  routeId: string;        // changes when a different route is shown, so its arcs draw in afresh
+  route: Place[];         // stops in order; arcs are drawn between them, one after another
+  focus: LatLon;          // turned to face the viewer
+  pulse?: Place | null;   // a single highlighted place when there is no route
+  spin?: boolean;         // drift slowly while idle
 };
 
-export default function Globe({ stops, animateLast, guess, guessLine, focus, onPick }: Props) {
+export default function Globe({ routeId, route, focus, pulse, spin }: Props) {
   const map = useLoader(THREE.TextureLoader, EARTH);
   map.colorSpace = THREE.SRGBColorSpace;
   const atmosphere = useMemo(() => new THREE.ShaderMaterial({
@@ -112,15 +111,16 @@ export default function Globe({ stops, animateLast, guess, guessLine, focus, onP
   });
   const controls = useRef<React.ComponentRef<typeof OrbitControls>>(null);
 
-  // Fly the camera so the focused place faces the viewer.
+  // Fly the camera so the focused place faces the viewer, again whenever spinning stops.
   useEffect(() => {
+    if (spin) return;
     const start = toLatLon(camera.position);
     const proxy = { ...start };
     let dLon = focus.lon - start.lon;
     if (dLon > 180) dLon -= 360;
     if (dLon < -180) dLon += 360;
     const tween = gsap.to(proxy, {
-      lat: focus.lat, lon: start.lon + dLon, duration: 1.6, ease: 'power2.inOut',
+      lat: focus.lat, lon: start.lon + dLon, duration: reduced() ? 0 : 1.6, ease: 'power2.inOut',
       onUpdate: () => {
         camera.position.copy(toVec(proxy, camera.position.length()));
         camera.lookAt(0, 0, 0);
@@ -128,19 +128,13 @@ export default function Globe({ stops, animateLast, guess, guessLine, focus, onP
       },
     });
     return () => { tween.kill(); };
-  }, [focus, camera]);
-
-  const click = (e: ThreeEvent<MouseEvent>) => {
-    if (!onPick || e.delta > 4) return;
-    e.stopPropagation();
-    onPick(toLatLon(e.point));
-  };
+  }, [focus, camera, spin]);
 
   return (
     <>
       <ambientLight intensity={0.35} />
       <directionalLight ref={sun} intensity={2.6} />
-      <mesh onClick={click} onPointerOver={() => onPick && (document.body.style.cursor = 'crosshair')} onPointerOut={() => (document.body.style.cursor = '')}>
+      <mesh>
         <sphereGeometry args={[1, 128, 64]} />
         <meshStandardMaterial map={map} roughness={0.85} metalness={0} />
       </mesh>
@@ -148,14 +142,13 @@ export default function Globe({ stops, animateLast, guess, guessLine, focus, onP
         <sphereGeometry args={[1, 64, 32]} />
       </mesh>
 
-      {stops.slice(1).map((s, i) => (
-        <Arc key={s.step} from={stops[i]} to={s} color="#ffb020" animate={animateLast && i === stops.length - 2} />
+      {route.slice(1).map((s, i) => (
+        <Arc key={`${routeId}-${i}`} from={route[i]} to={s} color="#ffb020" delay={0.6 + i * 1.2} />
       ))}
-      {stops.map((s, i) => <Marker key={s.step} at={s} color="#ffd23f" label={s.place} pulse={i === stops.length - 1} />)}
-      {guess && <Marker at={guess} color="#f0604d" label="Your guess" />}
-      {guess && guessLine && <Arc key={`g${stops.length}`} from={guess} to={stops[stops.length - 1]} color="#ffffff" width={0.004} animate />}
+      {route.map((s, i) => <Marker key={`${routeId}-${i}`} at={s} color="#ffd23f" label={s.label} pulse={i === route.length - 1} />)}
+      {pulse && route.length === 0 && <Marker at={pulse} color="#ffd23f" label={pulse.label} pulse />}
 
-      <OrbitControls ref={controls} enablePan={false} minDistance={1.6} maxDistance={4.5} enableDamping rotateSpeed={0.5} />
+      <OrbitControls ref={controls} enablePan={false} minDistance={1.6} maxDistance={4.5} enableDamping rotateSpeed={0.5} autoRotate={spin && !reduced()} autoRotateSpeed={0.4} />
     </>
   );
 }

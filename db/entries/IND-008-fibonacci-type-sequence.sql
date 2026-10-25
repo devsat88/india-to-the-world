@@ -1,7 +1,7 @@
 -- IND-008: Fibonacci-type sequence (matrameru)
 
 INSERT INTO innovations (
-  id, slug, discipline_id, title, originator, period, year_start, year_end, source_text, description, background, significance, western_parallel, transmission_note, modern_relevance, modern_value, evidence_tier, confidence, caveat, region, verification, wikipedia, image_url, image_credit
+  id, slug, discipline_id, title, originator, period, year_start, year_end, source_text, description, background, significance, western_parallel, transmission_note, modern_relevance, modern_value, today, evidence_tier, confidence, caveat, region, verification, wikipedia, image_url, image_credit
 ) VALUES (
   'IND-008',                                   -- id
   'fibonacci-type-sequence',                   -- slug
@@ -19,6 +19,7 @@ INSERT INTO innovations (
   'Independent later work in Europe.',         -- transmission_note
   'Appears throughout mathematics, biology and computer science.', -- modern_relevance
   NULL,                                        -- modern_value
+  'Sunflower spirals and search algorithms',   -- today
   'Documented',                                -- evidence_tier
   'High',                                      -- confidence
   'Sometimes better called the Hemachandra numbers in the Indian context.', -- caveat

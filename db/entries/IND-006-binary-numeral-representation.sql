@@ -35,7 +35,7 @@ INSERT INTO sources (innovation_id, position, kind, title, url) VALUES
   ('IND-006', 3, 'article', 'Wikipedia: Pingala', 'https://en.wikipedia.org/wiki/Pingala');
 
 INSERT INTO sources (innovation_id, position, kind, title, url) VALUES
-  ('IND-006', 4, 'article', 'link.springer.com', 'https://link.springer.com/book/10.1007%2F978-93-86279-49-1');
+  ('IND-006', 4, 'article', 'C. S. Seshadri (ed.), Studies in the History of Indian Mathematics (Hindustan Book Agency, 2010)', 'https://link.springer.com/book/10.1007%2F978-93-86279-49-1');
 
 INSERT INTO relations (from_id, to_id, kind) VALUES
   ('IND-006', 'IND-014', 'related');

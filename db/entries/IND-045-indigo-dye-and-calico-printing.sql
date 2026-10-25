@@ -1,7 +1,7 @@
 -- IND-045: Indigo dye and calico printing
 
 INSERT INTO innovations (
-  id, slug, discipline_id, title, originator, period, year_start, year_end, source_text, description, background, significance, western_parallel, transmission_note, modern_relevance, modern_value, evidence_tier, confidence, caveat, region, verification, wikipedia, image_url, image_credit
+  id, slug, discipline_id, title, originator, period, year_start, year_end, source_text, description, background, significance, western_parallel, transmission_note, modern_relevance, modern_value, today, evidence_tier, confidence, caveat, region, verification, wikipedia, image_url, image_credit
 ) VALUES (
   'IND-045',                                   -- id
   'indigo-dye-and-calico-printing',            -- slug
@@ -19,6 +19,7 @@ INSERT INTO innovations (
   '''Indigo'' derives from Greek for ''Indian''; huge export trade to Europe.', -- transmission_note
   'Textile chemistry and global trade.',       -- modern_relevance
   NULL,                                        -- modern_value
+  'The blue in your jeans',                    -- today
   'Documented',                                -- evidence_tier
   'High',                                      -- confidence
   'Indigo was used in several regions; India was a principal source.', -- caveat

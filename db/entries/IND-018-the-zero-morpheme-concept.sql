@@ -39,4 +39,4 @@ INSERT INTO sources (innovation_id, position, kind, title, creator, institution,
   ('IND-018', 4, 'translation', 'Ashtadhyayi Sutra Patha Of Maharshi Panini Pushpa Dikshit', 'वैयाकरण खसूची', 'Internet Archive', NULL, 'https://archive.org/details/AshtadhyayiSutraPathaOfMaharshiPaniniPushpaDikshit', NULL, NULL, NULL, 'needs_review');
 
 INSERT INTO sources (innovation_id, position, kind, title, url) VALUES
-  ('IND-018', 5, 'article', 'link.springer.com', 'https://link.springer.com/book/10.1007%2F978-93-86279-49-1');
+  ('IND-018', 5, 'article', 'C. S. Seshadri (ed.), Studies in the History of Indian Mathematics (Hindustan Book Agency, 2010)', 'https://link.springer.com/book/10.1007%2F978-93-86279-49-1');

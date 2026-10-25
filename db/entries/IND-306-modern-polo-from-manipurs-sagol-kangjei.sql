@@ -1,7 +1,7 @@
 -- IND-306: Modern polo from Manipur's sagol kangjei
 
 INSERT INTO innovations (
-  id, slug, discipline_id, title, originator, period, year_start, year_end, source_text, description, background, significance, western_parallel, transmission_note, modern_relevance, modern_value, evidence_tier, confidence, caveat, region, verification, wikipedia, image_url, image_credit
+  id, slug, discipline_id, title, originator, period, year_start, year_end, source_text, description, background, significance, western_parallel, transmission_note, modern_relevance, modern_value, today, evidence_tier, confidence, caveat, region, verification, wikipedia, image_url, image_credit
 ) VALUES (
   'IND-306',                                   -- id
   'modern-polo-from-manipurs-sagol-kangjei',   -- slug
@@ -19,6 +19,7 @@ INSERT INTO innovations (
   'Learned from Manipuri players in Silchar, Assam.', -- transmission_note
   'Polo is played internationally today.',     -- modern_relevance
   NULL,                                        -- modern_value
+  'A horseback sport played worldwide',        -- today
   'Documented',                                -- evidence_tier
   'High',                                      -- confidence
   'The British codified the rules; Persian and Central Asian horse-ball games also existed.', -- caveat

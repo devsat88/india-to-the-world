@@ -1,11 +1,12 @@
 'use client';
 
 // An entry laid over any scene, so it can be read without leaving it. Shows
-// the summary at once and the rest when /data/<slug> arrives (a file, so no trailing slash).
+// the summary at once and the rest when /data/<slug> arrives.
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import EntryView from '@/components/EntryView';
+import { loadEntry } from '@/lib/load-entry';
 import type { Discipline, Entry, Item } from '@/lib/types';
 import styles from './LeafSheet.module.css';
 
@@ -15,19 +16,6 @@ type Props = {
   onClose: () => void;
   /** Open another entry in the sheet, e.g. from its path to modern innovation. */
   onOpen: (item: Item) => void;
-};
-
-const cache = new Map<string, Promise<Entry>>();
-const load = (slug: string) => {
-  if (!cache.has(slug)) {
-    const request = fetch(`/data/${slug}`).then((r) => {
-      if (!r.ok) throw new Error(String(r.status));
-      return r.json() as Promise<Entry>;
-    });
-    request.catch(() => cache.delete(slug)); // let the next open retry
-    cache.set(slug, request);
-  }
-  return cache.get(slug)!;
 };
 
 export default function LeafSheet({ item, disciplines, onClose, onOpen }: Props) {
@@ -42,7 +30,7 @@ export default function LeafSheet({ item, disciplines, onClose, onOpen }: Props)
     if (!item) return;
     let live = true;
     setFailed(null);
-    load(item.slug).then((e) => live && setEntry(e)).catch(() => live && setFailed(item.id));
+    loadEntry(item.slug).then((e) => live && setEntry(e)).catch(() => live && setFailed(item.id));
     ref.current?.scrollTo(0, 0);
     return () => { live = false; };
   }, [item]);

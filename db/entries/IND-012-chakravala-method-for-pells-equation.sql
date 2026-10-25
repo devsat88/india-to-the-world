@@ -35,4 +35,4 @@ INSERT INTO sources (innovation_id, position, kind, title, url) VALUES
   ('IND-012', 3, 'article', 'Wikipedia: Chakravala method', 'https://en.wikipedia.org/wiki/Chakravala_method');
 
 INSERT INTO sources (innovation_id, position, kind, title, url) VALUES
-  ('IND-012', 4, 'article', 'link.springer.com', 'https://link.springer.com/book/10.1007%2F978-93-86279-49-1');
+  ('IND-012', 4, 'article', 'C. S. Seshadri (ed.), Studies in the History of Indian Mathematics (Hindustan Book Agency, 2010)', 'https://link.springer.com/book/10.1007%2F978-93-86279-49-1');

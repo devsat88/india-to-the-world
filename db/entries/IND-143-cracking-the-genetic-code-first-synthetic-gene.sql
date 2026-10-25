@@ -1,7 +1,7 @@
 -- IND-143: Cracking the genetic code / first synthetic gene
 
 INSERT INTO innovations (
-  id, slug, discipline_id, title, originator, period, year_start, year_end, source_text, description, background, significance, western_parallel, transmission_note, modern_relevance, modern_value, evidence_tier, confidence, caveat, region, verification, wikipedia, image_url, image_credit
+  id, slug, discipline_id, title, originator, period, year_start, year_end, source_text, description, background, significance, western_parallel, transmission_note, modern_relevance, modern_value, today, evidence_tier, confidence, caveat, region, verification, wikipedia, image_url, image_credit
 ) VALUES (
   'IND-143',                                   -- id
   'cracking-the-genetic-code-first-synthetic-gene', -- slug
@@ -19,6 +19,7 @@ INSERT INTO innovations (
   'Work done by the India-born (Punjab) scientist in the US.', -- transmission_note
   'Foundational to genetics, biotech and synthetic biology.', -- modern_relevance
   NULL,                                        -- modern_value
+  'Lab-made DNA in medicine and research',     -- today
   'Documented',                                -- evidence_tier
   'High',                                      -- confidence
   'By the India-born, later US-based Khorana; Nobel Prize 1968.', -- caveat

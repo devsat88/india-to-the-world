@@ -1,7 +1,7 @@
 -- IND-147: USB (Universal Serial Bus)
 
 INSERT INTO innovations (
-  id, slug, discipline_id, title, originator, period, year_start, year_end, source_text, description, background, significance, western_parallel, transmission_note, modern_relevance, modern_value, evidence_tier, confidence, caveat, region, verification, wikipedia, image_url, image_credit
+  id, slug, discipline_id, title, originator, period, year_start, year_end, source_text, description, background, significance, western_parallel, transmission_note, modern_relevance, modern_value, today, evidence_tier, confidence, caveat, region, verification, wikipedia, image_url, image_credit
 ) VALUES (
   'IND-147',                                   -- id
   'usb',                                       -- slug
@@ -19,6 +19,7 @@ INSERT INTO innovations (
   'Developed by the India-born Bhatt''s team at Intel in the US.', -- transmission_note
   'USB is the world''s dominant device-connection standard.', -- modern_relevance
   NULL,                                        -- modern_value
+  'The port on every laptop and charger',      -- today
   'Documented',                                -- evidence_tier
   'High',                                      -- confidence
   'A team effort at Intel led by an India-born engineer (diaspora contribution).', -- caveat

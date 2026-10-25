@@ -1,7 +1,7 @@
 -- IND-151: Unified Payments Interface (UPI)
 
 INSERT INTO innovations (
-  id, slug, discipline_id, title, originator, period, year_start, year_end, source_text, description, background, significance, western_parallel, transmission_note, modern_relevance, modern_value, evidence_tier, confidence, caveat, region, verification, wikipedia, image_url, image_credit
+  id, slug, discipline_id, title, originator, period, year_start, year_end, source_text, description, background, significance, western_parallel, transmission_note, modern_relevance, modern_value, today, evidence_tier, confidence, caveat, region, verification, wikipedia, image_url, image_credit
 ) VALUES (
   'IND-151',                                   -- id
   'unified-payments-interface',                -- slug
@@ -19,6 +19,7 @@ INSERT INTO innovations (
   'Built in India as public digital infrastructure; being extended to other countries.', -- transmission_note
   'The world''s largest real-time payment system (~49% of global volume, IMF 2025).', -- modern_relevance
   NULL,                                        -- modern_value
+  'Billions of phone payments every month',    -- today
   'Documented',                                -- evidence_tier
   'High',                                      -- confidence
   'A modern, home-grown ''digital public infrastructure'' success, widely emulated abroad.', -- caveat

@@ -1,7 +1,7 @@
 -- IND-389: MIMO wireless
 
 INSERT INTO innovations (
-  id, slug, discipline_id, title, originator, period, year_start, year_end, source_text, description, background, significance, western_parallel, transmission_note, modern_relevance, modern_value, evidence_tier, confidence, caveat, region, verification, wikipedia, image_url, image_credit
+  id, slug, discipline_id, title, originator, period, year_start, year_end, source_text, description, background, significance, western_parallel, transmission_note, modern_relevance, modern_value, today, evidence_tier, confidence, caveat, region, verification, wikipedia, image_url, image_credit
 ) VALUES (
   'IND-389',                                   -- id
   'mimo-wireless',                             -- slug
@@ -19,6 +19,7 @@ INSERT INTO innovations (
   NULL,                                        -- transmission_note
   'Every modern phone and Wi-Fi router uses MIMO.', -- modern_relevance
   NULL,                                        -- modern_value
+  'Every modern phone and Wi-Fi router',       -- today
   'Documented',                                -- evidence_tier
   'High',                                      -- confidence
   NULL,                                        -- caveat

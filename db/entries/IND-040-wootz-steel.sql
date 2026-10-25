@@ -1,7 +1,7 @@
 -- IND-040: Wootz (crucible) steel
 
 INSERT INTO innovations (
-  id, slug, discipline_id, title, originator, period, year_start, year_end, source_text, description, background, significance, western_parallel, transmission_note, modern_relevance, modern_value, evidence_tier, confidence, caveat, region, verification, wikipedia, image_url, image_credit
+  id, slug, discipline_id, title, originator, period, year_start, year_end, source_text, description, background, significance, western_parallel, transmission_note, modern_relevance, modern_value, today, evidence_tier, confidence, caveat, region, verification, wikipedia, image_url, image_credit
 ) VALUES (
   'IND-040',                                   -- id
   'wootz-steel',                               -- slug
@@ -19,6 +19,7 @@ INSERT INTO innovations (
   'Exported via the Middle East; forged into Damascus steel by Near Eastern smiths.', -- transmission_note
   'A landmark in materials science; studied for its carbide nanostructures.', -- modern_relevance
   NULL,                                        -- modern_value
+  'Damascus blades and nanomaterial research', -- today
   'Documented',                                -- evidence_tier
   'High',                                      -- confidence
   '''Damascus steel'' refers to the forged blades; the source steel was substantially Indian/Sri Lankan wootz.', -- caveat

@@ -1,7 +1,7 @@
 -- IND-100: Diamond mining and use
 
 INSERT INTO innovations (
-  id, slug, discipline_id, title, originator, period, year_start, year_end, source_text, description, background, significance, western_parallel, transmission_note, modern_relevance, modern_value, evidence_tier, confidence, caveat, region, verification, wikipedia, image_url, image_credit
+  id, slug, discipline_id, title, originator, period, year_start, year_end, source_text, description, background, significance, western_parallel, transmission_note, modern_relevance, modern_value, today, evidence_tier, confidence, caveat, region, verification, wikipedia, image_url, image_credit
 ) VALUES (
   'IND-100',                                   -- id
   'diamond-mining-and-use',                    -- slug
@@ -19,6 +19,7 @@ INSERT INTO innovations (
   'Exported to Europe via trade.',             -- transmission_note
   'The origin of the global diamond trade.',   -- modern_relevance
   NULL,                                        -- modern_value
+  'The stones in engagement rings',            -- today
   'Documented',                                -- evidence_tier
   'High',                                      -- confidence
   'Diamonds were found, not ''invented''; the achievement is mining, valuing and grading them.', -- caveat

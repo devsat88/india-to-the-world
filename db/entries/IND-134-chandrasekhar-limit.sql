@@ -1,7 +1,7 @@
 -- IND-134: Chandrasekhar limit
 
 INSERT INTO innovations (
-  id, slug, discipline_id, title, originator, period, year_start, year_end, source_text, description, background, significance, western_parallel, transmission_note, modern_relevance, modern_value, evidence_tier, confidence, caveat, region, verification, wikipedia, image_url, image_credit
+  id, slug, discipline_id, title, originator, period, year_start, year_end, source_text, description, background, significance, western_parallel, transmission_note, modern_relevance, modern_value, today, evidence_tier, confidence, caveat, region, verification, wikipedia, image_url, image_credit
 ) VALUES (
   'IND-134',                                   -- id
   'chandrasekhar-limit',                       -- slug
@@ -19,6 +19,7 @@ INSERT INTO innovations (
   'Work done by the India-born scientist while moving between Cambridge and the US.', -- transmission_note
   'Fundamental to stellar death, supernovae and black-hole formation.', -- modern_relevance
   NULL,                                        -- modern_value
+  'How we understand supernovae and black holes', -- today
   'Documented',                                -- evidence_tier
   'High',                                      -- confidence
   'By the India-born (later Indian-American) Chandrasekhar; vindicated after Eddington''s opposition; Nobel Prize 1983.', -- caveat

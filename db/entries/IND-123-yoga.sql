@@ -1,7 +1,7 @@
 -- IND-123: Yoga
 
 INSERT INTO innovations (
-  id, slug, discipline_id, title, originator, period, year_start, year_end, source_text, description, background, significance, western_parallel, transmission_note, modern_relevance, modern_value, evidence_tier, confidence, caveat, region, verification, wikipedia, image_url, image_credit
+  id, slug, discipline_id, title, originator, period, year_start, year_end, source_text, description, background, significance, western_parallel, transmission_note, modern_relevance, modern_value, today, evidence_tier, confidence, caveat, region, verification, wikipedia, image_url, image_credit
 ) VALUES (
   'IND-123',                                   -- id
   'yoga',                                      -- slug
@@ -19,6 +19,7 @@ INSERT INTO innovations (
   'Spread globally in the 19th-20th c.',       -- transmission_note
   'One of India''s most widespread cultural exports.', -- modern_relevance
   NULL,                                        -- modern_value
+  'Studios and classes in nearly every city',  -- today
   'Documented',                                -- evidence_tier
   'High',                                      -- confidence
   'Modern postural yoga differs substantially from most ancient practice; framed here as tradition, not medicine.', -- caveat

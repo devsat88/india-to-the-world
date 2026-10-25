@@ -1,7 +1,7 @@
 -- IND-195: Brahmi script
 
 INSERT INTO innovations (
-  id, slug, discipline_id, title, originator, period, year_start, year_end, source_text, description, background, significance, western_parallel, transmission_note, modern_relevance, modern_value, evidence_tier, confidence, caveat, region, verification, wikipedia, image_url, image_credit
+  id, slug, discipline_id, title, originator, period, year_start, year_end, source_text, description, background, significance, western_parallel, transmission_note, modern_relevance, modern_value, today, evidence_tier, confidence, caveat, region, verification, wikipedia, image_url, image_credit
 ) VALUES (
   'IND-195',                                   -- id
   'brahmi-script',                             -- slug
@@ -19,6 +19,7 @@ INSERT INTO innovations (
   'Spread across South and Southeast Asia.',   -- transmission_note
   'The root of Devanagari, Tamil, Thai, Balinese and many more scripts.', -- modern_relevance
   NULL,                                        -- modern_value
+  'Scripts from Devanagari and Tamil to Thai', -- today
   'Documented',                                -- evidence_tier
   'High',                                      -- confidence
   'Whether Brahmi arose indigenously or from a Semitic model is a long-standing scholarly debate.', -- caveat

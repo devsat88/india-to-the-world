@@ -1,0 +1,43 @@
+/* Shared by the games: the globe fills the left, the game panel sits on the right;
+   on phones the globe takes the top and the panel scrolls below it. */
+.game { position: fixed; inset: 0; overflow: hidden; }
+.stage { position: absolute; inset: 0 46% 0 0; }
+.panel {
+  position: absolute; inset: 0 0 0 auto; width: 46%; z-index: 10; /* above the globe's labels */
+  overflow-y: auto; padding: 92px 48px 40px 16px;
+  display: flex; flex-direction: column; gap: 16px;
+}
+.panel > * { max-width: 620px; }
+
+.kicker {
+  display: flex; justify-content: space-between; gap: 12px; margin: 0;
+  font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--turmeric);
+}
+.kicker span + span { color: var(--muted); }
+.title { font: clamp(40px, 5vw, 64px)/0.95 var(--display); margin: 0; }
+.lede { margin: 0; color: var(--muted); }
+
+.leaf { padding: 18px 22px; border-radius: 16px; }
+.leaf h2 { font: 32px/1.05 var(--display); margin: 2px 0 6px; }
+.leaf p { margin: 0; }
+.meta { font-size: 14px; color: var(--leaf-muted); }
+
+.actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.primary, .secondary {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 48px; padding: 0 24px; border-radius: 12px;
+  font-weight: 700; font-size: 16px; text-decoration: none;
+}
+.primary { border: 0; background: var(--turmeric); color: var(--night); }
+.primary:disabled { opacity: 0.4; cursor: default; }
+.secondary { border: 1px solid rgba(243, 233, 210, 0.28); background: transparent; color: var(--ink); font-weight: 600; }
+.secondary:hover { border-color: var(--turmeric); }
+
+.fair { margin: 0; font-size: 14px; color: var(--muted); }
+.fair strong { color: var(--ink); font-weight: 600; }
+
+@media (max-width: 899px) {
+  .game { position: static; }
+  .stage { position: relative; inset: auto; height: 46vh; min-height: 300px; }
+  .panel { position: static; width: auto; padding: 8px 16px 40px; }
+}

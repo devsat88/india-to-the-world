@@ -1,7 +1,7 @@
 -- IND-007: Pascal's triangle (Meru-prastara)
 
 INSERT INTO innovations (
-  id, slug, discipline_id, title, originator, period, year_start, year_end, source_text, description, background, significance, western_parallel, transmission_note, modern_relevance, modern_value, evidence_tier, confidence, caveat, region, verification, wikipedia, image_url, image_credit
+  id, slug, discipline_id, title, originator, period, year_start, year_end, source_text, description, background, significance, western_parallel, transmission_note, modern_relevance, modern_value, today, evidence_tier, confidence, caveat, region, verification, wikipedia, image_url, image_credit
 ) VALUES (
   'IND-007',                                   -- id
   'pascals-triangle',                          -- slug
@@ -19,6 +19,7 @@ INSERT INTO innovations (
   'Independent European rediscovery; also known in China (Yang Hui).', -- transmission_note
   'Core to combinatorics and probability.',    -- modern_relevance
   NULL,                                        -- modern_value
+  'Probability, from coin tosses to genetics', -- today
   'Documented',                                -- evidence_tier
   'High',                                      -- confidence
   'The array was known in several cultures independently.', -- caveat
@@ -35,7 +36,7 @@ INSERT INTO sources (innovation_id, position, kind, title, url) VALUES
   ('IND-007', 3, 'article', 'Wikipedia: Pascal''s triangle', 'https://en.wikipedia.org/wiki/Pascal''s_triangle');
 
 INSERT INTO sources (innovation_id, position, kind, title, url) VALUES
-  ('IND-007', 4, 'article', 'link.springer.com', 'https://link.springer.com/book/10.1007%2F978-93-86279-49-1');
+  ('IND-007', 4, 'article', 'C. S. Seshadri (ed.), Studies in the History of Indian Mathematics (Hindustan Book Agency, 2010)', 'https://link.springer.com/book/10.1007%2F978-93-86279-49-1');
 
 INSERT INTO relations (from_id, to_id, kind) VALUES
   ('IND-007', 'IND-014', 'related');

@@ -1,7 +1,7 @@
 -- IND-406: The Transformer (Attention Is All You Need)
 
 INSERT INTO innovations (
-  id, slug, discipline_id, title, originator, period, year_start, year_end, source_text, description, background, significance, western_parallel, transmission_note, modern_relevance, modern_value, evidence_tier, confidence, caveat, region, verification, wikipedia, image_url, image_credit
+  id, slug, discipline_id, title, originator, period, year_start, year_end, source_text, description, background, significance, western_parallel, transmission_note, modern_relevance, modern_value, today, evidence_tier, confidence, caveat, region, verification, wikipedia, image_url, image_credit
 ) VALUES (
   'IND-406',                                   -- id
   'transformer-architecture',                  -- slug
@@ -19,6 +19,7 @@ INSERT INTO innovations (
   NULL,                                        -- transmission_note
   'Every large language model, including India''s own, is a Transformer.', -- modern_relevance
   NULL,                                        -- modern_value
+  'Every large AI language model',             -- today
   'Documented',                                -- evidence_tier
   'High',                                      -- confidence
   'A team result; the attention mechanism itself came from Bahdanau and colleagues (2014).', -- caveat

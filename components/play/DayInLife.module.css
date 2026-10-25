@@ -1,0 +1,58 @@
+.day { max-width: 1280px; margin: 0 auto; padding: 92px 40px 56px; }
+.head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; }
+.count { margin: 0; text-align: right; color: var(--muted); font-size: 24px; line-height: 1; }
+.count strong { font: 44px/1 var(--display); color: var(--turmeric); font-weight: 400; }
+.count span { display: block; margin-top: 6px; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; }
+
+.sky { display: block; width: 100%; height: auto; margin: 12px 0 20px; overflow: visible; }
+.path { fill: none; stroke: rgba(243, 233, 210, 0.18); stroke-width: 2; stroke-dasharray: 3 8; vector-effect: non-scaling-stroke; }
+.trail { fill: none; stroke: var(--turmeric); stroke-width: 3; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+.sun { fill: var(--turmeric); transition: cx 0.8s ease, cy 0.8s ease; }
+
+.body { display: grid; grid-template-columns: minmax(0, 1fr) 400px; gap: 32px; align-items: start; }
+.moments { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(168px, 1fr)); gap: 14px; }
+.tile {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 6px; width: 100%; height: 150px;
+  padding: 16px; border-radius: 16px; text-align: left;
+  border: 1px dashed rgba(243, 233, 210, 0.28); background: transparent; color: var(--muted);
+  transition: border-color 0.2s, background 0.2s, transform 0.2s;
+}
+.tile:hover { border-color: var(--turmeric); transform: translateY(-2px); }
+.tile svg { fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.time { font-size: 12px; }
+.thing { font-weight: 600; line-height: 1.2; color: var(--ink); }
+.when { margin-top: auto; font-size: 12px; }
+.seen { border: 1.5px solid var(--turmeric); background: var(--night-2); }
+.seen svg, .seen .when { color: var(--turmeric); }
+.active { border: 0; background: var(--turmeric); color: var(--night); }
+.active .thing { color: var(--night); font-weight: 700; }
+.active .when { font-weight: 600; }
+
+.side { position: sticky; top: 92px; display: grid; gap: 16px; scroll-margin-top: 80px; }
+.card { padding: 26px 28px; border-radius: 20px; box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35); animation: rise 0.5s cubic-bezier(0.2, 0.9, 0.2, 1) both; }
+@keyframes rise { from { opacity: 0; transform: translateY(10px); } }
+.card h2 { font: 34px/1.05 var(--display); margin: 6px 0 4px; }
+.card p { margin: 0 0 12px; }
+.cardKicker { font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--leaf-muted); }
+.years { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 12px; background: rgba(107, 90, 66, 0.1); margin-bottom: 18px; }
+.years strong { font: 30px/1 var(--display); font-weight: 400; }
+.years span { font-size: 14px; line-height: 1.3; color: var(--leaf-muted); }
+.card .caveat { margin: -6px 0 18px; font-size: 14px; color: var(--leaf-muted); }
+.dark, .outline {
+  display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 0 18px;
+  border-radius: 12px; font-weight: 600; text-decoration: none;
+}
+.dark { flex-grow: 1; border: 0; background: var(--leaf-ink); color: var(--leaf); }
+.outline { border: 1px solid rgba(42, 31, 20, 0.3); color: var(--leaf-ink); }
+.hint { margin: 0; padding: 24px; border-radius: 20px; border: 1px dashed var(--line); color: var(--muted); }
+.hint strong { color: var(--ink); }
+.done { padding: 22px 24px; border-radius: 20px; background: var(--night-2); border: 1px solid var(--turmeric); }
+.done h2 { font: 28px/1.1 var(--display); margin: 0 0 14px; }
+
+@media (max-width: 899px) {
+  .day { padding: 80px 16px 40px; }
+  .body { grid-template-columns: 1fr; }
+  .side { position: static; }
+  .moments { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .tile { height: 136px; padding: 14px; }
+}

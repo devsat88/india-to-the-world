@@ -3,8 +3,8 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { OrbitControls, Stars } from '@react-three/drei';
-import type { OrbitControls as Controls } from 'three-stdlib';
+import { Stars } from '@react-three/drei';
+import { OrbitControls as Controls } from 'three/examples/jsm/controls/OrbitControls.js';
 import LeafSheet from '@/components/LeafSheet';
 import Peek, { type PeekAt } from '@/components/Peek';
 import { eraScale, formatYear } from '@/lib/time';
@@ -60,6 +60,28 @@ function Fit({ controls }: { controls: React.RefObject<Controls | null> }) {
     if (c.target.length() > R_MAX) c.target.setLength(R_MAX);
     if (c.getDistance() >= home * 0.95 && c.target.lengthSq() > 1e-4) c.target.lerp(ORIGIN, 0.06);
   });
+  return null;
+}
+
+/**
+ * three's own OrbitControls rather than drei's (three-stdlib): only this one
+ * zooms a pinch toward the point between the fingers, not just the mouse.
+ */
+function Orbit({ controls, autoRotate }: { controls: React.RefObject<Controls | null>; autoRotate: boolean }) {
+  const camera = useThree((s) => s.camera);
+  const dom = useThree((s) => s.gl.domElement);
+  const c = useMemo(() => {
+    const c = new Controls(camera);
+    Object.assign(c, { enablePan: false, zoomToCursor: true, minDistance: 3, maxPolarAngle: Math.PI * 0.49, autoRotateSpeed: 0.25, enableDamping: true });
+    return c;
+  }, [camera]);
+  useEffect(() => {
+    c.connect(dom);
+    controls.current = c;
+    return () => { c.dispose(); controls.current = null; };
+  }, [c, dom, controls]);
+  useEffect(() => { c.autoRotate = autoRotate; }, [c, autoRotate]);
+  useFrame((_, dt) => c.update(dt), -1);
   return null;
 }
 
@@ -139,14 +161,14 @@ export default function Sky({ atlas }: { atlas: Atlas }) {
           onFocus={setFocus}
         />
         <Clock cursor={cursor} playing={playing} onTick={tick} />
-        <OrbitControls ref={controls} enablePan={false} zoomToCursor minDistance={3} maxPolarAngle={Math.PI * 0.49} autoRotate={!reduced && !open && !hover} autoRotateSpeed={0.25} enableDamping />
+        <Orbit controls={controls} autoRotate={!reduced && !open && !hover} />
         <CameraMemory controls={controls} />
         <Fit controls={controls} />
       </Canvas>
 
       <aside className={styles.key}>
         <p>Centre: {formatYear(atlas.eras[0].start)}. Rim: present day. Each sector is a discipline.</p>
-        <p>Drag to orbit, scroll to zoom toward the pointer; era names appear when zoomed in. Select a discipline to filter, or a star for details.</p>
+        <p>Drag to orbit, scroll or pinch to zoom toward a point; era names appear when zoomed in. Select a discipline to filter, or a star for details.</p>
       </aside>
 
       {hover && <Peek at={hover} color={atlas.disciplines[hover.item.discipline].color} />}

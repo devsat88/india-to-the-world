@@ -29,7 +29,7 @@ export default async function EntryPage({ params }: Params) {
     <main className={styles.page} style={{ '--c': d.color } as React.CSSProperties}>
       <BackButton className={styles.back} />
       <article className={`panel ${styles.leaf}`}>
-        <EntryView entry={entry} discipline={d} />
+        <EntryView entry={entry} discipline={d} detailed />
       </article>
 
       <nav className={styles.pager} aria-label="Neighbouring entries in time">

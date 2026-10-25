@@ -1,7 +1,7 @@
 -- IND-388: Digital video compression and HDTV
 
 INSERT INTO innovations (
-  id, slug, discipline_id, title, originator, period, year_start, year_end, source_text, description, background, significance, western_parallel, transmission_note, modern_relevance, modern_value, evidence_tier, confidence, caveat, region, verification, wikipedia, image_url, image_credit
+  id, slug, discipline_id, title, originator, period, year_start, year_end, source_text, description, background, significance, western_parallel, transmission_note, modern_relevance, modern_value, today, evidence_tier, confidence, caveat, region, verification, wikipedia, image_url, image_credit
 ) VALUES (
   'IND-388',                                   -- id
   'digital-video-compression-and-hdtv',        -- slug
@@ -19,6 +19,7 @@ INSERT INTO innovations (
   NULL,                                        -- transmission_note
   'Every streamed or broadcast video uses motion-compensated compression.', -- modern_relevance
   NULL,                                        -- modern_value
+  'Streaming and high-definition TV',          -- today
   'Documented',                                -- evidence_tier
   'High',                                      -- confidence
   'Digital video compression was built by many groups; Netravali is one of its recognised pioneers.', -- caveat

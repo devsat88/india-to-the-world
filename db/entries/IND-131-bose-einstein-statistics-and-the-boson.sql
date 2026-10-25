@@ -1,7 +1,7 @@
 -- IND-131: Bose-Einstein statistics and the boson
 
 INSERT INTO innovations (
-  id, slug, discipline_id, title, originator, period, year_start, year_end, source_text, description, background, significance, western_parallel, transmission_note, modern_relevance, modern_value, evidence_tier, confidence, caveat, region, verification, wikipedia, image_url, image_credit
+  id, slug, discipline_id, title, originator, period, year_start, year_end, source_text, description, background, significance, western_parallel, transmission_note, modern_relevance, modern_value, today, evidence_tier, confidence, caveat, region, verification, wikipedia, image_url, image_credit
 ) VALUES (
   'IND-131',                                   -- id
   'bose-einstein-statistics-and-the-boson',    -- slug
@@ -19,6 +19,7 @@ INSERT INTO innovations (
   'Bose sent his paper to Einstein, who had it published and extended it.', -- transmission_note
   'Bosons and BEC are pillars of modern physics; the Higgs boson carries his name.', -- modern_relevance
   NULL,                                        -- modern_value
+  'The Higgs boson and ultra-cold quantum gases', -- today
   'Documented',                                -- evidence_tier
   'High',                                      -- confidence
   'Bose never received a Nobel Prize, though the particle class is named after him.', -- caveat

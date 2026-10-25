@@ -8,7 +8,7 @@ import { DatabaseSync } from 'node:sqlite';
 
 const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const DB = path.join(root, 'db/indiatotheworld.sqlite');
-const TMP = `${DB}.building`; // built aside, so a failed build keeps the last good database
+const TMP = `${DB}.${process.pid}.building`; // built aside, so a failed build keeps the last good database
 const read = (p) => fs.readFileSync(path.join(root, p), 'utf8');
 const sqlFiles = (dir) => fs.readdirSync(path.join(root, dir)).filter((f) => f.endsWith('.sql')).sort();
 
@@ -20,7 +20,7 @@ for (const f of sqlFiles('db/reference')) db.exec(read(`db/reference/${f}`));
 
 const errors = [];
 // Rows an entry file may add, each keyed to its entry id.
-const TABLES = [['innovations', 'id'], ['sources', 'innovation_id'], ['outcomes', 'innovation_id'], ['journey_stops', 'innovation_id'], ['relations', 'from_id']];
+const TABLES = [['innovations', 'id'], ['sources', 'innovation_id'], ['outcomes', 'innovation_id'], ['chapters', 'innovation_id'], ['journey_stops', 'innovation_id'], ['relations', 'from_id']];
 const othersCount = (id) => TABLES.map(([t, col]) => db.prepare(`SELECT COUNT(*) AS n FROM ${t} WHERE ${col} IS NOT ?`).get(id).n).join();
 // One pass, so a '--' inside a string isn't taken for a comment, nor a quote inside a comment for a string.
 const code = (sql) => sql.replace(/'(?:[^']|'')*'|"(?:[^"]|"")*"|--[^\n]*|\/\*[\s\S]*?\*\//g, (m) => (m[0] === "'" || m[0] === '"' ? "''" : ' '));
@@ -54,6 +54,12 @@ for (const v of db.prepare('PRAGMA foreign_key_check').all()) {
 // Journeys must be numbered 1, 2, 3... without gaps.
 for (const { innovation_id, n, maxStep } of db.prepare('SELECT innovation_id, COUNT(*) AS n, MAX(step) AS maxStep FROM journey_stops GROUP BY innovation_id').all())
   if (n !== maxStep) errors.push(`${innovation_id}: journey steps must run 1..${n} without gaps`);
+
+// Every [n] in a chapter must cite one of the entry's own sources.
+for (const { innovation_id, position, body } of db.prepare('SELECT innovation_id, position, body FROM chapters').all())
+  for (const [, n] of body.matchAll(/\[(\d+)\]/g))
+    if (!db.prepare('SELECT 1 FROM sources WHERE innovation_id = ? AND position = ?').get(innovation_id, Number(n)))
+      errors.push(`${innovation_id}: chapter ${position} cites [${n}], but there is no source at position ${n}`);
 
 // An innovation can only lead to something that came after it.
 for (const { from_id, to_id } of db.prepare(

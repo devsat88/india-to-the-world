@@ -1,7 +1,7 @@
 -- IND-067: Pachisi / Ludo
 
 INSERT INTO innovations (
-  id, slug, discipline_id, title, originator, period, year_start, year_end, source_text, description, background, significance, western_parallel, transmission_note, modern_relevance, modern_value, evidence_tier, confidence, caveat, region, verification, wikipedia, image_url, image_credit
+  id, slug, discipline_id, title, originator, period, year_start, year_end, source_text, description, background, significance, western_parallel, transmission_note, modern_relevance, modern_value, today, evidence_tier, confidence, caveat, region, verification, wikipedia, image_url, image_credit
 ) VALUES (
   'IND-067',                                   -- id
   'pachisi-ludo',                              -- slug
@@ -19,6 +19,7 @@ INSERT INTO innovations (
   'Colonial-era adoption and simplification.', -- transmission_note
   'A globally popular family game.',           -- modern_relevance
   NULL,                                        -- modern_value
+  'Family race games, on boards and phones',   -- today
   'Documented',                                -- evidence_tier
   'High',                                      -- confidence
   'Related race games exist in other cultures.', -- caveat
