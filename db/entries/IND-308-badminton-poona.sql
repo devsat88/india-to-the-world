@@ -1,7 +1,7 @@
 -- IND-308: Badminton (Poona)
 
 INSERT INTO innovations (
-  id, slug, discipline_id, title, originator, period, year_start, year_end, source_text, description, background, significance, western_parallel, transmission_note, modern_relevance, modern_value, evidence_tier, confidence, caveat, region, verification, wikipedia, image_url, image_credit
+  id, slug, discipline_id, title, originator, period, year_start, year_end, source_text, description, background, significance, western_parallel, transmission_note, modern_relevance, modern_value, today, evidence_tier, confidence, caveat, region, verification, wikipedia, image_url, image_credit
 ) VALUES (
   'IND-308',                                   -- id
   'badminton-poona',                           -- slug
@@ -19,6 +19,7 @@ INSERT INTO innovations (
   'Taken to England in the 1870s.',            -- transmission_note
   'A global Olympic sport.',                   -- modern_relevance
   NULL,                                        -- modern_value
+  'An Olympic sport played worldwide',         -- today
   'Documented',                                -- evidence_tier
   'Medium',                                    -- confidence
   'Shuttlecock games (battledore) existed in Europe and Asia; India''s role is in the game''s early modern form.', -- caveat

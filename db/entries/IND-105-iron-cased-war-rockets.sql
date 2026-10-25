@@ -1,7 +1,7 @@
 -- IND-105: Iron-cased war rockets (Mysorean rockets)
 
 INSERT INTO innovations (
-  id, slug, discipline_id, title, originator, period, year_start, year_end, source_text, description, background, significance, western_parallel, transmission_note, modern_relevance, modern_value, evidence_tier, confidence, caveat, region, verification, wikipedia, image_url, image_credit
+  id, slug, discipline_id, title, originator, period, year_start, year_end, source_text, description, background, significance, western_parallel, transmission_note, modern_relevance, modern_value, today, evidence_tier, confidence, caveat, region, verification, wikipedia, image_url, image_credit
 ) VALUES (
   'IND-105',                                   -- id
   'iron-cased-war-rockets',                    -- slug
@@ -19,6 +19,7 @@ INSERT INTO innovations (
   'Captured Mysorean rockets directly informed William Congreve''s designs.', -- transmission_note
   'A direct ancestor of modern military rocketry.', -- modern_relevance
   NULL,                                        -- modern_value
+  'The lineage of modern rocketry',            -- today
   'Documented',                                -- evidence_tier
   'High',                                      -- confidence
   'A genuine ''India first, then adopted by the West'' case, though early-modern rather than ancient.', -- caveat

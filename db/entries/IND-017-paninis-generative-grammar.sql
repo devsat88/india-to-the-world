@@ -1,7 +1,7 @@
 -- IND-017: Panini's generative grammar
 
 INSERT INTO innovations (
-  id, slug, discipline_id, title, originator, period, year_start, year_end, source_text, description, background, significance, western_parallel, transmission_note, modern_relevance, modern_value, evidence_tier, confidence, caveat, region, verification, wikipedia, image_url, image_credit
+  id, slug, discipline_id, title, originator, period, year_start, year_end, source_text, description, background, significance, western_parallel, transmission_note, modern_relevance, modern_value, today, evidence_tier, confidence, caveat, region, verification, wikipedia, image_url, image_credit
 ) VALUES (
   'IND-017',                                   -- id
   'paninis-generative-grammar',                -- slug
@@ -19,6 +19,7 @@ INSERT INTO innovations (
   'Studied by European Sanskritists from the 19th c.; influenced modern formal-language theory.', -- transmission_note
   'Directly comparable to Backus-Naur Form and compiler grammars.', -- modern_relevance
   NULL,                                        -- modern_value
+  'Echoed in programming-language grammars',   -- today
   'Documented',                                -- evidence_tier
   'High',                                      -- confidence
   'Panini didn''t ''invent computing''; his system is a strikingly formal grammar admired by modern theorists.', -- caveat

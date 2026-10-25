@@ -9,16 +9,62 @@ mistake in one file can't damage another.
 
 ## Add an entry
 
-```sh
-npm install
-npm run new-entry -- "Kuttaka algorithm"     # creates db/entries/IND-206-kuttaka-algorithm.sql
-# fill in every TODO in that file
-npm run db:build                             # checks your entry against the rules
-npm run dev                                  # see it at http://localhost:3000
-```
+You need Node 22.13 or newer and a GitHub account.
 
-Then open a pull request. CI runs the same check, and flags any edits to existing
-entries for closer review. Removing an entry needs a maintainer's approval.
+1. Fork [devsat88/india-to-the-world](https://github.com/devsat88/india-to-the-world) and clone your fork:
+
+   ```sh
+   git clone https://github.com/<you>/india-to-the-world.git
+   cd india-to-the-world
+   npm install
+   ```
+
+2. Start a branch from an up-to-date `main`:
+
+   ```sh
+   git remote add upstream https://github.com/devsat88/india-to-the-world.git
+   git pull upstream main
+   git switch -c entry/bhashini
+   ```
+
+3. Create and fill in the entry:
+
+   ```sh
+   npm run new-entry -- "Bhashini AI translation platform"
+   # creates db/entries/IND-408-bhashini-ai-translation-platform.sql
+   # fill in every TODO in that file
+   npm run db:build   # checks your entry against the rules
+   npm run dev        # see it at http://localhost:3000
+   ```
+
+4. Commit only your entry file, push, and open a pull request against `main`:
+
+   ```sh
+   git add db/entries/IND-408-bhashini-ai-translation-platform.sql
+   git commit -m "Add IND-408 Bhashini AI translation platform"
+   git push -u origin entry/bhashini
+   ```
+
+Keep one entry per pull request. Never commit `db/indiatotheworld.sqlite`; it is built
+from the entry files.
+
+## What happens to your pull request
+
+- **CI** runs `npm run build` (every rule below) and a change check. New entries pass;
+  edits to existing entries pass with a warning so the reviewer looks closely; removing
+  an entry fails until a maintainer adds the `allow-entry-removal` label.
+- **Review**: a maintainer checks the sources and wording, and may ask for changes.
+  Push more commits to the same branch to update the pull request.
+- **Merge**: once merged, the site redeploys to [indiatotheworld.fyi](https://indiatotheworld.fyi)
+  within a few minutes.
+- **ID clash**: if CI says your id already exists, another entry was merged with it first.
+  Run `git pull upstream main`, then `npm run new-entry` again for a fresh id, move your
+  content into the new file, delete the old one, and push.
+
+Fixing an existing entry (a better source, a typo, marking a suggested source
+`verified`) works the same way: branch, edit the entry file, open a pull request.
+Changes to `db/schema.sql`, `db/reference/`, `scripts/` or `.github/` need the
+maintainer's review; open an issue first to discuss them.
 
 By opening a pull request you agree that your data contributions are licensed under
 CC BY-SA 4.0 ([db/LICENSE](db/LICENSE)) and code under MIT ([LICENSE](LICENSE)).
@@ -43,11 +89,11 @@ If something is wrong, the build names the file and the rule, and nothing is pub
 
 | Table | What goes in it |
 | --- | --- |
-| `innovations` | The entry itself. One row per file. |
+| `innovations` | The entry itself. One row per file. The optional `today` column says in a few words where it lives today ("The digits on every clock and keyboard"); entries that have it appear in Rewind and Then → Now. |
 | `sources` | Everything that backs it up. `kind` is `reference` (book or paper), `primary_text` (the original work or paper), `translation` (an edition or scan), `museum_object`, `image` or `article`. |
 | `outcomes` | What it led to, in plain words. |
 | `relations` | Links to other entries. `led_to` means this entry directly enabled a later one; entry pages follow these links to show the path to modern innovation. Use `related` for anything looser. |
-| `journey_stops` | The route the idea travelled, for the globe game: place, coordinates, year, who carried it, what happened, and a clue for players. |
+| `journey_stops` | The route the idea travelled, for the globe in Then → Now and Rewind: place, coordinates, year, who carried it, and what happened. The `clue` column is no longer shown, but is still required. |
 
 ## Primary sources and museum objects
 

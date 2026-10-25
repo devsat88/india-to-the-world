@@ -3,7 +3,7 @@
 import path from 'node:path';
 import { DatabaseSync } from 'node:sqlite';
 import { DB_VERSION } from './db-version';
-import type { Atlas, Branch, Discipline, Entry, Era, Item, Journey, JourneyStop, Source } from './types';
+import type { Atlas, Branch, Chapter, Discipline, Entry, Era, Item, Journey, JourneyStop, Source } from './types';
 
 // DB_VERSION changes on every rebuild, which reopens the file and, in
 // development, hot-reloads the pages that read it.
@@ -35,6 +35,7 @@ function toItem(r: Row): Item {
     year: r.year_start as number,
     yearEnd: r.year_end as number,
     description: r.description as string,
+    today: r.today as string | null,
     evidence: r.evidence_tier as Item['evidence'],
     confidence: r.confidence as Item['confidence'],
     image: r.image_url as string | null,
@@ -77,10 +78,11 @@ export function getEntry(slug: string): Entry | null {
   if (!r) return null;
   const id = r.id as string;
   const sources = all(
-    `SELECT kind, title, creator, institution, year, url, image_url AS imageUrl, licence, note, status
+    `SELECT position, kind, title, creator, institution, year, url, image_url AS imageUrl, licence, note, status
      FROM sources WHERE innovation_id = ? ORDER BY position`,
     id,
   ) as Source[];
+  const chapters = all('SELECT heading, body FROM chapters WHERE innovation_id = ? ORDER BY position', id) as Chapter[];
   const outcomes = all('SELECT text FROM outcomes WHERE innovation_id = ? ORDER BY position', id).map((o) => o.text as string);
   const related = all(
     `${ITEM_SQL} WHERE i.id IN (SELECT to_id FROM relations WHERE from_id = ? AND kind = 'related'
@@ -105,6 +107,7 @@ export function getEntry(slug: string): Entry | null {
     wikipedia: r.wikipedia as string | null,
     imageCredit: r.image_credit as string | null,
     sources,
+    chapters,
     outcomes,
     legacy: legacy(id),
     builtOn,

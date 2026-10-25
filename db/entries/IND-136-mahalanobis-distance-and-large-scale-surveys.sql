@@ -1,7 +1,7 @@
 -- IND-136: Mahalanobis distance and large-scale surveys
 
 INSERT INTO innovations (
-  id, slug, discipline_id, title, originator, period, year_start, year_end, source_text, description, background, significance, western_parallel, transmission_note, modern_relevance, modern_value, evidence_tier, confidence, caveat, region, verification, wikipedia, image_url, image_credit
+  id, slug, discipline_id, title, originator, period, year_start, year_end, source_text, description, background, significance, western_parallel, transmission_note, modern_relevance, modern_value, today, evidence_tier, confidence, caveat, region, verification, wikipedia, image_url, image_credit
 ) VALUES (
   'IND-136',                                   -- id
   'mahalanobis-distance-and-large-scale-surveys', -- slug
@@ -19,6 +19,7 @@ INSERT INTO innovations (
   'Developed in India; founded the Indian Statistical Institute (1931).', -- transmission_note
   'The Mahalanobis distance is standard in statistics, ML and anomaly detection.', -- modern_relevance
   NULL,                                        -- modern_value
+  'Fraud detection and machine learning',      -- today
   'Documented',                                -- evidence_tier
   'High',                                      -- confidence
   'A genuinely Indian-developed and internationally adopted tool.', -- caveat

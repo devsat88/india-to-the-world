@@ -1,7 +1,7 @@
 -- IND-132: Raman effect (Raman scattering)
 
 INSERT INTO innovations (
-  id, slug, discipline_id, title, originator, period, year_start, year_end, source_text, description, background, significance, western_parallel, transmission_note, modern_relevance, modern_value, evidence_tier, confidence, caveat, region, verification, wikipedia, image_url, image_credit
+  id, slug, discipline_id, title, originator, period, year_start, year_end, source_text, description, background, significance, western_parallel, transmission_note, modern_relevance, modern_value, today, evidence_tier, confidence, caveat, region, verification, wikipedia, image_url, image_credit
 ) VALUES (
   'IND-132',                                   -- id
   'raman-effect',                              -- slug
@@ -19,6 +19,7 @@ INSERT INTO innovations (
   'Fully credited internationally.',           -- transmission_note
   'Raman spectroscopy is a standard analytical tool worldwide.', -- modern_relevance
   NULL,                                        -- modern_value
+  'Lab instruments that identify materials by light', -- today
   'Documented',                                -- evidence_tier
   'High',                                      -- confidence
   'This one was fully recognised: Raman won the 1930 Nobel Prize in Physics.', -- caveat

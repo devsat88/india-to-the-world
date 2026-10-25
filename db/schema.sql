@@ -36,6 +36,7 @@ CREATE TABLE innovations (
   transmission_note  TEXT,
   modern_relevance   TEXT,
   modern_value       TEXT,
+  today              TEXT CHECK (today IS NULL OR length(today) BETWEEN 3 AND 60), -- where it lives today, in a few words: 'The digits on every clock and keyboard'
   evidence_tier      TEXT NOT NULL CHECK (evidence_tier IN ('Documented', 'Plausible precursor', 'Contested-Myth')),
   confidence         TEXT NOT NULL CHECK (confidence IN ('High', 'Medium', 'Low')),
   caveat             TEXT,
@@ -72,6 +73,16 @@ CREATE TABLE sources (
   PRIMARY KEY (innovation_id, position),
   CHECK (kind = 'reference' OR url IS NOT NULL),
   CHECK (image_url IS NULL OR licence IS NOT NULL)
+);
+
+-- The long read on the entry page: headed sections of researched prose.
+-- Paragraphs are separated by a blank line; [n] cites the entry's source at position n.
+CREATE TABLE chapters (
+  innovation_id  TEXT NOT NULL REFERENCES innovations(id),
+  position       INTEGER NOT NULL,
+  heading        TEXT NOT NULL CHECK (length(heading) BETWEEN 3 AND 80),
+  body           TEXT NOT NULL CHECK (length(body) >= 200),
+  PRIMARY KEY (innovation_id, position)
 );
 
 -- What an innovation made possible, in plain words.

@@ -10,12 +10,22 @@
 .when { color: var(--leaf-muted); margin: 0 0 12px; display: flex; flex-wrap: wrap; gap: 4px 14px; }
 .pills { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 0 0 22px !important; }
 .lede { font-size: 21px; line-height: 1.6; margin: 0 0 26px; }
+.facts { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 14px 24px; margin: 0 0 26px; padding: 16px 0; border-top: 1px solid var(--line); }
+.facts dt { color: var(--leaf-muted); font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em; }
+.facts dd { margin: 2px 0 0; }
 .body section { border-top: 1px solid var(--line); padding: 16px 0 6px; }
 .body h2 { font: 24px/1.2 var(--display); margin: 0 0 8px; }
 .body p, .body ul, .body ol { margin: 0 0 12px; }
 .body ul, .body ol { padding-left: 20px; }
 .meta { color: var(--leaf-muted); font-size: 15px; }
-.sources li { margin-bottom: 6px; }
+.sources { list-style: none; padding-left: 0 !important; }
+.sources li { margin-bottom: 6px; padding-left: 30px; position: relative; }
+.num { position: absolute; left: 0; min-width: 22px; color: var(--leaf-muted); font-size: 13px; font-variant-numeric: tabular-nums; }
+.chapter p { font-size: 18px; line-height: 1.7; }
+.chapter sup { line-height: 0; margin-left: 1px; }
+.chapter sup a { font-size: 12px; font-weight: 700; text-decoration: none; color: var(--turmeric); }
+.view [id^='source-'] { scroll-margin-top: 80px; }
+.view [id^='source-']:target { background: color-mix(in srgb, var(--turmeric) 18%, transparent); border-radius: 6px; }
 .sources :global(.pill), .objects :global(.pill) { margin-left: 8px; font-size: 11px; }
 
 .route { list-style: none; padding: 0 !important; counter-reset: stop; }
@@ -24,6 +34,7 @@
   content: counter(stop); position: absolute; left: 0; top: 2px; width: 22px; height: 22px; border-radius: 50%;
   background: var(--leaf-ink); color: var(--leaf); font-size: 12px; font-weight: 700; display: grid; place-items: center;
 }
+.route .story { margin: 4px 0 0 !important; }
 .route li:not(:last-child)::after { content: ''; position: absolute; left: 10px; top: 26px; bottom: 0; border-left: 2px dotted var(--leaf-muted); }
 
 .button { display: inline-block; padding: 9px 18px; border-radius: 999px; background: var(--leaf-ink); color: var(--leaf); text-decoration: none; font-weight: 600; }

@@ -40,4 +40,4 @@ INSERT INTO sources (innovation_id, position, kind, title, creator, institution,
   ('IND-011', 5, 'translation', 'Siddhanta Siromani - Goladhyaya with Marichi Bhashya - Bhaskaracharya, Kedar Dutta Joshi', NULL, 'Internet Archive', NULL, 'https://archive.org/details/siddhanta-siromani-goladhyaya-with-marichi-bhashya-bhaskaracharya-kedar-dutta-joshi', NULL, NULL, NULL, 'needs_review');
 
 INSERT INTO sources (innovation_id, position, kind, title, url) VALUES
-  ('IND-011', 6, 'article', 'link.springer.com', 'https://link.springer.com/book/10.1007%2F978-93-86279-49-1');
+  ('IND-011', 6, 'article', 'C. S. Seshadri (ed.), Studies in the History of Indian Mathematics (Hindustan Book Agency, 2010)', 'https://link.springer.com/book/10.1007%2F978-93-86279-49-1');

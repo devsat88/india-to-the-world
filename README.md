@@ -4,8 +4,9 @@
 
 - **Sky** (home): every innovation as a star in a 3D disc of time, played from the Stone Age to today.
 - **Rangoli**: step through history era by era; each era blooms as a rangoli of its innovations.
-- **Timeline challenge**: place innovations in chronological order. Classic, daily and themed decks.
-- **Transmission routes**: trace an idea along its recorded route on a 3D globe, one stop at a time.
+- **Rewind**: a daily puzzle. Start from something in use today and rewind through its history to where it began.
+- **A Day in Your Life**: tap ordinary moments, from a morning shampoo to evening chess, to find the idea behind each.
+- **Then → Now**: match an old finding to where it lives on today, then see how far it came on a 3D globe.
 - **Entry pages**: the path from each innovation to the modern innovations it led to, plus primary sources, museum objects and references.
 
 Popular myths are included and fact-checked rather than repeated.

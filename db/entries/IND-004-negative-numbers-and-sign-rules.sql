@@ -1,7 +1,7 @@
 -- IND-004: Negative numbers and sign rules
 
 INSERT INTO innovations (
-  id, slug, discipline_id, title, originator, period, year_start, year_end, source_text, description, background, significance, western_parallel, transmission_note, modern_relevance, modern_value, evidence_tier, confidence, caveat, region, verification, wikipedia, image_url, image_credit
+  id, slug, discipline_id, title, originator, period, year_start, year_end, source_text, description, background, significance, western_parallel, transmission_note, modern_relevance, modern_value, today, evidence_tier, confidence, caveat, region, verification, wikipedia, image_url, image_credit
 ) VALUES (
   'IND-004',                                   -- id
   'negative-numbers-and-sign-rules',           -- slug
@@ -19,6 +19,7 @@ INSERT INTO innovations (
   'Reached Europe through Arabic algebra.',    -- transmission_note
   'Foundational to algebra, accounting, physics.', -- modern_relevance
   NULL,                                        -- modern_value
+  'Bank overdrafts and sub-zero temperatures', -- today
   'Documented',                                -- evidence_tier
   'High',                                      -- confidence
   'Chinese rod numerals also handled negatives; Brahmagupta gave explicit rules.', -- caveat
@@ -38,4 +39,4 @@ INSERT INTO sources (innovation_id, position, kind, title, creator, institution,
   ('IND-004', 3, 'translation', 'Algebra, with Arithmetic and mensuration, from the Sanscrit of Brahmegupta and Bháscara. Translated by Henry Thomas Colebrooke', 'Brahmagupta, 7th cent; Bhaskaracarya, b. 1114', 'Internet Archive', '1817', 'https://archive.org/details/algebrawitharith00brahuoft', NULL, NULL, NULL, 'needs_review');
 
 INSERT INTO sources (innovation_id, position, kind, title, url) VALUES
-  ('IND-004', 4, 'article', 'link.springer.com', 'https://link.springer.com/book/10.1007%2F978-93-86279-49-1');
+  ('IND-004', 4, 'article', 'C. S. Seshadri (ed.), Studies in the History of Indian Mathematics (Hindustan Book Agency, 2010)', 'https://link.springer.com/book/10.1007%2F978-93-86279-49-1');

@@ -1,7 +1,7 @@
 -- IND-054: Cotton cultivation and spinning
 
 INSERT INTO innovations (
-  id, slug, discipline_id, title, originator, period, year_start, year_end, source_text, description, background, significance, western_parallel, transmission_note, modern_relevance, modern_value, evidence_tier, confidence, caveat, region, verification, wikipedia, image_url, image_credit
+  id, slug, discipline_id, title, originator, period, year_start, year_end, source_text, description, background, significance, western_parallel, transmission_note, modern_relevance, modern_value, today, evidence_tier, confidence, caveat, region, verification, wikipedia, image_url, image_credit
 ) VALUES (
   'IND-054',                                   -- id
   'cotton-cultivation-and-spinning',           -- slug
@@ -19,6 +19,7 @@ INSERT INTO innovations (
   'Cotton and cotton textiles were major Indian exports for millennia.', -- transmission_note
   'Cotton remains a global staple fibre.',     -- modern_relevance
   NULL,                                        -- modern_value
+  'The most-worn natural fibre on Earth',      -- today
   'Documented',                                -- evidence_tier
   'High',                                      -- confidence
   'Cotton was independently domesticated in the Americas too.', -- caveat

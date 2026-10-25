@@ -1,7 +1,7 @@
 -- IND-066: Snakes and Ladders (Moksha Patam)
 
 INSERT INTO innovations (
-  id, slug, discipline_id, title, originator, period, year_start, year_end, source_text, description, background, significance, western_parallel, transmission_note, modern_relevance, modern_value, evidence_tier, confidence, caveat, region, verification, wikipedia, image_url, image_credit
+  id, slug, discipline_id, title, originator, period, year_start, year_end, source_text, description, background, significance, western_parallel, transmission_note, modern_relevance, modern_value, today, evidence_tier, confidence, caveat, region, verification, wikipedia, image_url, image_credit
 ) VALUES (
   'IND-066',                                   -- id
   'snakes-and-ladders',                        -- slug
@@ -19,6 +19,7 @@ INSERT INTO innovations (
   'Brought to Britain in the colonial era and re-published.', -- transmission_note
   'A popular children''s game worldwide.',     -- modern_relevance
   NULL,                                        -- modern_value
+  'A board game in millions of homes',         -- today
   'Documented',                                -- evidence_tier
   'High',                                      -- confidence
   'The moral framing was largely stripped out in Western versions.', -- caveat

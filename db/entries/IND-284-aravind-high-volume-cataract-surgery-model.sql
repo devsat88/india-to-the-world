@@ -1,7 +1,7 @@
 -- IND-284: Aravind high-volume cataract surgery model
 
 INSERT INTO innovations (
-  id, slug, discipline_id, title, originator, period, year_start, year_end, source_text, description, background, significance, western_parallel, transmission_note, modern_relevance, modern_value, evidence_tier, confidence, caveat, region, verification, wikipedia, image_url, image_credit
+  id, slug, discipline_id, title, originator, period, year_start, year_end, source_text, description, background, significance, western_parallel, transmission_note, modern_relevance, modern_value, today, evidence_tier, confidence, caveat, region, verification, wikipedia, image_url, image_credit
 ) VALUES (
   'IND-284',                                   -- id
   'aravind-high-volume-cataract-surgery-model', -- slug
@@ -19,6 +19,7 @@ INSERT INTO innovations (
   'Studied by business schools and copied abroad.', -- transmission_note
   'Restores sight at a fraction of Western cost.', -- modern_relevance
   NULL,                                        -- modern_value
+  'Affordable eye surgery at massive scale',   -- today
   'Documented',                                -- evidence_tier
   'High',                                      -- confidence
   'A delivery-model innovation rather than a new surgical technique.', -- caveat

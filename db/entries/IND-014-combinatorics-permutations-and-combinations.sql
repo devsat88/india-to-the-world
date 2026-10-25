@@ -40,7 +40,7 @@ INSERT INTO sources (innovation_id, position, kind, title, creator, institution,
   ('IND-014', 5, 'translation', 'Lilavati Ganitamu', 'Bhaskaracarya', 'Internet Archive', '1936', 'https://archive.org/details/lilavatiganitamu00bhassher', NULL, NULL, NULL, 'needs_review');
 
 INSERT INTO sources (innovation_id, position, kind, title, url) VALUES
-  ('IND-014', 6, 'article', 'link.springer.com', 'https://link.springer.com/book/10.1007%2F978-93-86279-49-1');
+  ('IND-014', 6, 'article', 'C. S. Seshadri (ed.), Studies in the History of Indian Mathematics (Hindustan Book Agency, 2010)', 'https://link.springer.com/book/10.1007%2F978-93-86279-49-1');
 
 INSERT INTO relations (from_id, to_id, kind) VALUES
   ('IND-014', 'IND-082', 'led_to');

@@ -1,7 +1,7 @@
 -- IND-109: Herbal shampoo and hair cleansing
 
 INSERT INTO innovations (
-  id, slug, discipline_id, title, originator, period, year_start, year_end, source_text, description, background, significance, western_parallel, transmission_note, modern_relevance, modern_value, evidence_tier, confidence, caveat, region, verification, wikipedia, image_url, image_credit
+  id, slug, discipline_id, title, originator, period, year_start, year_end, source_text, description, background, significance, western_parallel, transmission_note, modern_relevance, modern_value, today, evidence_tier, confidence, caveat, region, verification, wikipedia, image_url, image_credit
 ) VALUES (
   'IND-109',                                   -- id
   'herbal-shampoo-and-hair-cleansing',         -- slug
@@ -19,6 +19,7 @@ INSERT INTO innovations (
   'Colonial-era traders carried the practice and word to Europe.', -- transmission_note
   'Shampoo is a global personal-care product.', -- modern_relevance
   NULL,                                        -- modern_value
+  'A bottle in almost every bathroom',         -- today
   'Documented',                                -- evidence_tier
   'High',                                      -- confidence
   'The English word and commercial product are later; the herbal practice is ancient.', -- caveat

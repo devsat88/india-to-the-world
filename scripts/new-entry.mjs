@@ -1,5 +1,5 @@
 // Creates a ready-to-fill entry file with the next free id.
-//   npm run new-entry -- "Kuttaka algorithm"
+//   npm run new-entry -- "Bhashini AI translation platform"
 import fs from 'node:fs';
 import path from 'node:path';
 import { DatabaseSync } from 'node:sqlite';
@@ -32,7 +32,7 @@ const template = `-- ${id}: ${title}
 ${disciplines}
 
 INSERT INTO innovations (
-  id, slug, discipline_id, title, originator, period, year_start, year_end, source_text, description, background, significance, western_parallel, transmission_note, modern_relevance, modern_value, evidence_tier, confidence, caveat, region, verification, wikipedia, image_url, image_credit
+  id, slug, discipline_id, title, originator, period, year_start, year_end, source_text, description, background, significance, western_parallel, transmission_note, modern_relevance, modern_value, today, evidence_tier, confidence, caveat, region, verification, wikipedia, image_url, image_credit
 ) VALUES (
   '${id}',                                    -- id
   ${q(slug)},                                 -- slug: used in the page URL
@@ -50,6 +50,7 @@ INSERT INTO innovations (
   NULL,                                       -- transmission_note: how the idea travelled
   NULL,                                       -- modern_relevance: why it matters today
   NULL,                                       -- modern_value: measurable worth today, sourced
+  NULL,                                       -- today: where it lives today, up to 60 characters, e.g. 'The digits on every clock and keyboard'
   'Documented',                               -- evidence_tier: Documented | Plausible precursor | Contested-Myth
   'Medium',                                   -- confidence: High | Medium | Low
   NULL,                                       -- caveat: what the claim does not say
@@ -64,6 +65,11 @@ INSERT INTO innovations (
 -- Everything except 'reference' needs a url. Images need a licence.
 INSERT INTO sources (innovation_id, position, kind, title, creator, institution, year, url, image_url, licence) VALUES
   ('${id}', 1, 'reference', 'TODO book or paper', 'TODO author', NULL, NULL, NULL, NULL, NULL);
+
+-- Optional: the long read on the entry page. Headed sections of researched
+-- prose; separate paragraphs with a blank line and cite sources as [1], [2].
+-- INSERT INTO chapters (innovation_id, position, heading, body) VALUES
+--   ('${id}', 1, 'How it worked', 'Two or more paragraphs, each claim cited [1].');
 
 -- Optional: what it led to, especially what the wider world adopted.
 -- INSERT INTO outcomes (innovation_id, position, text) VALUES

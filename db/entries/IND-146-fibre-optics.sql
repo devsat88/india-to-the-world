@@ -1,7 +1,7 @@
 -- IND-146: Fibre optics (imaging fibre bundles)
 
 INSERT INTO innovations (
-  id, slug, discipline_id, title, originator, period, year_start, year_end, source_text, description, background, significance, western_parallel, transmission_note, modern_relevance, modern_value, evidence_tier, confidence, caveat, region, verification, wikipedia, image_url, image_credit
+  id, slug, discipline_id, title, originator, period, year_start, year_end, source_text, description, background, significance, western_parallel, transmission_note, modern_relevance, modern_value, today, evidence_tier, confidence, caveat, region, verification, wikipedia, image_url, image_credit
 ) VALUES (
   'IND-146',                                   -- id
   'fibre-optics',                              -- slug
@@ -19,6 +19,7 @@ INSERT INTO innovations (
   'Work done by the India-born Kapany in the UK and US.', -- transmission_note
   'Fibre optics underpins global internet and telecom backbones.', -- modern_relevance
   NULL,                                        -- modern_value
+  'Optical fibre, from endoscopes to the web', -- today
   'Documented',                                -- evidence_tier
   'High',                                      -- confidence
   'By the India-born ''father of fibre optics''; long-distance fibre comms were a broader later achievement.', -- caveat

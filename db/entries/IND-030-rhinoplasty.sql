@@ -1,7 +1,7 @@
 -- IND-030: Rhinoplasty (nose reconstruction)
 
 INSERT INTO innovations (
-  id, slug, discipline_id, title, originator, period, year_start, year_end, source_text, description, background, significance, western_parallel, transmission_note, modern_relevance, modern_value, evidence_tier, confidence, caveat, region, verification, wikipedia, image_url, image_credit
+  id, slug, discipline_id, title, originator, period, year_start, year_end, source_text, description, background, significance, western_parallel, transmission_note, modern_relevance, modern_value, today, evidence_tier, confidence, caveat, region, verification, wikipedia, image_url, image_credit
 ) VALUES (
   'IND-030',                                   -- id
   'rhinoplasty',                               -- slug
@@ -19,6 +19,7 @@ INSERT INTO innovations (
   'Reported in Gentleman''s Magazine (1794); performed by J. C. Carpue in London (1814; published 1816); refined by von Graefe/Dieffenbach.', -- transmission_note
   'Foundational to modern reconstructive and plastic surgery.', -- modern_relevance
   NULL,                                        -- modern_value
+  'Modern plastic and reconstructive surgery', -- today
   'Documented',                                -- evidence_tier
   'High',                                      -- confidence
   'The surviving text was redacted centuries after Sushruta; the technique''s antiquity is nonetheless well accepted. The 1794 Pune operation was done by a craftsman-surgeon; historians note its link to the Sanskrit text is assumed rather than documented.', -- caveat

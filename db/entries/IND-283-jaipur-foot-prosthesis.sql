@@ -1,7 +1,7 @@
 -- IND-283: Jaipur Foot prosthesis
 
 INSERT INTO innovations (
-  id, slug, discipline_id, title, originator, period, year_start, year_end, source_text, description, background, significance, western_parallel, transmission_note, modern_relevance, modern_value, evidence_tier, confidence, caveat, region, verification, wikipedia, image_url, image_credit
+  id, slug, discipline_id, title, originator, period, year_start, year_end, source_text, description, background, significance, western_parallel, transmission_note, modern_relevance, modern_value, today, evidence_tier, confidence, caveat, region, verification, wikipedia, image_url, image_credit
 ) VALUES (
   'IND-283',                                   -- id
   'jaipur-foot-prosthesis',                    -- slug
@@ -19,6 +19,7 @@ INSERT INTO innovations (
   'Fitted in many conflict zones worldwide.',  -- transmission_note
   'Has helped well over a million amputees.',  -- modern_relevance
   NULL,                                        -- modern_value
+  'Prosthetic legs for over a million people', -- today
   'Documented',                                -- evidence_tier
   'High',                                      -- confidence
   'A frugal-engineering design rather than a high-tech device.', -- caveat

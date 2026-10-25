@@ -1,10 +1,10 @@
 // The one rendering of an entry, used by the entry page and the quick-view
 // sheet. Given only an Item it shows the summary; given the full Entry it
-// shows everything.
+// shows the story; `detailed` (the entry page) adds the record behind it.
 import Link from 'next/link';
 import { entryFileUrl } from '@/lib/site';
-import { formatYear } from '@/lib/time';
-import type { Branch, Discipline, Entry, Item, Source } from '@/lib/types';
+import { formatSpan, formatYear } from '@/lib/time';
+import type { Branch, Chapter, Discipline, Entry, Item, Source } from '@/lib/types';
 import styles from './EntryView.module.css';
 
 type Props = {
@@ -14,18 +14,35 @@ type Props = {
   onOpen?: (item: Item) => void;
   /** The full entry could not be loaded. */
   failed?: boolean;
+  /** Add the facts, parallels and journey stories the quick view leaves out. */
+  detailed?: boolean;
 };
 
 function SourceLine({ s }: { s: Source }) {
   const meta = [s.creator, s.institution, s.year].filter(Boolean).join(', ');
   return (
-    <li>
+    <li id={`source-${s.position}`}>
+      <span className={styles.num}>{s.position}</span>
       {s.url ? <a href={s.url} target="_blank" rel="noopener">{s.title}</a> : s.title}
       {meta && <span className={styles.meta}> {meta}</span>}
       {s.note && <span className={styles.meta}>. {s.note}</span>}
       {s.status === 'needs_review' && <span className="pill review" title="Found automatically; not yet checked by an editor">Unreviewed</span>}
     </li>
   );
+}
+
+/** Paragraphs split on blank lines; [n] becomes a link to source n. */
+function Chapters({ list }: { list: Chapter[] }) {
+  return list.map((c) => (
+    <section key={c.heading} className={styles.chapter}>
+      <h2>{c.heading}</h2>
+      {c.body.split(/\n\s*\n/).map((para, i) => (
+        <p key={i}>
+          {para.split(/\[(\d+)\]/).map((part, j) => (j % 2 ? <sup key={j}><a href={`#source-${part}`}>{part}</a></sup> : part))}
+        </p>
+      ))}
+    </section>
+  ));
 }
 
 function Node({ item }: { item: Item }) {
@@ -61,7 +78,7 @@ function Branches({ list, onOpen }: { list: Branch[]; onOpen: Open }) {
   );
 }
 
-export default function EntryView({ entry, discipline: d, onOpen, failed }: Props) {
+export default function EntryView({ entry, discipline: d, onOpen, failed, detailed }: Props) {
   const full = 'sources' in entry ? entry : null;
   const myth = entry.evidence === 'Contested-Myth';
 
@@ -70,6 +87,18 @@ export default function EntryView({ entry, discipline: d, onOpen, failed }: Prop
   const objects = of('museum_object', 'image');
   const references = of('reference');
   const reading = of('article');
+
+  const facts = full && detailed ? ([
+    ['Dated', entry.yearEnd !== entry.year ? formatSpan(entry.year, entry.yearEnd) : formatYear(entry.year)],
+    ['As scholars put it', entry.period],
+    ['Originator', entry.originator],
+    ['Source text', full.sourceText],
+    ['Region', full.region],
+    ['Discipline', d.name],
+    ['Evidence', entry.evidence],
+    ['Confidence', entry.confidence],
+    ['Verification', full.verification],
+  ] satisfies [string, string | null][]).filter((f) => f[1]) : [];
 
   return (
     <div className={styles.view} style={{ '--c': d.color } as React.CSSProperties}>
@@ -92,8 +121,16 @@ export default function EntryView({ entry, discipline: d, onOpen, failed }: Prop
           {full?.verification && ['Corrected', 'Downgraded', 'Unverified'].includes(full.verification) && <span className="pill review">{full.verification}</span>}
         </p>
         <p className={styles.lede}>{entry.description}</p>
+        {facts.length > 0 && (
+          <dl className={styles.facts}>
+            {facts.map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}
+          </dl>
+        )}
+        {detailed && full && <Chapters list={full.chapters} />}
         {full?.background && <section><h2>Background</h2><p>{full.background}</p></section>}
         {full?.significance && <section><h2>Significance</h2><p>{full.significance}</p></section>}
+        {detailed && full?.westernParallel && <section><h2>Meanwhile in the West</h2><p>{full.westernParallel}</p></section>}
+        {detailed && !myth && full?.caveat && <section><h2>Fair to say</h2><p>{full.caveat}</p></section>}
 
         {myth ? (
           <section>
@@ -137,10 +174,13 @@ export default function EntryView({ entry, discipline: d, onOpen, failed }: Prop
                   <>
                     <ol className={styles.route}>
                       {full.journey.map((s) => (
-                        <li key={s.step}><strong>{s.place}</strong>, {s.yearLabel}. <span className={styles.meta}>{s.carrier}</span></li>
+                        <li key={s.step}>
+                          <strong>{s.place}</strong>, {s.yearLabel}. <span className={styles.meta}>{s.carrier}</span>
+                          {detailed && <p className={styles.story}>{s.story}</p>}
+                        </li>
                       ))}
                     </ol>
-                    <Link className={styles.button} href={`/play/journey/?idea=${entry.slug}`}>Trace the route on the globe</Link>
+                    {entry.today && <Link className={styles.button} href={`/play/then-now/?idea=${entry.slug}`}>Play it in Then → Now</Link>}
                   </>
                 )}
               </section>
@@ -154,7 +194,7 @@ export default function EntryView({ entry, discipline: d, onOpen, failed }: Prop
                 <h2>Museum objects</h2>
                 <ul className={styles.objects}>
                   {objects.map((s, i) => (
-                    <li key={i}>
+                    <li key={i} id={`source-${s.position}`}>
                       <a href={s.url ?? undefined} target="_blank" rel="noopener">
                         {s.imageUrl && <img src={s.imageUrl} alt="" loading="lazy" />}
                         <strong>{s.title}</strong>

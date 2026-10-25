@@ -1,7 +1,7 @@
 -- IND-142: Oral Rehydration Solution (ORS)
 
 INSERT INTO innovations (
-  id, slug, discipline_id, title, originator, period, year_start, year_end, source_text, description, background, significance, western_parallel, transmission_note, modern_relevance, modern_value, evidence_tier, confidence, caveat, region, verification, wikipedia, image_url, image_credit
+  id, slug, discipline_id, title, originator, period, year_start, year_end, source_text, description, background, significance, western_parallel, transmission_note, modern_relevance, modern_value, today, evidence_tier, confidence, caveat, region, verification, wikipedia, image_url, image_credit
 ) VALUES (
   'IND-142',                                   -- id
   'oral-rehydration-solution',                 -- slug
@@ -19,6 +19,7 @@ INSERT INTO innovations (
   'Chatterjee published an early formula; Mahalanabis proved it at scale in 1971 refugee camps.', -- transmission_note
   'Called one of the most important medical advances of the 20th century; saves millions of lives.', -- modern_relevance
   NULL,                                        -- modern_value
+  'A sachet that saves millions of children',  -- today
   'Documented',                                -- evidence_tier
   'High',                                      -- confidence
   'Credit is shared across several researchers; the Indian contributions are often underplayed.', -- caveat
