@@ -1,0 +1,12 @@
+.home { max-width: 1180px; margin: 0 auto; padding: 120px 24px 64px; }
+.home h1 { font: clamp(64px, 11vw, 150px)/0.9 var(--display); margin: 0; }
+.intro { font-size: 21px; color: var(--muted); max-width: 46ch; margin: 22px 0 56px; }
+.doors { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+.door {
+  display: block; text-decoration: none; padding: 28px; border-radius: 22px;
+  border: 1px solid var(--line); background: var(--night-2);
+  transition: border-color 0.2s, transform 0.3s;
+}
+.door:hover { border-color: var(--turmeric); transform: translateY(-3px); }
+.door h2 { font: 36px/1 var(--display); margin: 0 0 10px; }
+.door p { margin: 0; color: var(--muted); }

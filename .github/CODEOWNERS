@@ -1,0 +1,10 @@
+# Every change needs the maintainer's review. If editors join to review
+# entries, add them under db/entries/ and keep the rest with the maintainer:
+# the rules, the gate that enforces them, and CI.
+*                @devsat88
+/db/schema.sql   @devsat88
+/db/reference/   @devsat88
+/scripts/        @devsat88
+/.github/        @devsat88
+/LICENSE         @devsat88
+/db/LICENSE      @devsat88

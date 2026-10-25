@@ -1,0 +1,29 @@
+name: New entry
+description: Suggest an innovation to add
+labels: [data, new-entry]
+body:
+  - type: input
+    id: title
+    attributes: { label: Innovation, description: "e.g. Kuttaka algorithm" }
+    validations: { required: true }
+  - type: input
+    id: period
+    attributes: { label: When, description: "e.g. 499 CE, c. 300-200 BCE" }
+    validations: { required: true }
+  - type: input
+    id: originator
+    attributes: { label: Who or which text }
+  - type: textarea
+    id: description
+    attributes: { label: What it is, description: One or two plain sentences }
+    validations: { required: true }
+  - type: textarea
+    id: relevance
+    attributes: { label: Why it matters today }
+  - type: textarea
+    id: sources
+    attributes: { label: Sources, description: Scholarly references and links }
+    validations: { required: true }
+  - type: textarea
+    id: caveat
+    attributes: { label: Caveats, description: Parallel or earlier discoveries elsewhere, open debates }

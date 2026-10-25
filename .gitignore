@@ -1,0 +1,31 @@
+# Dependencies
+node_modules/
+
+# Build output
+.next/
+out/
+*.tsbuildinfo
+next-env.d.ts
+
+# Generated from db/entries by `npm run db:build`
+db/indiatotheworld.sqlite
+db/indiatotheworld.sqlite.building
+db/*.sqlite-journal
+db/*.sqlite-wal
+db/*.sqlite-shm
+lib/db-version.ts
+
+# Env and deploy
+.env*
+!.env.example
+.vercel/
+
+# Logs
+npm-debug.log*
+*.log
+
+# Local tooling
+.claude/settings.local.json
+.vscode/
+.idea/
+.DS_Store

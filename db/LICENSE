@@ -1,0 +1,16 @@
+India to the World dataset
+Copyright (c) 2026 India to the World contributors
+
+The data in this directory (db/schema.sql, db/reference/, db/entries/ and
+db/source-queries.json), and any database built from it, is licensed under the
+Creative Commons Attribution-ShareAlike 4.0 International licence (CC BY-SA 4.0).
+
+  Summary:    https://creativecommons.org/licenses/by-sa/4.0/
+  Full text:  https://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+You may share and adapt it for any purpose, including commercially, if you
+credit "India to the World (https://indiatotheworld.fyi)" and release your
+adaptations under the same licence.
+
+Images, museum objects and scans linked from entries are not covered by this
+licence; each keeps its own licence, credited on its entry.

@@ -1,0 +1,12 @@
+.peek {
+  position: fixed; z-index: 25; margin: 0; width: 180px; pointer-events: none;
+  transform: translate(16px, calc(-100% - 12px));
+  border-radius: 12px; overflow: hidden;
+  background: var(--night-2); border: 1px solid color-mix(in srgb, var(--c) 60%, transparent);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+  animation: peek 0.18s ease-out both;
+}
+@keyframes peek { from { opacity: 0; transform: translate(16px, calc(-100% - 4px)) scale(0.96); } }
+.peek img, .noimg { display: block; width: 100%; height: 110px; object-fit: cover; background: color-mix(in srgb, var(--c) 35%, var(--night-3)); }
+.peek figcaption { padding: 8px 10px 10px; font-size: 14px; line-height: 1.3; font-weight: 600; }
+.peek small { display: block; font-weight: 400; color: var(--c); font-size: 12px; margin-bottom: 2px; }

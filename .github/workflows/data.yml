@@ -1,0 +1,33 @@
+name: Build
+on:
+  pull_request:
+    # Re-run when labels change, so 'allow-entry-removal' takes effect
+    types: [opened, synchronize, reopened, labeled, unlabeled]
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      # Builds the database first, failing with a per-file report if any entry breaks a rule
+      - run: npm run build
+  entries:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      # Flags edits to existing entries; removals fail unless a maintainer adds the label
+      - run: node scripts/check-entry-changes.mjs "origin/$BASE_REF"
+        env:
+          BASE_REF: ${{ github.base_ref }}
+          ALLOW_REMOVAL: ${{ contains(github.event.pull_request.labels.*.name, 'allow-entry-removal') }}

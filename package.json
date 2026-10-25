@@ -1,0 +1,35 @@
+{
+  "name": "indiatotheworld",
+  "version": "0.2.0",
+  "description": "An open, sourced atlas of Indian innovations from the first stone tools to Chandrayaan, explorable through time.",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22.13"
+  },
+  "scripts": {
+    "db:build": "node --no-warnings=ExperimentalWarning scripts/db-build.mjs",
+    "new-entry": "node --no-warnings=ExperimentalWarning scripts/new-entry.mjs",
+    "dev": "node --no-warnings=ExperimentalWarning scripts/dev.mjs",
+    "build": "npm run db:build && NODE_OPTIONS=--no-warnings=ExperimentalWarning next build",
+    "start": "npm run build && node scripts/serve.mjs",
+    "suggest:sources": "node --no-warnings=ExperimentalWarning scripts/suggest-sources.mjs"
+  },
+  "dependencies": {
+    "@react-three/drei": "^10.7.9",
+    "@react-three/fiber": "^9.8.2",
+    "gsap": "^3.15.0",
+    "next": "^16.4.3",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "three": "^0.186.1"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.5",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@types/three": "^0.186.0",
+    "typescript": "^7.0.2"
+  }
+}

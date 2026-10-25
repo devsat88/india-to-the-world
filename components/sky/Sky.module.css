@@ -1,0 +1,48 @@
+.sky { position: fixed; inset: 0; }
+
+.key {
+  position: absolute; left: 24px; top: 80px; z-index: 10; width: 250px;
+  font-size: 14px; color: var(--muted); pointer-events: none;
+}
+.key p { margin: 0 0 8px; }
+
+/* Timeline controls sit top right, under the site bar and clear of the disc. */
+.scrub {
+  position: absolute; right: 24px; top: 64px; z-index: 10;
+  display: flex; align-items: center; gap: 12px;
+  width: min(460px, calc(100vw - 340px));
+  padding: 6px 16px 6px 6px; border-radius: 999px;
+  background: rgba(27, 34, 80, 0.9); border: 1px solid var(--line);
+}
+.now {
+  position: absolute; right: 24px; top: 128px; z-index: 10; margin: 0;
+  text-align: right; pointer-events: none; width: min(460px, 40vw);
+  color: var(--turmeric); font-size: 14px;
+}
+.now strong { display: block; font: 22px/1.15 var(--display); color: var(--ink); }
+.play { flex: none; width: 36px; height: 36px; border-radius: 50%; border: 0; background: var(--turmeric); color: var(--night); font-size: 15px; }
+.track { flex: 1; min-width: 0; display: flex; flex-direction: column; padding-top: 6px; }
+.track input { width: 100%; margin: 0; accent-color: var(--turmeric); }
+.ends { display: flex; justify-content: space-between; font-size: 11px; color: var(--muted); line-height: 1.6; }
+.year { flex: none; min-width: 6.5em; text-align: right; font: 19px/1 var(--display); }
+
+:global(.sky-era) { font-size: 11px; color: rgba(243, 233, 210, 0.45); white-space: nowrap; pointer-events: none; opacity: 0; transition: opacity 0.4s; }
+:global(.sky-era.near) { opacity: 1; }
+:global(.sky-label) {
+  border: 0; background: none; padding: 2px 4px; font-size: 13px; white-space: nowrap;
+  text-shadow: 0 0 6px #121735;
+}
+
+/* Tablets and phones: the disc needs the width, so the key goes. */
+@media (max-width: 900px) {
+  .key { display: none; }
+  .scrub { right: 16px; width: min(460px, calc(100vw - 32px)); }
+  .now { right: 16px; }
+}
+@media (max-width: 640px) {
+  :global(.sky-label) { font-size: 11px; padding: 2px; }
+  .scrub { top: 52px; left: 16px; width: auto; gap: 10px; padding-right: 12px; }
+  .year { min-width: 5.5em; font-size: 16px; }
+  .now { top: 108px; left: 16px; width: auto; font-size: 13px; }
+  .now strong { font-size: 17px; }
+}

@@ -1,0 +1,23 @@
+-- Disciplines: each one is a slice of the wheel and a colour across the site.
+INSERT INTO disciplines (id, name, short, color) VALUES
+  ('mathematics', 'Mathematics & Computer Science', 'Mathematics', '#E8A317'),
+  ('logic', 'Logic & Philosophy of Science', 'Logic', '#F28C28'),
+  ('astronomy', 'Astronomy & Cosmology', 'Astronomy', '#CFE3FF'),
+  ('physics', 'Physics & Mechanics', 'Physics', '#3FB8AF'),
+  ('space', 'Space & Aerospace', 'Space', '#F4F4FF'),
+  ('computing', 'Computing, IT & AI', 'Computing', '#8C7CF0'),
+  ('medicine', 'Medicine & Surgery', 'Medicine', '#7DB46C'),
+  ('agriculture', 'Agriculture, Botany & Everyday Tech', 'Agriculture', '#A9C94A'),
+  ('materials', 'Metallurgy, Materials & Chemistry', 'Materials', '#8FA9C4'),
+  ('textiles', 'Textiles & Craft', 'Textiles', '#B98AD9'),
+  ('architecture', 'Architecture & Engineering', 'Architecture', '#D8B48A'),
+  ('archaeology', 'Archaeology & Prehistory', 'Archaeology', '#C0623B'),
+  ('art', 'Art, Sculpture & Rock Art', 'Art', '#D9475A'),
+  ('scripts', 'Writing & Scripts', 'Scripts', '#E9D8A6'),
+  ('language-games', 'Language, Music & Games', 'Language & games', '#E78FB3'),
+  ('sport', 'Sport & Martial Arts', 'Sport', '#F0604D'),
+  ('education', 'Education & Knowledge Systems', 'Education', '#6EC1E4'),
+  ('trade', 'Economy, Trade & Statecraft', 'Trade', '#F5D06F'),
+  ('energy', 'Energy & Nuclear', 'Energy', '#5FD3A0'),
+  ('biopiracy', 'Modern Biopiracy Cases', 'Biopiracy', '#BFA46A'),
+  ('myth-check', 'Contested / Myth (Fact-check)', 'Myth check', '#9A9AA8');
