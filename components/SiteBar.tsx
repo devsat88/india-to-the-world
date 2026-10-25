@@ -9,6 +9,7 @@ const LINKS = [
   { href: '/', label: 'Sky' },
   { href: '/rangoli/', label: 'Rangoli' },
   { href: '/play/', label: 'Play' },
+  { href: '/entries/', label: 'Index' },
 ];
 
 export default function SiteBar() {

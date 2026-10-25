@@ -1,0 +1,9 @@
+.page { max-width: 1180px; margin: 0 auto; padding: 120px 16px 64px; }
+.page h1 { font: clamp(48px, 8vw, 96px)/0.95 var(--display); margin: 0; }
+.intro { font-size: 19px; color: var(--muted); margin: 16px 0 40px; }
+.page h2 { font: 30px/1 var(--display); margin: 40px 0 14px; color: var(--c); }
+.page ul { list-style: none; margin: 0; padding: 0; columns: 300px; column-gap: 32px; }
+.page li { break-inside: avoid; padding: 5px 0; }
+.page li a { text-decoration: none; }
+.page li a:hover { color: var(--turmeric); }
+.page small { color: var(--muted); white-space: nowrap; }

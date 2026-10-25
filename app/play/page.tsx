@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import styles from '../home.module.css';
 
-export const metadata: Metadata = { title: 'Play' };
+export const metadata: Metadata = { title: 'Play', description: 'Games that trace how old Indian findings turn up in your day.', alternates: { canonical: '/play/' } };
 
 export default function PlayPage() {
   return (
