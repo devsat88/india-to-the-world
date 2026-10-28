@@ -1,4 +1,5 @@
-.sky { position: fixed; inset: 0; }
+/* Pinches anywhere on the sky (labels and cards included) zoom the camera, never the page. */
+.sky { position: fixed; inset: 0; touch-action: none; }
 
 .key {
   position: absolute; left: 24px; top: 92px; z-index: 10; width: 260px;
