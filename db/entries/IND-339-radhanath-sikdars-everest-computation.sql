@@ -21,7 +21,7 @@ INSERT INTO innovations (
   NULL,                                        -- modern_value
   'Documented',                                -- evidence_tier
   'Medium',                                    -- confidence
-  'The ''Sir, I have discovered the highest mountain!'' story only appears from 1933; the computation itself is documented.', -- caveat
+  'The ''Sir, I have discovered the highest mountain!'' story traces to a 1928 speech by Kenneth Mason and was popularised from 1933; Sikdar''s role as chief computer is documented, but whether he personally computed Peak XV is disputed.', -- caveat
   'Pan-Indian / unspecified',                  -- region
   'Verified-web',                              -- verification
   'Radhanath_Sikdar',                          -- wikipedia

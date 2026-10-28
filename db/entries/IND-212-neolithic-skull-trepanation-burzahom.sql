@@ -60,4 +60,3 @@ The entry''s caveat applies: most widely available accounts of the find are seco
 'Burzahom is not the world''s first trepanation. The practice is known from Neolithic Europe, and later from Bronze Age Anatolia, Jericho and Andean Peru, where healed skulls show that perhaps half or more of patients survived [7]. In South Asia, older reports claim trepanned skulls at the Harappan sites of Lothal, Harappa and Kalibangan and at the megalithic site of Maski in Karnataka, where one skull has two circular holes either side of the sagittal suture [7]. Some of those earlier identifications are less secure than the Burzahom case [7].
 
 What makes Burzahom stand out is the number of trepanned skulls from a single community, and the healing on them. It places Kashmir''s Neolithic farmers among the many prehistoric peoples who independently found that a person could survive having the skull opened [5][7].');
-

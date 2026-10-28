@@ -1,0 +1,24 @@
+.page { max-width: 860px; margin: 0 auto; padding: 120px 24px 80px; }
+.page h1 { font: clamp(64px, 11vw, 150px)/0.9 var(--display); margin: 0; }
+.intro { font-size: 21px; color: var(--muted); max-width: 46ch; margin: 22px 0 40px; }
+
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin: 0 0 24px; }
+.stats div { padding: 18px 20px; border-radius: 18px; border: 1px solid var(--line); background: var(--night-2); }
+.stats dt { font-size: 13px; color: var(--muted); }
+.stats dd { margin: 4px 0 0; font: 30px/1.1 var(--display); color: var(--turmeric); }
+
+.section { margin-top: 56px; }
+.section h2 { font: 36px/1 var(--display); margin: 0 0 16px; }
+.section p { max-width: 64ch; }
+.section a { color: var(--turmeric); }
+
+.tiers, .ways { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.tiers li, .ways li { padding: 16px 20px; border-radius: 16px; border: 1px solid var(--line); color: var(--muted); }
+.tiers strong { color: var(--ink); }
+.tiers span { margin: 0 10px 0 6px; padding: 1px 8px; border-radius: 999px; background: var(--night-3); color: var(--ink); font-size: 13px; }
+.ways a { display: block; font: 24px/1.1 var(--display); text-decoration: none; margin-bottom: 4px; }
+.ways a:hover { text-decoration: underline; }
+
+@media (max-width: 640px) {
+  .page { padding: 96px 16px 64px; }
+}

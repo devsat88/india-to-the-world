@@ -89,7 +89,7 @@ export default function DayInLife({ items }: { items: Item[] }) {
       <div className={styles.head}>
         <div>
           <h1 className={shared.title}>A Day in Your Life</h1>
-          <p className={shared.lede}>Tap anything you use today to find where it began.</p>
+          <p className={shared.lede}>Tap a moment to find its origin.</p>
         </div>
         <p className={styles.count}><strong>{seenCount}</strong> of {moments.length}<span>ideas from India found</span></p>
       </div>
@@ -135,7 +135,7 @@ export default function DayInLife({ items }: { items: Item[] }) {
               </div>
             </article>
           ) : (
-            <p className={styles.hint}>Start with your morning: tap <strong>Stretch</strong>.</p>
+            <p className={styles.hint}>Tap <strong>Stretch</strong>.</p>
           )}
 
           {complete && (

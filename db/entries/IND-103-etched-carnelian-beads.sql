@@ -13,7 +13,7 @@ INSERT INTO innovations (
   -2001,                                       -- year_end
   'Indus Valley sites',                        -- source_text
   'Decorative beads made by an alkaline-etching technique that whitens designs on carnelian.', -- description
-  NULL,                                        -- background
+  'Artisans of the Indus (Harappan) civilisation in the third millennium BCE developed a way to draw permanent white designs on red carnelian beads. They painted patterns with an alkaline paste and then heated the bead, so that the treated surface turned white while the rest stayed red. These etched (sometimes called bleached) beads were luxury goods, found in royal graves in Mesopotamia, and the technique survived in South Asia for thousands of years.', -- background
   NULL,                                        -- significance
   'A distinctive Harappan chemical craft.',    -- western_parallel
   'Traded from China to Greece.',              -- transmission_note
@@ -45,3 +45,41 @@ INSERT INTO sources (innovation_id, position, kind, title, url) VALUES
 INSERT INTO relations (from_id, to_id, kind) VALUES
   ('IND-103', 'IND-228', 'led_to'),
   ('IND-103', 'IND-229', 'led_to');
+
+-- Researched sources.
+INSERT INTO sources (innovation_id, position, kind, title, institution, url) VALUES
+  ('IND-103', 7, 'article', 'britishmuseum.iro.bl.uk', NULL, 'https://britishmuseum.iro.bl.uk/concern/book_contributions/0c1fcbb0-4f50-4a47-9cdb-d62827c3df8c'),
+  ('IND-103', 8, 'article', 'Etching carnelian beads understanding and reproducing ancestral technique', 'British Museum', 'https://www.britishmuseum.org/blog/etching-carnelian-beads-understanding-and-reproducing-ancestral-technique'),
+  ('IND-103', 9, 'article', 'Mark kenoyer paints designs', 'Harappa.com', 'https://www.harappa.com/slide/mark-kenoyer-paints-designs'),
+  ('IND-103', 10, 'reference', 'Beck, H. C. (1933). Etched carnelian beads. The Antiquaries Journal 13.', NULL, NULL),
+  ('IND-103', 11, 'reference', 'Mackay, E. (1933). Decorated carnelian beads. Man 33.', NULL, NULL),
+  ('IND-103', 12, 'reference', 'Kenoyer, J. M. (2020). Bleached carnelian beads of the Indus Tradition.', NULL, NULL),
+  ('IND-103', 13, 'reference', 'Possehl, G. L. (2002). The Indus Civilization: A Contemporary Perspective.', NULL, NULL);
+
+INSERT INTO chapters (innovation_id, position, heading, body) VALUES
+  ('IND-103', 1, 'Historical context',
+'The Indus civilisation, at its height around 2600 to 1900 BCE, had a highly developed bead industry using carnelian, agate, jasper and other stones from Gujarat and nearby regions. Bead workshops are known from sites such as Chanhudaro in Sindh and Lothal in Gujarat, and fine etched beads come from Mohenjo-daro, Harappa and Dholavira. Mesopotamian texts name a distant land called Meluhha, generally identified with the Indus region, as a source of carnelian; the ruler Gudea of Lagash (c. 2100 BCE) mentions it.'),
+  ('IND-103', 2, 'How it worked',
+'A carnelian bead was first shaped, polished and drilled, work that could take several days. The craftsman then painted a design, such as circles, eyes, lines or zigzags, using a paste of sodium carbonate (washing soda) mixed with the juice of a desert caper shrub, Capparis aphylla, which helped the paste stick. After drying, the bead was fired at a carefully controlled temperature. Too much heat would crack the stone and too little would leave no mark. A British Museum study found that the alkali dissolves some of the silica at the surface, leaving a network of tiny pores that scatter light and so look white. Some beads were fully whitened and then painted with dark lines, giving a reverse effect.'),
+  ('IND-103', 3, 'The evidence',
+'Etched carnelian beads are found at many Indus sites, and their manufacture is well understood from both archaeology and living craft practice. In 1933 the bead expert Horace Beck published an account of the method, drawing on Ernest Mackay''s report of craftsmen still etching beads in Sindh. J. Mark Kenoyer and others have since reproduced the technique experimentally. In Mesopotamia, etched beads appear in the Royal Cemetery at Ur (c. 2600 to 2450 BCE), in a necklace from Kish (c. 2600 to 2340 BCE), and at Susa and Nippur. The British Museum''s scientific study of the etching process confirmed the chemistry.'),
+  ('IND-103', 4, 'How it travelled',
+'In the third millennium BCE the beads were exported west to Mesopotamia and Iran, and probably also to the Gulf. Some Mesopotamian beads carry designs with no Indus parallel, suggesting that local workshops may have etched imported carnelian or that Indus artisans made designs for that market; two beads were later inscribed with dedications by the Sumerian king Shulgi (c. 2094 to 2047 BCE). The technique continued in South Asia long after the Indus cities declined, and etched beads of later date travelled very widely: to Central Asia, to Southeast Asia (Thailand, Vietnam, Myanmar, Malaysia, the Philippines), to China, where about 55 imported examples dating from the Western Zhou to the Jin dynasty are known, and rarely as far west as Egypt and the Greek island of Aegina.'),
+  ('IND-103', 5, 'Debate and caveats',
+'The dataset''s statement that the beads were traded from China to Greece is true only across a span of more than two thousand years. Indus-era beads reached Mesopotamia and Iran; the Chinese and Southeast Asian finds belong to the first millennium BCE and later, and Greek examples are rare. Whether a given Mesopotamian bead was made in the Indus region or locally is often uncertain. The term etching is used loosely: the process is a chemical alteration of the stone''s surface, not acid etching in the modern sense, and some researchers prefer the word bleached.'),
+  ('IND-103', 6, 'Why it matters today',
+'Etched carnelian is an early example of controlled surface chemistry: using an alkali and heat to change the optical properties of a mineral in a chosen pattern. The same idea of selectively treating a surface underlies modern techniques such as glass frosting and chemical patterning of materials. The beads also act as tracers of ancient trade, showing how far Indus goods travelled.'),
+  ('IND-103', 7, 'Key dates',
+'c. 2600-1900 BCE: Mature Harappan bead industry produces etched carnelian
+
+c. 2600-2450 BCE: Etched beads buried in the Royal Cemetery at Ur
+
+c. 2100 BCE: Gudea of Lagash names Meluhha as a carnelian source
+
+c. 2094-2047 BCE: Shulgi dedicates inscribed carnelian beads
+
+1st millennium BCE onward: Later etched beads reach China and Southeast Asia
+
+1933: Beck publishes the etching method
+
+2019: British Museum study explains the whitening chemistry');

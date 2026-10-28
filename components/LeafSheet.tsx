@@ -7,6 +7,7 @@ import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import EntryView from '@/components/EntryView';
 import { loadEntry } from '@/lib/load-entry';
+import { useReading } from '@/lib/reading';
 import type { Discipline, Entry, Item } from '@/lib/types';
 import styles from './LeafSheet.module.css';
 
@@ -25,6 +26,7 @@ export default function LeafSheet({ item, disciplines, onClose, onOpen }: Props)
   // Callers pass a fresh onClose each render; a ref keeps focus from being reset on every one.
   const close = useRef(onClose);
   useEffect(() => { close.current = onClose; });
+  useReading(item, ref);
 
   useEffect(() => {
     if (!item) return;
@@ -59,7 +61,8 @@ export default function LeafSheet({ item, disciplines, onClose, onOpen }: Props)
           <>
             <div className={styles.top}>
               <button className={styles.button} onClick={onClose}>← Back</button>
-              <Link className={styles.button} href={`/entry/${item.slug}/`}>Details →</Link>
+              {/* Closed on the way out, so coming back lands on the scene, not the sheet. */}
+              <Link className={styles.button} href={`/entry/${item.slug}/`} onClick={onClose}>Details →</Link>
             </div>
             <EntryView entry={shown} discipline={disciplines[item.discipline]} onOpen={onOpen} failed={failed === item.id} />
           </>

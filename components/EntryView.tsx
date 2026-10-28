@@ -26,7 +26,6 @@ function SourceLine({ s }: { s: Source }) {
       {s.url ? <a href={s.url} target="_blank" rel="noopener">{s.title}</a> : s.title}
       {meta && <span className={styles.meta}> {meta}</span>}
       {s.note && <span className={styles.meta}>. {s.note}</span>}
-      {s.status === 'needs_review' && <span className="pill review" title="Found automatically; not yet checked by an editor">Unreviewed</span>}
     </li>
   );
 }
@@ -95,9 +94,6 @@ export default function EntryView({ entry, discipline: d, onOpen, failed, detail
     ['Source text', full.sourceText],
     ['Region', full.region],
     ['Discipline', d.name],
-    ['Evidence', entry.evidence],
-    ['Confidence', entry.confidence],
-    ['Verification', full.verification],
   ] satisfies [string, string | null][]).filter((f) => f[1]) : [];
 
   return (
@@ -117,8 +113,6 @@ export default function EntryView({ entry, discipline: d, onOpen, failed, detail
         </p>
         <p className={styles.pills}>
           <span className={styles.year}>{formatYear(entry.year)}</span>
-          {myth && <span className="pill myth">Contested-Myth</span>}
-          {full?.verification && ['Corrected', 'Downgraded', 'Unverified'].includes(full.verification) && <span className="pill review">{full.verification}</span>}
         </p>
         <p className={styles.lede}>{entry.description}</p>
         {facts.length > 0 && (
@@ -151,7 +145,7 @@ export default function EntryView({ entry, discipline: d, onOpen, failed, detail
           </section>
         ) : null}
 
-        {!full && <p className={styles.meta}>{failed ? 'The full entry could not be loaded. Open Details to try again.' : 'Loading sources…'}</p>}
+        {!full && <p className={styles.meta}>{failed ? 'Could not load. Open Details to retry.' : 'Loading sources…'}</p>}
         {full && (
           <>
             {full.builtOn.length > 0 && (
@@ -201,7 +195,6 @@ export default function EntryView({ entry, discipline: d, onOpen, failed, detail
                       </a>
                       <span className={styles.meta}>{[s.institution, s.year].filter(Boolean).join(', ')}</span>
                       {s.licence && <span className={styles.meta}>{s.licence}</span>}
-                      {s.status === 'needs_review' && <span className="pill review">Unreviewed</span>}
                     </li>
                   ))}
                 </ul>

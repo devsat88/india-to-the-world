@@ -256,9 +256,7 @@ export class RangoliEngine {
 
     ctx.lineWidth = 2.5;
     ctx.strokeStyle = color;
-    ctx.setLineDash(item.evidence === 'Contested-Myth' ? [4, 4] : []);
     ctx.beginPath(); ctx.arc(x, y, s, 0, Math.PI * 2); ctx.stroke();
-    ctx.setLineDash([]);
     ctx.lineWidth = 1;
     ctx.strokeStyle = `rgba(${PALM},0.3)`;
     ctx.beginPath(); ctx.arc(x, y, s + 4, 0, Math.PI * 2); ctx.stroke();

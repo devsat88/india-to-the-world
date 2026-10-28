@@ -1,0 +1,36 @@
+.card {
+  position: fixed; left: 24px; bottom: 24px; z-index: 15; width: 300px;
+  padding: 16px 18px 14px; border-radius: 18px;
+  background: rgba(27, 34, 80, 0.92); border: 1px solid var(--line);
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+  animation: in 0.6s cubic-bezier(0.2, 0.9, 0.2, 1) 1.2s both;
+}
+.leaving { animation: out 1.2s ease forwards; pointer-events: none; }
+@keyframes in { from { opacity: 0; transform: translateY(16px); } }
+@keyframes out { to { opacity: 0; transform: translateY(8px); } }
+
+.eyebrow { margin: 0 0 6px; font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--turmeric); }
+.title { display: flex; flex-direction: column; font: 20px/1.2 var(--display); text-decoration: none; }
+.title small { font: 13px/1.5 var(--body); color: var(--muted); }
+
+.progress { display: block; height: 3px; margin: 10px 0 12px; border-radius: 3px; background: var(--line); overflow: hidden; }
+.progress::after { content: ''; display: block; height: 100%; width: calc(var(--p) * 100%); background: var(--turmeric); }
+
+.actions { display: flex; align-items: center; gap: 14px; }
+.resume {
+  padding: 7px 16px; border-radius: 999px; background: var(--ink); color: var(--night);
+  font-size: 14px; font-weight: 600; line-height: 1; text-decoration: none;
+}
+.more { font-size: 14px; color: var(--muted); text-decoration: none; }
+.more:hover { color: var(--ink); }
+.close { margin-left: auto; border: 0; background: none; color: var(--muted); font-size: 20px; line-height: 1; padding: 2px 4px; }
+.close:hover { color: var(--ink); }
+
+@media (max-width: 640px) {
+  .card { left: 16px; right: 16px; bottom: 16px; width: auto; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .card { animation: none; }
+  .leaving { animation: out 0.01ms forwards; }
+}

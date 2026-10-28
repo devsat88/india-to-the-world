@@ -1,0 +1,113 @@
+.bar {
+  position: fixed; inset: 0 0 auto 0; z-index: 20;
+  display: flex; align-items: center; gap: 34px;
+  padding: 14px 24px 18px;
+  background: linear-gradient(var(--night) 35%, transparent);
+}
+
+.brand { display: flex; align-items: flex-end; gap: 8px; text-decoration: none; }
+.name {
+  font: 34px/1 var(--display); white-space: nowrap;
+  background: linear-gradient(100deg, var(--ink) 40%, #ffe1a0 50%, var(--ink) 60%) 100% 0 / 300% 100%;
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  animation: gilt 7s ease-in-out infinite;
+}
+@keyframes gilt { 0%, 60% { background-position: 100% 0; } 100% { background-position: 0 0; } }
+
+/* A clay lamp; the flame sways and glows */
+.diya { width: 24px; height: 30px; flex: none; margin-bottom: 2px; overflow: visible; }
+.lamp { fill: #c8622e; }
+.flame {
+  fill: #ffc24a; transform-origin: 12px 14px;
+  filter: drop-shadow(0 0 4px #ffb43a) drop-shadow(0 0 10px rgba(255, 140, 40, 0.8));
+  animation: flicker 1.6s ease-in-out infinite;
+}
+@keyframes flicker { 0%, 100% { transform: scale(1) rotate(-4deg); } 50% { transform: scale(0.92, 1.1) rotate(4deg); } }
+
+.nav { position: relative; display: flex; gap: 4px; }
+
+.item {
+  position: relative; display: flex; align-items: center; gap: 10px;
+  padding: 8px 16px 10px; border-radius: 12px;
+  color: var(--muted); font-size: 15px; font-weight: 600; text-decoration: none;
+  transition: color 0.3s, background 0.3s;
+}
+.item:hover { color: var(--ink); background: rgba(243, 233, 210, 0.04); }
+.item[aria-current='page'] { color: var(--ink); }
+
+.icon {
+  width: 18px; height: 18px; flex: none;
+  fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round;
+  transition: transform 0.6s cubic-bezier(0.3, 1.6, 0.5, 1), filter 0.3s;
+}
+.item:hover .icon { transform: rotate(-12deg) scale(1.12); }
+.item[aria-current='page'] .icon { filter: drop-shadow(0 0 6px rgba(255, 200, 90, 0.8)); }
+
+.label { display: flex; flex-direction: column; line-height: 1.1; }
+.label small { font-size: 11px; font-weight: 400; color: var(--muted); letter-spacing: 0.02em; }
+.item[aria-current='page'] .label small { color: #c9c3ea; }
+
+/* Flowing light under the active item */
+.ribbon {
+  position: absolute; bottom: -2px; height: 3px; border-radius: 3px; pointer-events: none;
+  background: linear-gradient(90deg, #2fb5a8, var(--turmeric), #e86a8a, #2fb5a8) 0 0 / 300% 100%;
+  filter: drop-shadow(0 0 8px rgba(232, 163, 23, 0.8));
+  animation: flow 4s linear infinite;
+  transition: left 0.6s cubic-bezier(0.7, 0, 0.2, 1), width 0.6s cubic-bezier(0.7, 0, 0.2, 1);
+}
+.ribbon::after { content: ''; position: absolute; inset: -16px -10px 0; background: inherit; filter: blur(16px); opacity: 0.4; border-radius: 50%; }
+@keyframes flow { to { background-position: 300% 0; } }
+
+/* A lotus opening on the ribbon */
+.lotus { position: absolute; left: 50%; bottom: -15px; width: 24px; height: 24px; translate: -50% 0; pointer-events: none; }
+.petal { transform-origin: 17px 17px; transform: rotate(var(--r)) scaleY(0); fill: #f6b37a; transition: transform 0.7s cubic-bezier(0.3, 1.5, 0.5, 1) var(--d); }
+.petal:nth-child(odd) { fill: #e86a8a; }
+.core { transform-origin: 17px 17px; transform: scale(0); fill: #ffe39a; transition: transform 0.4s ease 0.35s; }
+.item[aria-current='page'] .petal { transform: rotate(var(--r)) scaleY(1); }
+.item[aria-current='page'] .core { transform: scale(1); }
+.item[aria-current='page'] .lotus { animation: spin 18s linear infinite; }
+@keyframes spin { to { rotate: 360deg; } }
+
+/* About sits apart, at the far end of the bar */
+.about {
+  margin-left: auto; display: flex; align-items: center; gap: 8px;
+  padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line);
+  color: var(--muted); font-size: 14px; font-weight: 600; text-decoration: none;
+  transition: color 0.3s, border-color 0.3s;
+}
+.about:hover, .about[aria-current='page'] { color: var(--ink); border-color: var(--turmeric); }
+
+/* Petals and fireflies released on a switch */
+.layer { position: absolute; inset: 0 0 -160px 0; pointer-events: none; overflow: hidden; }
+.fall {
+  position: absolute; width: 8px; height: 12px; border-radius: 0 100% 0 100%; background: var(--c); opacity: 0.9;
+  animation: fall var(--t) linear forwards;
+}
+@keyframes fall { to { transform: translate(var(--x), 150px) rotate(540deg); opacity: 0; } }
+.fly {
+  position: absolute; width: 3px; height: 3px; border-radius: 50%;
+  background: #ffe7a8; box-shadow: 0 0 8px 2px rgba(255, 210, 120, 0.8);
+  animation: rise var(--t) ease-out forwards;
+}
+@keyframes rise { from { opacity: 1; } to { transform: translate(var(--x), -46px); opacity: 0; } }
+
+@media (max-width: 760px) {
+  .label small { display: none; }
+}
+@media (max-width: 640px) {
+  .bar { gap: 10px; padding: 12px 16px; }
+  .name { font-size: 24px; }
+  .diya { width: 18px; height: 22px; }
+  .item { gap: 6px; padding: 6px 8px 8px; font-size: 14px; }
+  .lotus { display: none; }
+  .about { padding: 7px; }
+  .aboutLabel { display: none; }
+}
+@media (max-width: 420px) {
+  .icon, .diya { display: none; }
+  .about .icon { display: block; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .name, .flame, .ribbon, .item[aria-current='page'] .lotus { animation: none; }
+  .ribbon, .petal, .core, .icon { transition: none; }
+}

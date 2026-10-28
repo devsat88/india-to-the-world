@@ -9,6 +9,7 @@ import LeafSheet from '@/components/LeafSheet';
 import Peek, { type PeekAt } from '@/components/Peek';
 import { eraScale, formatYear } from '@/lib/time';
 import type { Atlas, Item } from '@/lib/types';
+import Meteors from './Meteors';
 import Galaxy, { R_MAX } from './Galaxy';
 import styles from './Sky.module.css';
 
@@ -64,24 +65,78 @@ function Fit({ controls }: { controls: React.RefObject<Controls | null> }) {
 }
 
 /**
- * three's own OrbitControls rather than drei's (three-stdlib): only this one
- * zooms a pinch toward the point between the fingers, not just the mouse.
+ * Orbit by drag; zoom by wheel or pinch is our own: it scales the camera and
+ * its target about the point on the disc under the pointer (or between the
+ * fingers), so that point stays exactly where it is on screen. Auto-rotation
+ * pauses while the visitor is interacting, so the disc never slides away.
  */
 function Orbit({ controls, autoRotate }: { controls: React.RefObject<Controls | null>; autoRotate: boolean }) {
   const camera = useThree((s) => s.camera);
   const dom = useThree((s) => s.gl.domElement);
+  const touched = useRef(0);
   const c = useMemo(() => {
     const c = new Controls(camera);
-    Object.assign(c, { enablePan: false, zoomToCursor: true, minDistance: 3, maxPolarAngle: Math.PI * 0.49, autoRotateSpeed: 0.25, enableDamping: true });
+    Object.assign(c, { enablePan: false, enableZoom: false, minDistance: 2, maxPolarAngle: Math.PI * 0.49, autoRotateSpeed: 0.25, enableDamping: true });
     return c;
   }, [camera]);
   useEffect(() => {
     c.connect(dom);
     controls.current = c;
-    return () => { c.dispose(); controls.current = null; };
-  }, [c, dom, controls]);
-  useEffect(() => { c.autoRotate = autoRotate; }, [c, autoRotate]);
-  useFrame((_, dt) => c.update(dt), -1);
+    const ray = new THREE.Raycaster(), ndc = new THREE.Vector2(), disc = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0), p = new THREE.Vector3();
+    const zoom = (x: number, y: number, s: number) => {
+      const r = dom.getBoundingClientRect();
+      ndc.set(((x - r.left) / r.width) * 2 - 1, -((y - r.top) / r.height) * 2 + 1);
+      ray.setFromCamera(ndc, camera);
+      if (!ray.ray.intersectPlane(disc, p)) p.copy(c.target);
+      const d = c.getDistance();
+      s = THREE.MathUtils.clamp(s, c.minDistance / d, c.maxDistance / d);
+      camera.position.sub(p).multiplyScalar(s).add(p);
+      c.target.sub(p).multiplyScalar(s).add(p);
+      touched.current = performance.now();
+    };
+    const wheel = (e: WheelEvent) => {
+      e.preventDefault();
+      const step = e.deltaMode ? 0.05 : e.ctrlKey ? 0.01 : 0.0015; // lines, trackpad pinch, pixels
+      zoom(e.clientX, e.clientY, Math.exp(e.deltaY * step));
+    };
+    const fingers = new Map<number, { x: number; y: number }>();
+    let span = 0;
+    const pair = () => [...fingers.values()];
+    const gap = () => { const [a, b] = pair(); return Math.hypot(a.x - b.x, a.y - b.y); };
+    const down = (e: PointerEvent) => {
+      touched.current = performance.now();
+      if (e.pointerType !== 'touch') return;
+      fingers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+      span = fingers.size === 2 ? gap() : 0;
+    };
+    const move = (e: PointerEvent) => {
+      if (!fingers.has(e.pointerId)) return;
+      fingers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+      if (fingers.size !== 2) return;
+      const g = gap(), [a, b] = pair();
+      if (span > 0 && g > 0) zoom((a.x + b.x) / 2, (a.y + b.y) / 2, span / g);
+      span = g;
+    };
+    const up = (e: PointerEvent) => { fingers.delete(e.pointerId); span = fingers.size === 2 ? gap() : 0; };
+    dom.addEventListener('wheel', wheel, { passive: false });
+    dom.addEventListener('pointerdown', down);
+    dom.addEventListener('pointermove', move);
+    dom.addEventListener('pointerup', up);
+    dom.addEventListener('pointercancel', up);
+    return () => {
+      dom.removeEventListener('wheel', wheel);
+      dom.removeEventListener('pointerdown', down);
+      dom.removeEventListener('pointermove', move);
+      dom.removeEventListener('pointerup', up);
+      dom.removeEventListener('pointercancel', up);
+      c.dispose();
+      controls.current = null;
+    };
+  }, [c, dom, camera, controls]);
+  useFrame((_, dt) => {
+    c.autoRotate = autoRotate && performance.now() - touched.current > 6000;
+    c.update(dt);
+  }, -1);
   return null;
 }
 
@@ -151,6 +206,7 @@ export default function Sky({ atlas }: { atlas: Atlas }) {
         <color attach="background" args={['#121735']} />
         <fog attach="fog" args={['#121735', 20, 42]} />
         <Stars radius={70} depth={40} count={2500} factor={3} saturation={0} fade speed={0.5} />
+        {!reduced && <Meteors />}
         <Galaxy
           atlas={atlas}
           cursor={cursor}
@@ -166,18 +222,24 @@ export default function Sky({ atlas }: { atlas: Atlas }) {
         <Fit controls={controls} />
       </Canvas>
 
-      <aside className={styles.key}>
-        <p>Centre: {formatYear(atlas.eras[0].start)}. Rim: present day. Each sector is a discipline.</p>
-        <p>Drag to orbit, scroll or pinch to zoom toward a point; era names appear when zoomed in. Select a discipline to filter, or a star for details.</p>
+      <aside className={styles.key} data-avoid>
+        <p className={styles.eyebrow}>The Atlas</p>
+        <h1 className={styles.title}>{atlas.items.length} Indian innovations, charted across time</h1>
+        <dl className={styles.legend}>
+          <div><dt>Centre</dt><dd>{formatYear(atlas.eras[0].start)}</dd></div>
+          <div><dt>Rim</dt><dd>Today</dd></div>
+          <div><dt>Sectors</dt><dd>{Object.keys(atlas.disciplines).length} disciplines</dd></div>
+        </dl>
+        <p className={styles.hint}>Drag to orbit · Scroll to zoom · Tap a star</p>
       </aside>
 
       {hover && <Peek at={hover} color={atlas.disciplines[hover.item.discipline].color} />}
 
-      <p className={styles.now} aria-live="polite">
+      <p className={styles.now} aria-live="polite" data-avoid>
         {latest && playing ? <><strong>{latest.title}</strong>{formatYear(latest.year)}</> : null}
       </p>
 
-      <div className={styles.scrub}>
+      <div className={styles.scrub} data-avoid>
         <button
           className={styles.play}
           aria-label={playing ? 'Pause' : 'Play'}

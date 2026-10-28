@@ -14,7 +14,7 @@ INSERT INTO innovations (
   'Royal Institution lectures',                -- source_text
   'Described waveguides and horn antennas for millimetre waves and built an early point-contact semiconductor (crystal) detector.', -- description
   'To study millimetre waves on a laboratory bench in Calcutta, Jagadish Chandra Bose had to invent the hardware: metal tubes to guide the waves, flared horns to launch and collect them, lenses, polarisers, and a receiver sensitive enough for wavelengths of a few millimetres. His best receiver pressed a fine contact against a crystal of galena, and he described these devices in his lectures and papers from 1897 and patented the detector in the United States in 1904.', -- background
-  'The galena detector was the first use of a semiconductor crystal to detect radio waves, the ancestor of the crystal radio and of the point-contact diode, and Bose's horns and waveguides are the standard components of microwave engineering today. Nevill Mott, Nobel laureate in 1977, said Bose had anticipated the existence of P-type and N-type semiconductors.', -- significance
+  'The galena detector was the first use of a semiconductor crystal to detect radio waves, the ancestor of the crystal radio and of the point-contact diode, and Bose''s horns and waveguides are the standard components of microwave engineering today. Nevill Mott, Nobel laureate in 1977, said Bose had anticipated the existence of P-type and N-type semiconductors.', -- significance
   'Solid-state detectors were later central to Western electronics.', -- western_parallel
   'Nevill Mott later noted Bose had anticipated semiconductor detector physics.', -- transmission_note
   'Ancestors of microwave and semiconductor technology.', -- modern_relevance
@@ -22,7 +22,7 @@ INSERT INTO innovations (
   'Documented',                                -- evidence_tier
   'High',                                      -- confidence
   'Recognition came decades later; the devices were rediscovered/independently developed in the West.', -- caveat
-  'Pan-Indian / unspecified',                  -- region
+  'Bengal',                                    -- region
   'Reference-cited',                           -- verification
   'Horn_antenna',                              -- wikipedia
   'https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Schwarzbeck_BBHA_9120_D.jpg/500px-Schwarzbeck_BBHA_9120_D.jpg', -- image_url

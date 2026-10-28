@@ -4,10 +4,11 @@
 // an idea drawn as glowing arcs between its stops. Shared by the games.
 import { useEffect, useMemo, useRef } from 'react';
 import { useFrame, useLoader, useThree } from '@react-three/fiber';
-import { Html, OrbitControls } from '@react-three/drei';
+import { OrbitControls } from '@react-three/drei';
 import gsap from 'gsap';
 import * as THREE from 'three';
 import type { LatLon, Place } from '@/lib/types';
+import SceneLabel from '../SceneLabel';
 
 // Public-domain NASA Blue Marble, from Wikimedia Commons
 // (Whole_world_-_land_and_oceans_12000.jpg, 1920px), served locally.
@@ -57,6 +58,7 @@ const atmosphereShader = {
 
 function Arc({ from, to, color, delay, width = 0.009 }: { from: LatLon; to: LatLon; color: string; delay: number; width?: number }) {
   const geometry = useMemo(() => new THREE.TubeGeometry(arcCurve(from, to), 96, width, 8, false), [from, to, width]);
+  useEffect(() => () => geometry.dispose(), [geometry]);
   const progress = useRef({ v: reduced() ? 1 : 0 });
   useEffect(() => {
     if (reduced()) return;
@@ -81,7 +83,7 @@ function Marker({ at, color, label, pulse }: { at: LatLon; color: string; label?
     <group position={pos} quaternion={quat}>
       <mesh><circleGeometry args={[0.012, 24]} /><meshBasicMaterial color={color} toneMapped={false} /></mesh>
       {pulse && <mesh ref={ring}><ringGeometry args={[0.014, 0.018, 32]} /><meshBasicMaterial color={color} transparent toneMapped={false} /></mesh>}
-      {label && <Html center position={[0, 0, 0.02]} className="globe-label" zIndexRange={[5, 0]}>{label}</Html>}
+      {label && <SceneLabel position={[0, 0, 0.02]} className="globe-label" text={label} />}
     </group>
   );
 }
@@ -101,13 +103,14 @@ export default function Globe({ routeId, route, focus, pulse, spin }: Props) {
     vertexShader: atmosphereShader.vertex, fragmentShader: atmosphereShader.fragment,
     transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
   }), []);
+  useEffect(() => () => atmosphere.dispose(), [atmosphere]);
   const { camera } = useThree();
   const sun = useRef<THREE.DirectionalLight>(null);
 
   // The sun sits up and to the left of the camera, so whatever faces the viewer
   // is in daylight with a soft terminator toward one edge.
   useFrame(() => {
-    sun.current?.position.copy(camera.position).applyAxisAngle(camera.up, 0.7).add(camera.up.clone().multiplyScalar(0.8));
+    sun.current?.position.copy(camera.position).applyAxisAngle(camera.up, 0.7).addScaledVector(camera.up, 0.8);
   });
   const controls = useRef<React.ComponentRef<typeof OrbitControls>>(null);
 

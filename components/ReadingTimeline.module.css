@@ -1,0 +1,37 @@
+.empty { color: var(--muted); }
+
+.day h3 { margin: 28px 0 8px; font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+
+.list { list-style: none; margin: 0; padding: 0 0 0 14px; border-left: 2px solid var(--line); }
+.list li { position: relative; }
+.list li::before {
+  content: ''; position: absolute; left: -20px; top: 22px; width: 10px; height: 10px; border-radius: 50%;
+  background: var(--night); border: 2px solid var(--turmeric);
+}
+
+.row {
+  display: grid; grid-template-columns: 64px 1fr 90px auto; align-items: center; gap: 14px;
+  padding: 12px 14px; border-radius: 14px; text-decoration: none;
+  transition: background 0.2s;
+}
+.row:hover { background: var(--night-2); }
+.row time { font-size: 14px; color: var(--muted); }
+.title { display: flex; flex-direction: column; font-weight: 600; line-height: 1.25; }
+.title small { font-weight: 400; font-size: 13px; color: var(--muted); }
+
+.progress { height: 4px; border-radius: 4px; background: var(--line); overflow: hidden; }
+.progress::after { content: ''; display: block; height: 100%; width: calc(var(--p) * 100%); background: var(--turmeric); }
+
+.go { font-size: 14px; font-weight: 600; color: var(--turmeric); }
+
+.clear {
+  margin-top: 28px; padding: 8px 16px; border-radius: 999px;
+  border: 1px solid var(--line); background: none; color: var(--muted); font-size: 14px;
+}
+.clear:hover { color: var(--ink); border-color: var(--muted); }
+
+@media (max-width: 560px) {
+  .row { grid-template-columns: 1fr auto; gap: 6px 12px; }
+  .row time { grid-column: 1 / -1; font-size: 13px; }
+  .progress { grid-column: 1 / -1; grid-row: 3; }
+}

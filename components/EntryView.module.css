@@ -26,7 +26,6 @@
 .chapter sup a { font-size: 12px; font-weight: 700; text-decoration: none; color: var(--turmeric); }
 .view [id^='source-'] { scroll-margin-top: 80px; }
 .view [id^='source-']:target { background: color-mix(in srgb, var(--turmeric) 18%, transparent); border-radius: 6px; }
-.sources :global(.pill), .objects :global(.pill) { margin-left: 8px; font-size: 11px; }
 
 .route { list-style: none; padding: 0 !important; counter-reset: stop; }
 .route li { position: relative; padding: 0 0 10px 34px; counter-increment: stop; }

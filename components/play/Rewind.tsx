@@ -100,13 +100,13 @@ export default function Rewind({ pool, routes }: Props) {
     e.preventDefault();
     if (!item || done) return;
     const pick = byTitle.get(input.trim().toLowerCase());
-    if (!pick) { setNote('Choose one of the suggestions as you type.'); return; }
-    if (saved.guesses.includes(pick.id)) { setNote('You already tried that one.'); return; }
+    if (!pick) { setNote('Pick a suggestion.'); return; }
+    if (saved.guesses.includes(pick.id)) { setNote('Already tried.'); return; }
     const guesses = [...saved.guesses, pick.id];
     const status = pick.id === item.id ? 'won' : guesses.length >= clues.length ? 'lost' : 'playing';
     update({ guesses, status });
     setInput('');
-    setNote(status === 'playing' ? 'Not quite. Time rewinds one step.' : '');
+    setNote(status === 'playing' ? 'Not quite.' : '');
   };
 
   const share = async () => {
@@ -115,7 +115,7 @@ export default function Rewind({ pool, routes }: Props) {
     const text = `Rewind #${number} ${saved.status === 'won' ? used : 'X'}/${clues.length}\n${squares}\nhttps://indiatotheworld.fyi/play/rewind/`;
     try {
       if (navigator.share) await navigator.share({ text });
-      else { await navigator.clipboard.writeText(text); setNote('Result copied.'); }
+      else { await navigator.clipboard.writeText(text); setNote('Copied.'); }
     } catch {}
   };
 
@@ -144,7 +144,7 @@ export default function Rewind({ pool, routes }: Props) {
           {day && !practice && <span>{new Date(day).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' })}</span>}
         </p>
         <h1 className={shared.title} aria-live="polite">{done ? (saved.status === 'won' ? 'You got it.' : 'Out of time.') : 'What is it?'}</h1>
-        {!done && <p className={shared.lede}>Every wrong guess rewinds time by one clue. Name it in fewer clues for a better score.</p>}
+        {!done && <p className={shared.lede}>Each wrong guess reveals an older clue.</p>}
 
         <ol className={styles.clues}>
           {clues.map((c, i) => (
@@ -153,7 +153,7 @@ export default function Rewind({ pool, routes }: Props) {
               <span>{i < shown ? c.text : 'Locked'}</span>
             </li>
           ))}
-          {!clues.length && <li className={styles.locked}><span>Today</span><span>{failed ? 'Could not load the puzzle. Check your connection and reload.' : 'Loading…'}</span></li>}
+          {!clues.length && <li className={styles.locked}><span>Today</span><span>{failed ? 'Could not load. Reload to retry.' : 'Loading…'}</span></li>}
         </ol>
 
         {!done && item && (

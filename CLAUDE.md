@@ -28,8 +28,8 @@ Node >= 22.13 (uses built-in `node:sqlite`).
 | `db/entries/` | One file per innovation, `INSERT`s only |
 | `scripts/db-build.mjs` | The contribution gate: validates each entry file in its own savepoint |
 | `lib/db.ts` | Build-time-only SQLite reads (`getAtlas`, `getEntry`, `getJourneys`) |
-| `app/` | Routes: `/` Sky, `/rangoli`, `/play/timeline`, `/play/journey`, `/entry/[slug]`, `/data/[slug]` (JSON) |
-| `components/` | Scenes and games: `sky/` (R3F), `rangoli/` (2D canvas engine), `timeline/` (GSAP Flip), `journey/` (R3F globe) |
+| `app/` | Routes: `/` Sky, `/rangoli`, `/play/rewind`, `/play/day`, `/play/then-now`, `/entry/[slug]`, `/data/[slug]` (JSON) |
+| `components/` | Scenes and games: `sky/` (R3F), `rangoli/` (2D canvas engine), `globe/` (R3F Earth shared by games), `play/` (the games) |
 
 ## Rules
 

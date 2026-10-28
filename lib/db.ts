@@ -122,3 +122,8 @@ export function getJourneys(): Journey[] {
     stops: stopsFor(r.id as string),
   }));
 }
+
+/** Every "led to" link as [from id, to id], for views that draw connections. */
+export function getLinks(): [string, string][] {
+  return all("SELECT from_id, to_id FROM relations WHERE kind = 'led_to'").map((r) => [r.from_id as string, r.to_id as string]);
+}

@@ -3,13 +3,15 @@
 // Every innovation is a star in a disc: distance from the centre is time
 // (centre = the start of the first era, rim = today), the angle is its discipline.
 // Stars ignite as the time cursor sweeps outward.
-import { memo, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { memo, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { useFrame, type ThreeEvent } from '@react-three/fiber';
-import { Html, Line } from '@react-three/drei';
+import { Line } from '@react-three/drei';
 import * as THREE from 'three';
 import type { Line2 } from 'three-stdlib';
 import { eraScale, formatSpan, hash } from '@/lib/time';
 import type { Atlas, Item } from '@/lib/types';
+import SceneLabel from '../SceneLabel';
+import StarLabels from './StarLabels';
 
 export const R_MIN = 0.8, R_MAX = 10;
 const NEAR = 14; // camera distance below which era names show
@@ -94,6 +96,8 @@ export default function Galaxy({ atlas, cursor, focus, visibleCount, onHover, on
     [],
   );
 
+  useEffect(() => () => { geometry.dispose(); material.dispose(); }, [geometry, material]);
+
   useFrame(({ gl }) => {
     material.uniforms.uCursor.value = cursor.current;
     material.uniforms.uFocus.value = focus;
@@ -143,6 +147,7 @@ export default function Galaxy({ atlas, cursor, focus, visibleCount, onHover, on
       ))}
 
       <Labels atlas={atlas} names={names} focus={focus} near={near} onFocus={onFocus} />
+      <StarLabels stars={stars} cursor={cursor} focus={focus} onPick={onPick} />
     </group>
   );
 }
@@ -169,9 +174,7 @@ const Labels = memo(function Labels({ atlas, names, focus, near, onFocus }: { at
         return (
           <group key={era.id}>
             <Line points={circle(r)} color="#e8a317" lineWidth={1} transparent opacity={0.16} />
-            <Html position={[0, 0.05, -radius((i + 0.5) / atlas.eras.length)]} center className={`sky-era${near ? ' near' : ''}`} zIndexRange={[5, 0]}>
-              {era.name}, {formatSpan(era.start, era.end)}
-            </Html>
+            <SceneLabel position={[0, 0.05, -radius((i + 0.5) / atlas.eras.length)]} className={`sky-era${near ? ' near' : ''}`} text={`${era.name}, ${formatSpan(era.start, era.end)}`} />
           </group>
         );
       })}
@@ -183,15 +186,14 @@ const Labels = memo(function Labels({ atlas, names, focus, near, onFocus }: { at
       {names.map((d, i) => {
         const a = (i + 0.5) * slice;
         return (
-          <Html key={d} position={[Math.cos(a) * (R_MAX + 0.9), 0, Math.sin(a) * (R_MAX + 0.9)]} center zIndexRange={[5, 0]}>
-            <button
-              className="sky-label"
-              style={{ color: focus < 0 || focus === i ? atlas.disciplines[d].color : 'rgba(243,233,210,0.3)' }}
-              onClick={() => onFocus(focus === i ? -1 : i)}
-            >
-              {atlas.disciplines[d].short}
-            </button>
-          </Html>
+          <SceneLabel
+            key={d}
+            position={[Math.cos(a) * (R_MAX + 0.9), 0, Math.sin(a) * (R_MAX + 0.9)]}
+            className="sky-label"
+            color={focus < 0 || focus === i ? atlas.disciplines[d].color : 'rgba(243,233,210,0.3)'}
+            onClick={() => onFocus(focus === i ? -1 : i)}
+            text={atlas.disciplines[d].short}
+          />
         );
       })}
     </>

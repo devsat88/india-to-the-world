@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import BackButton from '@/components/BackButton';
 import EntryView from '@/components/EntryView';
+import ReadingPlace from '@/components/ReadingPlace';
 import { getAtlas, getEntry, getSlugs } from '@/lib/db';
 import { formatYear } from '@/lib/time';
 import styles from './entry.module.css';
@@ -28,6 +29,7 @@ export default async function EntryPage({ params }: Params) {
   return (
     <main className={styles.page} style={{ '--c': d.color } as React.CSSProperties}>
       <BackButton className={styles.back} />
+      <ReadingPlace slug={entry.slug} title={entry.title} year={entry.year} />
       <article className={`panel ${styles.leaf}`}>
         <EntryView entry={entry} discipline={d} detailed />
       </article>

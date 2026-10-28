@@ -8,7 +8,7 @@ INSERT INTO innovations (
   'materials',                                 -- discipline_id
   'Ultra-fine muslin textiles',                -- title
   'Bengali weavers (Dhaka muslin)',            -- originator
-  'ancient-medieval',                          -- period
+  'ancient trade in Gangetic fine cotton; Dhaka muslin peak 17th-18th c. CE, declining in the 19th c.', -- period
   1,                                           -- year_start
   1800,                                        -- year_end
   'Textile & trade record',                    -- source_text
@@ -23,7 +23,7 @@ INSERT INTO innovations (
   'High',                                      -- confidence
   'The finest weaves and the specific cotton variety were later lost.', -- caveat
   'Bengal',                                    -- region
-  'Reference-cited',                           -- verification
+  'Corrected',                                 -- verification
   'Muslin',                                    -- wikipedia
   'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Woman%27s_muslin_dress_c._1855.jpg/500px-Woman%27s_muslin_dress_c._1855.jpg', -- image_url
   'Wikimedia Commons, via Wikipedia: Muslin'   -- image_credit
@@ -62,3 +62,8 @@ Dhaka muslin was still admired at the Great Exhibition in London in 1851 [5], bu
 'Two projects in Bangladesh are now trying to recover the cloth. Bengal Muslin, launched in 2014 by the Drik photography agency under Saiful Islam, found a booklet of dried phuti karpas leaves at the Royal Botanic Gardens, Kew, sequenced their DNA and located a wild shrub in Bangladesh that was a close match [4]. A separate government-backed effort led by the botanist Md Monzur Hossain at Rajshahi University has produced six saris [4].
 
 Neither has yet grown enough of the cotton for a pure garment; Bengal Muslin blends it with other cotton into a hybrid yarn, and its saris have sold for thousands of pounds [4]. The surviving patterned form, jamdani, has never died out, and has been recognised by UNESCO as intangible cultural heritage [8].');
+
+-- Researched sources.
+INSERT INTO sources (innovation_id, position, kind, title, institution, url) VALUES
+  ('IND-044', 9, 'article', 'Wikipedia: Dhaka muslin', NULL, 'https://en.wikipedia.org/wiki/Dhaka_muslin'),
+  ('IND-044', 10, 'article', 'Bangladesh revives forgotten fabric muslin', 'en.prothomalo.com', 'https://en.prothomalo.com/lifestyle/bangladesh-revives-forgotten-fabric-muslin');

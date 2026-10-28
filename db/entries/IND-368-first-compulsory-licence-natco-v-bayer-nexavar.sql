@@ -39,3 +39,29 @@ INSERT INTO sources (innovation_id, position, kind, title, url) VALUES
 
 INSERT INTO outcomes (innovation_id, position, text) VALUES
   ('IND-368', 1, 'Set a working precedent for using the public-health flexibilities of the WTO''s TRIPS Agreement.');
+
+-- Researched sources.
+INSERT INTO sources (innovation_id, position, kind, title, institution, url) VALUES
+  ('IND-368', 7, 'article', 'Wikipedia: Sorafenib', NULL, 'https://en.wikipedia.org/wiki/Sorafenib'),
+  ('IND-368', 8, 'reference', 'Controller of Patents, Natco Pharma Ltd v. Bayer Corporation, compulsory licence decision, March 2012', NULL, NULL),
+  ('IND-368', 9, 'reference', 'Patents Act, 1970 (as amended), Section 84', NULL, NULL);
+
+INSERT INTO chapters (innovation_id, position, heading, body) VALUES
+  ('IND-368', 1, 'Historical context',
+'India brought back product patents for medicines in 2005 to comply with the WTO''s TRIPS agreement. TRIPS also allows governments to authorise use of a patent without the holder''s consent in some circumstances, and the 2001 Doha Declaration confirmed that countries may use such licences to protect public health. Section 84 of India''s Patents Act lets anyone apply for a compulsory licence three years after a patent is granted if the public''s reasonable needs are not met, the invention is not available at a reasonably affordable price, or it is not worked in India. Sorafenib, a kinase inhibitor, was approved in the US for advanced renal cell carcinoma in December 2005 and for inoperable liver cancer in November 2007, and Bayer held an Indian patent on it.'),
+  ('IND-368', 2, 'How it worked',
+'A compulsory licence does not cancel the patent. It lets a named company make and sell the patented product on set terms, usually including a royalty to the patent holder. Natco applied under Section 84, and the Controller of Patents decided in its favour in March 2012, setting the generic''s price and a royalty to Bayer. The Petrie-Flom Center put the cost of Nexavar in India at around 70,000 US dollars a year, against an average annual income of about 1,500 dollars, which illustrates the affordability argument behind the decision.'),
+  ('IND-368', 3, 'The evidence',
+'The core facts are consistent across sources: the March 2012 grant, Bayer''s price of 2.8 lakh rupees (about 2,900 US dollars) a month, Natco''s price of 8,800 rupees (about 91 dollars), and an initial 6% royalty. Bayer appealed, and the royalty was raised to 7% on appeal. A Harvard Petrie-Flom commentary written in April 2013 describes the Natco licence as India''s first compulsory licence for an on-patent medicine. The CSV records that the licence was upheld on appeal in 2013; the pages retrieved for this entry confirm the appeal and royalty increase but give no further detail of later court stages, so those are not described here.'),
+  ('IND-368', 4, 'How it travelled',
+'Compulsory licensing was not invented by India; Thailand, for example, issued licences for HIV/AIDS and heart drugs in 2006 and 2007 and faced trade retaliation. The Natco case drew wide attention because India is a major generic supplier to other developing countries, and because it showed a TRIPS-compliant legal route to cheaper cancer medicines. The pharmaceutical industry criticised the decision as a threat to investment in research.'),
+  ('IND-368', 5, 'Debate and caveats',
+'Supporters see the licence as a lawful use of TRIPS flexibilities to make a life-extending drug affordable. Critics, including Bayer, argued it weakened incentives to develop new medicines and set a precedent for undermining patents. The practical reach of the precedent has been limited: as the CSV notes, India has rarely granted compulsory licences since, and the Natco case is often described as exceptional rather than routine policy.'),
+  ('IND-368', 6, 'Why it matters today',
+'The case is still cited whenever governments consider compulsory licensing for expensive drugs, from cancer medicines to pandemic treatments. It remains the main Indian example of patent law being used directly to lower the price of a patented medicine.'),
+  ('IND-368', 7, 'Key dates',
+'December 2005: Sorafenib (Nexavar) approved by the US FDA for advanced renal cell carcinoma.
+
+November 2007: US FDA approves sorafenib for inoperable liver cancer.
+
+March 2012: Indian Patent Office grants Natco Pharma a compulsory licence for generic sorafenib.');
