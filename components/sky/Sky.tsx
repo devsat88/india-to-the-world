@@ -11,6 +11,7 @@ import { eraScale, formatYear } from '@/lib/time';
 import type { Atlas, Item } from '@/lib/types';
 import Meteors from './Meteors';
 import Galaxy, { R_MAX } from './Galaxy';
+import { gesture } from './gesture';
 import styles from './Sky.module.css';
 
 const SPEED = 0.06; // share of history per second while playing
@@ -67,7 +68,10 @@ function Fit({ controls }: { controls: React.RefObject<Controls | null> }) {
 /**
  * Orbit by drag; zoom by wheel or pinch is our own: it scales the camera and
  * its target about the point on the disc under the pointer (or between the
- * fingers), so that point stays exactly where it is on screen. Auto-rotation
+ * fingers), so that point stays exactly where it is on screen. Listens on the
+ * canvas's wrapper, so a gesture that starts on a label still zooms. OrbitControls
+ * has no two-finger mode left (zoom and pan are off), so it would keep rotating
+ * with whichever finger moved last; rotation is off until every finger lifts. Auto-rotation
  * pauses while the visitor is interacting, so the disc never slides away.
  */
 function Orbit({ controls, autoRotate }: { controls: React.RefObject<Controls | null>; autoRotate: boolean }) {
@@ -82,6 +86,7 @@ function Orbit({ controls, autoRotate }: { controls: React.RefObject<Controls | 
   useEffect(() => {
     c.connect(dom);
     controls.current = c;
+    const area = dom.parentElement!; // the canvas plus every label laid over it
     const ray = new THREE.Raycaster(), ndc = new THREE.Vector2(), disc = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0), p = new THREE.Vector3();
     const zoom = (x: number, y: number, s: number) => {
       const r = dom.getBoundingClientRect();
@@ -92,7 +97,7 @@ function Orbit({ controls, autoRotate }: { controls: React.RefObject<Controls | 
       s = THREE.MathUtils.clamp(s, c.minDistance / d, c.maxDistance / d);
       camera.position.sub(p).multiplyScalar(s).add(p);
       c.target.sub(p).multiplyScalar(s).add(p);
-      touched.current = performance.now();
+      touched.current = gesture.zoomedAt = performance.now();
     };
     const wheel = (e: WheelEvent) => {
       e.preventDefault();
@@ -106,8 +111,10 @@ function Orbit({ controls, autoRotate }: { controls: React.RefObject<Controls | 
     const down = (e: PointerEvent) => {
       touched.current = performance.now();
       if (e.pointerType !== 'touch') return;
+      if (e.isPrimary) { fingers.clear(); c.enableRotate = true; } // a new gesture; drop fingers whose lift was missed
       fingers.set(e.pointerId, { x: e.clientX, y: e.clientY });
       span = fingers.size === 2 ? gap() : 0;
+      if (fingers.size > 1) c.enableRotate = false;
     };
     const move = (e: PointerEvent) => {
       if (!fingers.has(e.pointerId)) return;
@@ -117,18 +124,25 @@ function Orbit({ controls, autoRotate }: { controls: React.RefObject<Controls | 
       if (span > 0 && g > 0) zoom((a.x + b.x) / 2, (a.y + b.y) / 2, span / g);
       span = g;
     };
-    const up = (e: PointerEvent) => { fingers.delete(e.pointerId); span = fingers.size === 2 ? gap() : 0; };
-    dom.addEventListener('wheel', wheel, { passive: false });
-    dom.addEventListener('pointerdown', down);
-    dom.addEventListener('pointermove', move);
-    dom.addEventListener('pointerup', up);
-    dom.addEventListener('pointercancel', up);
+    const up = (e: PointerEvent) => {
+      fingers.delete(e.pointerId);
+      span = fingers.size === 2 ? gap() : 0;
+      if (!fingers.size) c.enableRotate = true;
+    };
+    const still = (e: Event) => e.preventDefault(); // Safari's own pinch events, in case it ignores touch-action
+    area.addEventListener('wheel', wheel, { passive: false });
+    area.addEventListener('pointerdown', down);
+    area.addEventListener('pointermove', move);
+    area.addEventListener('pointerup', up);
+    area.addEventListener('pointercancel', up);
+    for (const g of ['gesturestart', 'gesturechange']) area.addEventListener(g, still);
     return () => {
-      dom.removeEventListener('wheel', wheel);
-      dom.removeEventListener('pointerdown', down);
-      dom.removeEventListener('pointermove', move);
-      dom.removeEventListener('pointerup', up);
-      dom.removeEventListener('pointercancel', up);
+      area.removeEventListener('wheel', wheel);
+      area.removeEventListener('pointerdown', down);
+      area.removeEventListener('pointermove', move);
+      area.removeEventListener('pointerup', up);
+      area.removeEventListener('pointercancel', up);
+      for (const g of ['gesturestart', 'gesturechange']) area.removeEventListener(g, still);
       c.dispose();
       controls.current = null;
     };

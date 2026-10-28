@@ -4,11 +4,13 @@
 // room, growing as they get closer and turning into picture cards up close.
 // Zoomed out, two featured stars at a time call out their cards, cycling as
 // time passes or the view moves, so it is clear the stars can be opened.
+// All of them step aside while a zoom is under way, and phones get fewer.
 // Pooled DOM nodes positioned per frame, so React never re-renders for them.
 import { useEffect, useMemo, useRef } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
 import type { Item } from '@/lib/types';
+import { zooming } from './gesture';
 import styles from './Sky.module.css';
 
 type Star = { item: Item; t: number; s: number; pos: THREE.Vector3 };
@@ -19,13 +21,16 @@ const SHOW = 9;        // camera distance at which a star's name may appear
 const CLOSE = 3;       // distance at which it reaches full size
 const CARD = 0.55;     // closeness (0..1) at which a name becomes a picture card
 const MAX = 40;        // names on screen at once
+const MAX_PHONE = 12;  // ...on a narrow screen
 const BASE = 12;       // font size, px, at scale 1
 const MAX_W = 200;     // name width cap, px, at scale 1
 const FEATURED = 2;    // cards called out in the overview
+const PHONE = 640;     // widths below this get fewer names and one card
 const CYCLE = 3500;    // ms between overview swaps
 const MOVED = 3;       // camera travel that also triggers a swap
 
 const v = new THREE.Vector3();
+const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
 const thumb = (url: string) => url.replace('/500px-', '/330px-');
 const overlaps = (r: Rect, list: Rect[]) => list.some(([x, y, w, h]) => r[0] < x + w && r[0] + r[2] > x && r[1] < y + h && r[1] + r[3] > y);
 
@@ -100,6 +105,13 @@ export default function StarLabels({ stars, cursor, focus, onPick }: Props) {
 
   useFrame(({ camera, size }) => {
     if (!layer.current) return;
+    if (zooming()) {
+      for (const i of shown.current) names.get(i)!.hidden = true;
+      shown.current.clear();
+      for (const i of [...featured.keys()]) unfeature(i);
+      return;
+    }
+    const phone = size.width < PHONE;
     const t = cursor.current;
     // Measuring forces a layout, so the panels are re-read a few times a second, not every frame.
     const m = measured.current, now = performance.now();
@@ -129,7 +141,7 @@ export default function StarLabels({ stars, cursor, focus, onPick }: Props) {
     const placed: Rect[] = [...panels];
     const next = new Set<number>();
     for (const n of near) {
-      if (next.size >= MAX) break;
+      if (next.size >= (phone ? MAX_PHONE : MAX)) break;
       const k = THREE.MathUtils.clamp((SHOW - n.d) / (SHOW - CLOSE), 0, 1);
       const card = k >= CARD && !!stars[n.i].item.image;
       const scale = 0.75 + k * 0.5;
@@ -143,7 +155,10 @@ export default function StarLabels({ stars, cursor, focus, onPick }: Props) {
       b.classList.toggle(styles.card, card);
       b.style.transform = `translate3d(${r[0]}px, ${r[1]}px, 0) scale(${scale})`;
       b.style.opacity = String(Math.min(1, k * 3));
-      if (!shown.current.has(n.i)) { b.hidden = false; b.classList.remove(styles.pop); void b.offsetWidth; b.classList.add(styles.pop); }
+      if (!shown.current.has(n.i)) {
+        b.hidden = false;
+        if (!reduced()) b.animate([{ clipPath: 'inset(0 100% 0 0)', filter: 'blur(2px)' }, { clipPath: 'inset(0)', filter: 'none' }], { duration: 350, easing: 'cubic-bezier(0.3, 1.6, 0.5, 1)' });
+      }
     }
     for (const i of shown.current) if (!next.has(i)) names.get(i)!.hidden = true;
     shown.current = next;
@@ -158,9 +173,9 @@ export default function StarLabels({ stars, cursor, focus, onPick }: Props) {
       f.style.transform = `translate3d(${n.x}px, ${n.y}px, 0)`;
     }
     const due = now - c.at > CYCLE || camera.position.distanceTo(c.from) > MOVED;
-    const room = featured.size < FEATURED && now - c.at > 900; // staggered, not all at once
+    const room = featured.size < (phone ? 1 : FEATURED) && now - c.at > 900; // staggered, not all at once
     if (!due && !room) return;
-    if (due && featured.size >= FEATURED) unfeature(c.order[0]);
+    if (due && featured.size >= (phone ? 1 : FEATURED)) unfeature(c.order[0]);
     const taken = [...featured.keys()].map((i) => cardRect(at.get(i)!));
     const free = lit.filter((n) => !featured.has(n.i) && inside(cardRect(n)) && !overlaps(cardRect(n), [...panels, ...taken]));
     // Prefer stars with a picture, well away from the card already showing.

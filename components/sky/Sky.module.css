@@ -49,14 +49,13 @@
   font-size: 12px; font-weight: 600; line-height: 1.6; color: var(--ink); text-align: left;
   text-shadow: 0 0 6px #121735; transition: background 0.3s, border-color 0.3s, padding 0.3s;
 }
+.starLabel[hidden] { display: none; } /* display: flex above would otherwise override it */
 .starLabel span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .starLabel img { display: none; }
 .starLabel:hover { background: rgba(232, 163, 23, 0.25); }
 .card { padding: 4px 10px 4px 4px; background: rgba(18, 23, 53, 0.82); border-color: rgba(232, 163, 23, 0.35); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35); }
 .card img { display: block; width: 40px; height: 40px; flex: none; border-radius: 6px; object-fit: cover; animation: develop 0.6s ease; }
 @keyframes develop { from { opacity: 0; filter: blur(6px) saturate(0); transform: scale(0.8); } }
-.pop { animation: pop 0.35s cubic-bezier(0.3, 1.6, 0.5, 1); }
-@keyframes pop { from { clip-path: inset(0 100% 0 0); filter: blur(2px); } to { clip-path: inset(0); filter: none; } }
 
 /* Featured cards in the overview: a pulse on the star, a stem, then the card. */
 .featured { position: absolute; top: 0; left: 0; width: 0; height: 0; }
@@ -95,7 +94,7 @@
 @keyframes fade-out { to { opacity: 0; filter: blur(3px); } }
 
 @media (prefers-reduced-motion: reduce) {
-  .pop, .ping, .stem, .featureCard, .featureCard::after, .featureCard img, .card img, .out { animation: none; }
+  .ping, .stem, .featureCard, .featureCard::after, .featureCard img, .card img, .out { animation: none; }
 }
 
 /* Tablets and phones: the disc needs the width, so the key goes. */
