@@ -3,11 +3,13 @@
 [indiatotheworld.fyi](https://indiatotheworld.fyi): an open, sourced atlas of Indian innovations, from the first stone tools at Attirampakkam to Chandrayaan-3.
 
 - **Sky** (home): every innovation as a star in a 3D disc of time, played from the Stone Age to today.
+- **Lines**: each discipline as a line on a transit map, its innovations as stops through the eras, with links where one idea led to another.
 - **Rangoli**: step through history era by era; each era blooms as a rangoli of its innovations.
 - **Rewind**: a daily puzzle. Start from something in use today and rewind through its history to where it began.
 - **A Day in Your Life**: tap ordinary moments, from a morning shampoo to evening chess, to find the idea behind each.
 - **Then → Now**: match an old finding to where it lives on today, then see how far it came on a 3D globe.
 - **Entry pages**: the path from each innovation to the modern innovations it led to, plus primary sources, museum objects and references.
+- **About**: how entries are sourced and graded, and your own reading timeline (kept only in your browser) to pick up a long read where you left off.
 
 Popular myths are included and fact-checked rather than repeated.
 
