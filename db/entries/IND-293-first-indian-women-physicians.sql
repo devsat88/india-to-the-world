@@ -13,7 +13,7 @@ INSERT INTO innovations (
   1886,                                        -- year_end
   'Medical degrees (Calcutta; Pennsylvania)',  -- source_text
   'Among the first South Asian women to qualify in Western medicine.', -- description
-  'In 1886 two Indian women qualified in Western medicine within months of each other. Anandibai Joshi received an MD from the Woman''s Medical College of Pennsylvania in Philadelphia in March 1886. Kadambini Ganguly was awarded the Graduate of Bengal Medical College qualification in Calcutta the same year. They are usually named together as the first Indian women to qualify as Western-trained doctors.  Their importance lies in opening the profession to Indian women, not in medical discovery. Joshi died the following year, so Ganguly is often called the first Indian woman to practise Western medicine.', -- background
+  'In 1886 two Indian women qualified in Western medicine within months of each other. Anandibai Joshi received an MD from the Woman''s Medical College of Pennsylvania in Philadelphia in March 1886. Kadambini Ganguly was awarded the Graduate of Bengal Medical College qualification in Calcutta the same year. They are usually named together as the first Indian women to qualify as Western-trained doctors. Their importance lies in opening the profession to Indian women, not in medical discovery. Joshi died the following year, so Ganguly is often called the first Indian woman to practise Western medicine.', -- background
   NULL,                                        -- significance
   NULL,                                        -- western_parallel
   'Joshi studied in the US.',                  -- transmission_note

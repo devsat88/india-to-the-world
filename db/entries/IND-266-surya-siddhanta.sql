@@ -13,7 +13,7 @@ INSERT INTO innovations (
   499,                                         -- year_end
   'Surya Siddhanta',                           -- source_text
   'A foundational astronomical treatise with planetary models, sine tables and eclipse methods.', -- description
-  'The Surya Siddhanta is the best known of the Indian astronomical treatises called Siddhantas. It sets out methods for computing the mean and true positions of the Sun, Moon and planets, gives a table of sines, and explains how to predict solar and lunar eclipses. It also covers time reckoning, star positions, geography and instruments.  The work exists, but not as a single-date text. An older Surya Siddhanta was summarised by Varahamihira in the 6th century, and the version that survives today was revised later, possibly around 800 CE.', -- background
+  'The Surya Siddhanta is the best known of the Indian astronomical treatises called Siddhantas. It sets out methods for computing the mean and true positions of the Sun, Moon and planets, gives a table of sines, and explains how to predict solar and lunar eclipses. It also covers time reckoning, star positions, geography and instruments. The work exists, but not as a single-date text. An older Surya Siddhanta was summarised by Varahamihira in the 6th century, and the version that survives today was revised later, possibly around 800 CE.', -- background
   NULL,                                        -- significance
   NULL,                                        -- western_parallel
   'Influenced later Indian and Islamic astronomy.', -- transmission_note

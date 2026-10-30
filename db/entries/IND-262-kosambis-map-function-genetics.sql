@@ -13,7 +13,7 @@ INSERT INTO innovations (
   1944,                                        -- year_end
   'Annals of Eugenics (1944)',                 -- source_text
   'A formula converting recombination frequencies into genetic map distances.', -- description
-  'In 1944 the mathematician D. D. Kosambi published a formula for converting the observed frequency of genetic recombination between two genes into a ''map distance'' along a chromosome. The Kosambi map function, which allows for the way one crossover inhibits another nearby, is still used in genetic mapping software today.  Bibliographies differ slightly on the year. The paper appeared in volume 12 of the Annals of Eugenics, which publisher and Indian Academy of Sciences records date to 1943, while most genetics texts cite it as 1944. It is only four pages long, one of the shortest and most-used papers in the history of genetics.', -- background
+  'In 1944 the mathematician D. D. Kosambi published a formula for converting the observed frequency of genetic recombination between two genes into a ''map distance'' along a chromosome. The Kosambi map function, which allows for the way one crossover inhibits another nearby, is still used in genetic mapping software today. Bibliographies differ slightly on the year. The paper appeared in volume 12 of the Annals of Eugenics, which publisher and Indian Academy of Sciences records date to 1943, while most genetics texts cite it as 1944. It is only four pages long, one of the shortest and most-used papers in the history of genetics.', -- background
   NULL,                                        -- significance
   'Still used in genetic mapping software.',   -- western_parallel
   'Done in India.',                            -- transmission_note

@@ -36,9 +36,9 @@ INSERT INTO sources (innovation_id, position, kind, title, url) VALUES
 
 -- Suggested automatically; an editor should check each and set status to 'verified' or delete it.
 INSERT INTO sources (innovation_id, position, kind, title, creator, institution, year, url, image_url, licence, note, status) VALUES
-  ('IND-111', 4, 'museum_object', 'Reliquary  in the shape of a stupa', NULL, 'The Metropolitan Museum of Art', '3rd–4th century CE', 'https://www.metmuseum.org/art/collection/search/75404', 'https://images.metmuseum.org/CRDImages/as/web-large/DP-13344-001.jpg', 'CC0, Met Open Access', 'Sri Lanka, central or western regions; Rock crystal', 'needs_review'),
-  ('IND-111', 5, 'museum_object', 'Reliquary  in the shape of a stupa', NULL, 'The Metropolitan Museum of Art', '3rd–4th century CE', 'https://www.metmuseum.org/art/collection/search/75406', 'https://images.metmuseum.org/CRDImages/as/web-large/DP-13346-001.jpg', 'CC0, Met Open Access', 'Sri Lanka, central or western regions; Rock crystal', 'needs_review'),
-  ('IND-111', 6, 'museum_object', 'Reliquary  in the shape of a stupa', NULL, 'The Metropolitan Museum of Art', '3rd–4th century CE', 'https://www.metmuseum.org/art/collection/search/75405', 'https://images.metmuseum.org/CRDImages/as/web-large/DP-13345-001.jpg', 'CC0, Met Open Access', 'Sri Lanka, central or western regions; Rock crystal', 'needs_review');
+  ('IND-111', 4, 'museum_object', 'Reliquary in the shape of a stupa', NULL, 'The Metropolitan Museum of Art', '3rd–4th century CE', 'https://www.metmuseum.org/art/collection/search/75404', 'https://images.metmuseum.org/CRDImages/as/web-large/DP-13344-001.jpg', 'CC0, Met Open Access', 'Sri Lanka, central or western regions; Rock crystal', 'needs_review'),
+  ('IND-111', 5, 'museum_object', 'Reliquary in the shape of a stupa', NULL, 'The Metropolitan Museum of Art', '3rd–4th century CE', 'https://www.metmuseum.org/art/collection/search/75406', 'https://images.metmuseum.org/CRDImages/as/web-large/DP-13346-001.jpg', 'CC0, Met Open Access', 'Sri Lanka, central or western regions; Rock crystal', 'needs_review'),
+  ('IND-111', 6, 'museum_object', 'Reliquary in the shape of a stupa', NULL, 'The Metropolitan Museum of Art', '3rd–4th century CE', 'https://www.metmuseum.org/art/collection/search/75405', 'https://images.metmuseum.org/CRDImages/as/web-large/DP-13345-001.jpg', 'CC0, Met Open Access', 'Sri Lanka, central or western regions; Rock crystal', 'needs_review');
 
 -- Researched sources.
 INSERT INTO sources (innovation_id, position, kind, title, institution, url) VALUES

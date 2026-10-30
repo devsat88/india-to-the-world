@@ -13,7 +13,7 @@ INSERT INTO innovations (
   1150,                                        -- year_end
   'Bijaganita',                                -- source_text
   'A visual dissection proof of the ''Pythagorean'' theorem.', -- description
-  'In his Bijaganita (1150), Bhaskara II gave a visual proof of the right-triangle theorem by rearranging pieces of a square: four copies of a right triangle and a small square fit together to show that the square on the longest side equals the sum of the squares on the other two sides. He also gave a second proof based on similar triangles.  The dissection figure is described in verse 129 of the Bijaganita. Some popular sources wrongly place it in the Lilavati, Bhaskara''s arithmetic. In the Bijaganita it is used together with an algebraic calculation, which is the point: Bhaskara shows algebra and geometry confirming each other.', -- background
+  'In his Bijaganita (1150), Bhaskara II gave a visual proof of the right-triangle theorem by rearranging pieces of a square: four copies of a right triangle and a small square fit together to show that the square on the longest side equals the sum of the squares on the other two sides. He also gave a second proof based on similar triangles. The dissection figure is described in verse 129 of the Bijaganita. Some popular sources wrongly place it in the Lilavati, Bhaskara''s arithmetic. In the Bijaganita it is used together with an algebraic calculation, which is the point: Bhaskara shows algebra and geometry confirming each other.', -- background
   NULL,                                        -- significance
   'Comparable dissection proofs exist in Chinese mathematics.', -- western_parallel
   NULL,                                        -- transmission_note

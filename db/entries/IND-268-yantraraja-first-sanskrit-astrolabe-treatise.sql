@@ -13,7 +13,7 @@ INSERT INTO innovations (
   1370,                                        -- year_end
   'Yantraraja',                                -- source_text
   'The first Sanskrit manual on the astrolabe, written at the Tughlaq court.', -- description
-  'The Yantraraja, written in 1370 by the Jain astronomer Mahendra Suri, is the first Sanskrit treatise on the astrolabe. Its title means king of instruments, which is also the name Mahendra gave to the astrolabe itself. Written at the court of Sultan Firuz Shah Tughlaq in Delhi, it introduced an instrument from the Greek and Islamic tradition to Sanskrit-reading astronomers.  Its significance is as an adaptation and translation of knowledge, not an invention.', -- background
+  'The Yantraraja, written in 1370 by the Jain astronomer Mahendra Suri, is the first Sanskrit treatise on the astrolabe. Its title means king of instruments, which is also the name Mahendra gave to the astrolabe itself. Written at the court of Sultan Firuz Shah Tughlaq in Delhi, it introduced an instrument from the Greek and Islamic tradition to Sanskrit-reading astronomers. Its significance is as an adaptation and translation of knowledge, not an invention.', -- background
   NULL,                                        -- significance
   'The astrolabe came from the Greek-Islamic tradition.', -- western_parallel
   'Adapted an imported instrument for Sanskrit astronomy.', -- transmission_note

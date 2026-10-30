@@ -13,7 +13,7 @@ INSERT INTO innovations (
   -1900,                                       -- year_end
   'Rakhigarhi (Haryana)',                      -- source_text
   'One of the largest Indus cities, with residential and industrial zones and a cemetery.', -- description
-  'Rakhigarhi, in Hisar district of Haryana, is one of the largest Harappan settlements known, spread across about eleven mounds. Some estimates put its total area at 350 hectares or more, which has led to claims that it was the largest Indus city of all, larger even than Mohenjo-daro.  The size figures quoted for Rakhigarhi vary widely. Amarendra Nath''s estimate of about 550 hectares appears in recent government and press summaries, others give about 350 hectares, and numbers for Mohenjo-daro range from about 250 to 300 hectares. Whatever the exact figure, Rakhigarhi clearly belongs among the very largest Indus settlements.', -- background
+  'Rakhigarhi, in Hisar district of Haryana, is one of the largest Harappan settlements known, spread across about eleven mounds. Some estimates put its total area at 350 hectares or more, which has led to claims that it was the largest Indus city of all, larger even than Mohenjo-daro. The size figures quoted for Rakhigarhi vary widely. Amarendra Nath''s estimate of about 550 hectares appears in recent government and press summaries, others give about 350 hectares, and numbers for Mohenjo-daro range from about 250 to 300 hectares. Whatever the exact figure, Rakhigarhi clearly belongs among the very largest Indus settlements.', -- background
   NULL,                                        -- significance
   'Comparable in scale to the great Bronze-Age cities.', -- western_parallel
   'Ongoing excavations continue to reveal its scale.', -- transmission_note

@@ -13,7 +13,7 @@ INSERT INTO innovations (
   1734,                                        -- year_end
   'Jaipur (also Delhi, Ujjain, Varanasi)',     -- source_text
   'Monumental stone instruments including the ~27 m Samrat Yantra, the world''s largest stone sundial; UNESCO World Heritage Site (2010).', -- description
-  'The Jantar Mantar observatories are a group of monumental masonry instruments built by Sawai Jai Singh II, ruler of Amber and founder of Jaipur, in the early 18th century. The largest and best preserved is at Jaipur, completed in 1734, with others at Delhi, Ujjain, Varanasi and Mathura. The Jaipur site''s Vrihat Samrat Yantra, about 27 metres high, is often called the largest stone sundial in the world.  Jantar Mantar, Jaipur, was inscribed as a UNESCO World Heritage Site in 2010.', -- background
+  'The Jantar Mantar observatories are a group of monumental masonry instruments built by Sawai Jai Singh II, ruler of Amber and founder of Jaipur, in the early 18th century. The largest and best preserved is at Jaipur, completed in 1734, with others at Delhi, Ujjain, Varanasi and Mathura. The Jaipur site''s Vrihat Samrat Yantra, about 27 metres high, is often called the largest stone sundial in the world. Jantar Mantar, Jaipur, was inscribed as a UNESCO World Heritage Site in 2010.', -- background
   NULL,                                        -- significance
   'Comparable naked-eye observatories existed in Samarkand and Istanbul.', -- western_parallel
   'Jai Singh studied Indian, Islamic and European astronomy.', -- transmission_note

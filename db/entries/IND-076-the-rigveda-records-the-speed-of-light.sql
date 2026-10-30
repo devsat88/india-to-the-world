@@ -58,7 +58,7 @@ On the supportive side, a 2019 article in the NCERT journal School Science argue
   ('IND-076', 4, 'How the claim spread',
 'There is no transmission to describe. The modern value of the speed of light was established through European astronomy and physics from the seventeenth century onward, and the Sayana reading emerged only after that value was known.'),
   ('IND-076', 5, 'Debate and caveats',
-'The passage is interesting evidence of how medieval Indian scholars thought about the sun''s motion, and some researchers treat it as a puzzle worth explaining. That is different from treating it as a measurement. The CSV gives this entry Medium confidence, reflecting that the textual line is real even though the interpretation fails.'),
+'The passage is interesting evidence of how medieval Indian scholars thought about the sun''s motion, and some researchers treat it as a puzzle worth explaining. That is different from treating it as a measurement. This entry is rated Medium confidence, reflecting that the textual line is real even though the interpretation fails.'),
   ('IND-076', 6, 'Why it matters today',
 'Indian astronomy has genuine achievements, from Aryabhata''s rotating earth to the Kerala school''s series expansions. Numerical coincidences like this one are easy to circulate online but weaken the case for those real contributions.'),
   ('IND-076', 7, 'Key dates',

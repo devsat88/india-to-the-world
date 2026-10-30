@@ -13,7 +13,7 @@ INSERT INTO innovations (
   575,                                         -- year_end
   'Pancha-Siddhantika',                        -- source_text
   'A compendium summarising five astronomical schools, two with Greek-Hellenistic roots (Romaka and Paulisa).', -- description
-  'The Pancha-Siddhantika, meaning the five Siddhantas, is a 6th-century compendium by the astronomer Varahamihira. It summarises five earlier astronomical systems: the Surya, Romaka, Paulisa, Vasishtha and Paitamaha Siddhantas. Two of these, the Romaka and Paulisa, drew on Greek and Hellenistic astronomy.  Because the original five works are otherwise lost, Varahamihira''s summary is the main window onto Indian astronomy before and around Aryabhata, and an unusual source for pre-Ptolemaic Greek methods.', -- background
+  'The Pancha-Siddhantika, meaning the five Siddhantas, is a 6th-century compendium by the astronomer Varahamihira. It summarises five earlier astronomical systems: the Surya, Romaka, Paulisa, Vasishtha and Paitamaha Siddhantas. Two of these, the Romaka and Paulisa, drew on Greek and Hellenistic astronomy. Because the original five works are otherwise lost, Varahamihira''s summary is the main window onto Indian astronomy before and around Aryabhata, and an unusual source for pre-Ptolemaic Greek methods.', -- background
   NULL,                                        -- significance
   NULL,                                        -- western_parallel
   'Documents active exchange with Greek astronomy.', -- transmission_note
@@ -46,7 +46,7 @@ INSERT INTO chapters (innovation_id, position, heading, body) VALUES
   ('IND-267', 1, 'Historical context',
 'Varahamihira worked near Ujjain, a major centre of astronomy, and is also known for the Brihat Samhita, an encyclopedic work on omens, and for works on astrology. His era saw Indian astronomy shift from older calendrical schemes to mathematical models of planetary motion, partly under the influence of Greek astronomy that reached India from the early centuries CE.
 
-The text uses an epoch in Shaka year 427, which is 505 CE. Indian astronomers usually chose an epoch close to the time of writing, so 505 CE is often taken as the approximate date of composition, though the CSV''s 575 CE reflects another common estimate.'),
+The text uses an epoch in Shaka year 427, which is 505 CE. Indian astronomers usually chose an epoch close to the time of writing, so 505 CE is often taken as the approximate date of composition, though 575 CE is another common estimate.'),
   ('IND-267', 2, 'How it worked',
 'Rather than present one system, Varahamihira laid out each school''s methods for computing the positions of the Sun, Moon and planets, the length of the year, eclipses and related problems. He also judged them. He ranked the Surya Siddhanta as the most accurate, the Romaka and Paulisa as about equally good, and the Vasishtha and Paitamaha as clearly inferior.
 

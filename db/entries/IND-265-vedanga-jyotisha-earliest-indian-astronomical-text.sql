@@ -13,7 +13,7 @@ INSERT INTO innovations (
   -400,                                        -- year_end
   'Vedanga Jyotisha (Rk and Yajus recensions)', -- source_text
   'A calendrical text giving a five-year cycle and Sun-Moon positions to time Vedic rituals.', -- description
-  'The Vedanga Jyotisha is the oldest surviving Indian text devoted to astronomy. Traditionally attributed to Lagadha, it is a short calendrical manual that survives in two recensions, one attached to the Rigveda and one to the Yajurveda. Its purpose was practical: to fix the right days and times for Vedic sacrifices by tracking the Sun and Moon.  The text itself is securely documented. What remains disputed is its date. Its language belongs to the last centuries BCE, while its description of the winter solstice has been read as reflecting conditions around 1400 to 1150 BCE.', -- background
+  'The Vedanga Jyotisha is the oldest surviving Indian text devoted to astronomy. Traditionally attributed to Lagadha, it is a short calendrical manual that survives in two recensions, one attached to the Rigveda and one to the Yajurveda. Its purpose was practical: to fix the right days and times for Vedic sacrifices by tracking the Sun and Moon. The text itself is securely documented. What remains disputed is its date. Its language belongs to the last centuries BCE, while its description of the winter solstice has been read as reflecting conditions around 1400 to 1150 BCE.', -- background
   NULL,                                        -- significance
   NULL,                                        -- western_parallel
   NULL,                                        -- transmission_note

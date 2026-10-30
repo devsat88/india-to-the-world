@@ -13,7 +13,7 @@ INSERT INTO innovations (
   1969,                                        -- year_end
   'Papers in probability',                     -- source_text
   'A unified theory of the probabilities of rare events.', -- description
-  'S. R. Srinivasa Varadhan developed, largely with Monroe Donsker, a unified theory of ''large deviations'', which describes the probabilities of rare events and how they become exponentially unlikely. For this and his work on diffusion processes he received the Abel Prize in 2007, the first Indian-born mathematician to win it.  King Harald of Norway presented the prize on 22 May 2007. The citation honoured Varadhan''s fundamental contributions to probability theory, and in particular his creation of a unified theory of large deviations. The Abel Committee chairman, Kristian Seip, said his work had great conceptual strength and ageless beauty.', -- background
+  'S. R. Srinivasa Varadhan developed, largely with Monroe Donsker, a unified theory of ''large deviations'', which describes the probabilities of rare events and how they become exponentially unlikely. For this and his work on diffusion processes he received the Abel Prize in 2007, the first Indian-born mathematician to win it. King Harald of Norway presented the prize on 22 May 2007. The citation honoured Varadhan''s fundamental contributions to probability theory, and in particular his creation of a unified theory of large deviations. The Abel Committee chairman, Kristian Seip, said his work had great conceptual strength and ageless beauty.', -- background
   NULL,                                        -- significance
   'Abel Prize 2007.',                          -- western_parallel
   'Early work at ISI Kolkata; later at NYU (diaspora).', -- transmission_note

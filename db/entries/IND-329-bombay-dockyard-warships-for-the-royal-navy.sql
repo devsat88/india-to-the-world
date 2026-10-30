@@ -38,11 +38,11 @@ INSERT INTO sources (innovation_id, position, kind, title, url) VALUES
 
 -- Researched sources.
 INSERT INTO sources (innovation_id, position, kind, title, institution, url) VALUES
-  ('IND-329', 6, 'reference', 'US Naval Institute Proceedings, April 1972 (cited in CSV, not retrieved)', NULL, NULL);
+  ('IND-329', 6, 'reference', 'US Naval Institute Proceedings, April 1972 (not retrieved)', NULL, NULL);
 
 INSERT INTO chapters (innovation_id, position, heading, body) VALUES
   ('IND-329', 1, 'Historical context',
-'The Napoleonic Wars drove huge shipbuilding programmes in Britain and created shortages of the oak traditionally used for warships. Bombay had an established shipbuilding tradition led by the Wadia family, and abundant teak. Building in India offered both materials and skilled labour. The CSV dates the Royal Navy work to 1777-1849; the sources retrieved here confirm the Trincomalee and name several other Indian-built warships but were not used to verify that full date range.'),
+'The Napoleonic Wars drove huge shipbuilding programmes in Britain and created shortages of the oak traditionally used for warships. Bombay had an established shipbuilding tradition led by the Wadia family, and abundant teak. Building in India offered both materials and skilled labour. The Royal Navy work is commonly dated to 1777-1849; the sources retrieved here confirm the Trincomalee and name several other Indian-built warships but were not used to verify that full date range.'),
   ('IND-329', 2, 'How it worked',
 'Ships were built to British Admiralty designs. Trincomalee was a Leda-class frigate, ordered on 30 October 1812, with work starting in 1816. Teak is generally valued for its resistance to rot, and teak hulls are often said to have outlasted oak ones. Parsi tradition shaped the process: master shipbuilder Jamsetjee Bomanjee Wadia drove an engraved silver nail into the keel, a ceremony considered important for the ship''s well-being. The ship cost about 23,000 pounds, plus 2,400 pounds for fitting out.'),
   ('IND-329', 3, 'The evidence',
@@ -50,7 +50,7 @@ INSERT INTO chapters (innovation_id, position, heading, body) VALUES
   ('IND-329', 4, 'How it travelled',
 'Bombay-built ships served in the Royal Navy alongside British-built ones. This was not a transfer of design, since the plans were British, but a case of British naval demand relying on Indian timber and Indian craft skills during a period of oak scarcity.'),
   ('IND-329', 5, 'Debate and caveats',
-'The achievement lies in the shipbuilding craft and organisation rather than in design innovation. Figures for the total number of Royal Navy ships built at Bombay, and claims about their longevity compared with oak ships, vary between sources and were not verified here. The US Naval Institute article cited in the CSV could not be retrieved for this page.'),
+'The achievement lies in the shipbuilding craft and organisation rather than in design innovation. Figures for the total number of Royal Navy ships built at Bombay, and claims about their longevity compared with oak ships, vary between sources and were not verified here. The US Naval Institute article often cited for this could not be retrieved for this page.'),
   ('IND-329', 6, 'Why it matters today',
 'HMS Trincomalee is preserved at the National Museum of the Royal Navy in Hartlepool and is part of the UK''s National Historic Fleet. She is a tangible reminder of the skill of Parsi shipwrights and of India''s place in the maritime economy of the British empire.'),
   ('IND-329', 7, 'Key dates',

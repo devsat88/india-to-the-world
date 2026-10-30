@@ -13,7 +13,7 @@ INSERT INTO innovations (
   1970,                                        -- year_end
   'University of Calcutta research',           -- source_text
   'Chemistry of vinca alkaloids and development of the anti-epileptic Ayush-56 and anti-malarials from plants.', -- description
-  'Asima Chatterjee (1917–2006) was an organic chemist at the University of Calcutta who spent her career working out the chemistry of medicinal plants found in India. She studied alkaloids, coumarins and terpenoids, including alkaloids from periwinkle (Vinca) and related plants, and led work that produced Ayush-56, an anti-epileptic preparation, and contributed to anti-malarial herbal formulations.  She is one of the best-known Indian women scientists of the 20th century. In 1944 she became one of the first women to earn a Doctor of Science from an Indian university; sources differ on whether she was the first or the second.', -- background
+  'Asima Chatterjee (1917–2006) was an organic chemist at the University of Calcutta who spent her career working out the chemistry of medicinal plants found in India. She studied alkaloids, coumarins and terpenoids, including alkaloids from periwinkle (Vinca) and related plants, and led work that produced Ayush-56, an anti-epileptic preparation, and contributed to anti-malarial herbal formulations. She is one of the best-known Indian women scientists of the 20th century. In 1944 she became one of the first women to earn a Doctor of Science from an Indian university; sources differ on whether she was the first or the second.', -- background
   NULL,                                        -- significance
   NULL,                                        -- western_parallel
   'Done in India.',                            -- transmission_note
