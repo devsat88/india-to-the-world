@@ -8,6 +8,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import LeafSheet from '@/components/LeafSheet';
 import Peek, { type PeekAt } from '@/components/Peek';
+import { useLinkedEntry } from '@/lib/share';
 import { store } from '@/lib/store';
 import { eraScale, formatSpan, formatYear } from '@/lib/time';
 import type { Atlas, Discipline, Item } from '@/lib/types';
@@ -143,6 +144,7 @@ export default function Lines({ atlas, links }: { atlas: Atlas; links: [string, 
     setOpen(memory.open);
     setReady(true);
   }, [lines, stops]);
+  useLinkedEntry(atlas.items, setOpen);
   useEffect(() => {
     if (!ready) return;
     const el = pane.current!;

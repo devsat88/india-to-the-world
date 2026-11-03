@@ -1,0 +1,31 @@
+.share { position: relative; }
+
+.toggle {
+  display: flex; align-items: center; gap: 6px;
+  padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line);
+  background: var(--night-2); color: var(--ink); font-size: 15px; font-weight: 600; line-height: 1;
+}
+.toggle:hover, .toggle[aria-expanded='true'] { border-color: var(--turmeric); }
+.toggle svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; }
+
+.menu {
+  position: absolute; right: 0; top: calc(100% + 6px); z-index: 5;
+  display: flex; flex-direction: column; min-width: 160px; padding: 6px;
+  border-radius: 14px; border: 1px solid var(--line);
+  background: var(--night-2); box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+  animation: drop 0.18s ease-out;
+}
+.menu a, .menu button {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 12px; border: 0; border-radius: 8px; background: none;
+  color: var(--ink); font-size: 15px; text-align: left; text-decoration: none;
+}
+.menu a:hover, .menu button:hover, .menu a:focus-visible, .menu button:focus-visible { background: var(--night-3); }
+.mark { width: 18px; height: 18px; flex: none; fill: currentColor; }
+.line { fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.cut { fill: none; stroke: var(--night-2); stroke-width: 2.2; stroke-linecap: round; }
+@keyframes drop { from { opacity: 0; transform: translateY(-4px); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .menu { animation: none; }
+}

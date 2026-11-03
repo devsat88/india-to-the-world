@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import gsap from 'gsap';
 import LeafSheet from '@/components/LeafSheet';
+import { linkedItem } from '@/lib/share';
 import Peek, { type PeekAt } from '@/components/Peek';
 import { eraScale, formatSpan, formatYear } from '@/lib/time';
 import type { Atlas, Item } from '@/lib/types';
@@ -31,9 +32,10 @@ export default function Rangoli({ atlas }: { atlas: Atlas }) {
     const onResize = () => e.resize();
     addEventListener('resize', onResize);
 
-    // #indus opens an era; #zero-as-a-number opens an entry inside its era.
-    const hash = decodeURIComponent(location.hash.slice(1));
-    const linked = atlas.items.find((i) => i.slug === hash);
+    // #indus opens an era; #zero-as-a-number or ?open=zero-as-a-number opens an entry inside its era.
+    let hash = '';
+    try { hash = decodeURIComponent(location.hash.slice(1)); } catch {}
+    const linked = linkedItem(atlas.items) ?? atlas.items.find((i) => i.slug === hash);
     const start = linked ? eraScale(eras).eraIndexOf(linked.year) : Math.max(0, eras.findIndex((x) => x.id === hash));
     setEra(start);
     if (linked) setOpen(linked);

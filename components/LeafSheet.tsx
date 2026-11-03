@@ -6,8 +6,11 @@ import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import EntryView from '@/components/EntryView';
+import Share from '@/components/Share';
 import { loadEntry } from '@/lib/load-entry';
 import { useReading } from '@/lib/reading';
+import { dropLinked, sheetLink } from '@/lib/share';
+import { shareText } from '@/lib/site';
 import type { Discipline, Entry, Item } from '@/lib/types';
 import styles from './LeafSheet.module.css';
 
@@ -20,12 +23,14 @@ type Props = {
 };
 
 export default function LeafSheet({ item, disciplines, onClose, onOpen }: Props) {
+  // A shared ?open= link is spent once its sheet closes.
+  const dismiss = () => { dropLinked(); onClose(); };
   const ref = useRef<HTMLElement>(null);
   const [entry, setEntry] = useState<Entry | null>(null);
   const [failed, setFailed] = useState<string | null>(null);
   // Callers pass a fresh onClose each render; a ref keeps focus from being reset on every one.
-  const close = useRef(onClose);
-  useEffect(() => { close.current = onClose; });
+  const close = useRef(dismiss);
+  useEffect(() => { close.current = dismiss; });
   useReading(item, ref);
 
   useEffect(() => {
@@ -55,14 +60,17 @@ export default function LeafSheet({ item, disciplines, onClose, onOpen }: Props)
   const shown = entry?.id === item?.id ? entry : item;
   return createPortal(
     <>
-      <div className={`${styles.backdrop} ${open ? styles.open : ''}`} onClick={onClose} aria-hidden />
+      <div className={`${styles.backdrop} ${open ? styles.open : ''}`} onClick={dismiss} aria-hidden />
       <aside ref={ref} tabIndex={-1} role="dialog" aria-modal="true" aria-label={item?.title} className={`panel ${styles.sheet} ${open ? styles.open : ''}`}>
         {item && shown && (
           <>
             <div className={styles.top}>
-              <button className={styles.button} onClick={onClose}>← Back</button>
+              <button className={styles.button} onClick={dismiss}>← Back</button>
               {/* Closed on the way out, so coming back lands on the scene, not the sheet. */}
-              <Link className={styles.button} href={`/entry/${item.slug}/`} onClick={onClose}>Details →</Link>
+              <div className={styles.actions}>
+                <Share url={sheetLink(item.slug)} title={item.title} text={shareText(item)} />
+                <Link className={styles.button} href={`/entry/${item.slug}/`} onClick={dismiss}>Details →</Link>
+              </div>
             </div>
             <EntryView entry={shown} discipline={disciplines[item.discipline]} onOpen={onOpen} failed={failed === item.id} />
           </>

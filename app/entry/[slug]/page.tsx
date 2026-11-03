@@ -4,7 +4,9 @@ import { notFound } from 'next/navigation';
 import BackButton from '@/components/BackButton';
 import EntryView from '@/components/EntryView';
 import ReadingPlace from '@/components/ReadingPlace';
+import Share from '@/components/Share';
 import { getAtlas, getEntry, getSlugs } from '@/lib/db';
+import { entryLink, shareText } from '@/lib/site';
 import { formatYear } from '@/lib/time';
 import styles from './entry.module.css';
 
@@ -15,7 +17,14 @@ type Params = { params: Promise<{ slug: string }> };
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const entry = getEntry((await params).slug);
-  return entry ? { title: entry.title, description: entry.description } : {};
+  if (!entry) return {};
+  const images = entry.image ? [entry.image] : undefined;
+  return {
+    title: entry.title,
+    description: entry.description,
+    openGraph: { title: entry.title, description: entry.description, url: entryLink(entry.slug), type: 'article', images },
+    twitter: { card: images ? 'summary_large_image' : 'summary', title: entry.title, description: entry.description, images },
+  };
 }
 
 export default async function EntryPage({ params }: Params) {
@@ -28,7 +37,10 @@ export default async function EntryPage({ params }: Params) {
 
   return (
     <main className={styles.page} style={{ '--c': d.color } as React.CSSProperties}>
-      <BackButton className={styles.back} />
+      <div className={styles.top}>
+        <BackButton className={styles.back} />
+        <Share url={entryLink(entry.slug)} title={entry.title} text={shareText(entry)} />
+      </div>
       <ReadingPlace slug={entry.slug} title={entry.title} year={entry.year} />
       <article className={`panel ${styles.leaf}`}>
         <EntryView entry={entry} discipline={d} detailed />

@@ -7,6 +7,7 @@ import { Stars } from '@react-three/drei';
 import { OrbitControls as Controls } from 'three/examples/jsm/controls/OrbitControls.js';
 import LeafSheet from '@/components/LeafSheet';
 import Peek, { type PeekAt } from '@/components/Peek';
+import { useLinkedEntry } from '@/lib/share';
 import { eraScale, formatYear } from '@/lib/time';
 import type { Atlas, Item } from '@/lib/types';
 import Meteors from './Meteors';
@@ -194,6 +195,7 @@ export default function Sky({ atlas }: { atlas: Atlas }) {
     memory.open = open;
   }, [playing, focus, open]);
   useEffect(() => () => { memory.cursor = cursor.current; }, []);
+  useLinkedEntry(atlas.items, setOpen);
 
   // Sync the DOM readouts and the count of ignited stars with the cursor.
   const tick = () => {

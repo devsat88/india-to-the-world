@@ -2,10 +2,8 @@
   padding: 84px 16px 64px;
   background: radial-gradient(ellipse at 50% 0%, color-mix(in srgb, var(--c) 18%, transparent), transparent 60%);
 }
-.back {
-  display: block; max-width: 780px; margin: 0 auto 14px; padding: 6px 0; border: 0; background: none;
-  color: var(--muted); font-size: 15px; text-align: left; width: 100%;
-}
+.top { display: flex; align-items: center; justify-content: space-between; max-width: 780px; margin: 0 auto 14px; }
+.back { padding: 6px 0; border: 0; background: none; color: var(--muted); font-size: 15px; }
 .back:hover { color: var(--ink); }
 .leaf {
   max-width: 780px; margin: 0 auto;
