@@ -1,6 +1,6 @@
 # Rebuilds the site just after midnight in India, so the static feed and the
-# day the Today page is built with move on. Needs a CF_DEPLOY_HOOK secret: the
-# Cloudflare Pages deploy hook URL for this project.
+# day the Today page is built with move on. Needs a DEPLOY_HOOK secret: the
+# Vercel deploy hook URL for this project (Settings > Git > Deploy Hooks).
 name: Daily rebuild
 on:
   schedule:
@@ -11,6 +11,6 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - run: if [ -n "$HOOK" ]; then curl -fsS -X POST "$HOOK"; else echo "CF_DEPLOY_HOOK is not set; skipping"; fi
+      - run: if [ -n "$HOOK" ]; then curl -fsS -X POST "$HOOK"; else echo "DEPLOY_HOOK is not set; skipping"; fi
         env:
-          HOOK: ${{ secrets.CF_DEPLOY_HOOK }}
+          HOOK: ${{ secrets.DEPLOY_HOOK }}

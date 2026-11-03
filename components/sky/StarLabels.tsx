@@ -28,6 +28,7 @@ const FEATURED = 2;    // cards called out in the overview
 const PHONE = 640;     // widths below this get fewer names and one card
 const CYCLE = 3500;    // ms between overview swaps
 const MOVED = 3;       // camera travel that also triggers a swap
+const LIT = 40;        // stars the sweep lights before any card, so the oldest star isn't always first
 
 const v = new THREE.Vector3();
 const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -53,6 +54,7 @@ export default function StarLabels({ stars, cursor, focus, onPick }: Props) {
   const layer = useRef<HTMLDivElement | null>(null);
   const widths = useRef<number[]>([]);
   const shown = useRef(new Set<number>());
+  const ready = useMemo(() => stars.map((s) => s.t).sort((a, b) => a - b)[Math.min(LIT, stars.length - 1)] ?? 0, [stars]);
   const cycle = useRef({ at: 0, from: new THREE.Vector3(), order: [] as number[] });
   const measured = useRef({ at: -1e9, panels: [] as Rect[] });
 
@@ -174,7 +176,7 @@ export default function StarLabels({ stars, cursor, focus, onPick }: Props) {
     }
     const due = now - c.at > CYCLE || camera.position.distanceTo(c.from) > MOVED;
     const room = featured.size < (phone ? 1 : FEATURED) && now - c.at > 900; // staggered, not all at once
-    if (!due && !room) return;
+    if ((!due && !room) || t < ready) return;
     if (due && featured.size >= (phone ? 1 : FEATURED)) unfeature(c.order[0]);
     const taken = [...featured.keys()].map((i) => cardRect(at.get(i)!));
     const free = lit.filter((n) => !featured.has(n.i) && inside(cardRect(n)) && !overlaps(cardRect(n), [...panels, ...taken]));
