@@ -73,3 +73,7 @@ September 2010: First Aadhaar number issued.
 26 September 2018: Supreme Court upholds the Aadhaar Act but strikes down Section 57.
 
 2021: Account Aggregator framework launched.');
+
+-- What it teaches someone building today.
+INSERT INTO lessons (innovation_id, pattern_id, problem, limits, insight) VALUES
+  ('IND-152', 'public-rails', 'Many residents had no document to prove who they were, which kept them out of bank accounts and benefits.', 'Over a billion people, many with no paper records at all.', 'Issue one identity that can be checked online, then open it as an API so banks, telecoms and others can build services on it.');

@@ -75,3 +75,7 @@ April 2000: USB 2.0 released
 2013: European Inventor Award
 
 2025: Padma Shri announced');
+
+-- What it teaches someone building today.
+INSERT INTO lessons (innovation_id, pattern_id, problem, limits, insight) VALUES
+  ('IND-147', 'open-standard', 'PCs had a tangle of different ports, one for each kind of device.', 'Many rival companies had to agree on a single design.', 'Agree one plug-and-play standard anyone can build to; once every PC had the port, device makers followed.');

@@ -56,3 +56,7 @@ By 1988 it had 11,000 shareholders, 23,000 depositors and deposits of over Rs 1.
 'SEWA''s relationship with its parent union soured as it grew. The union leadership was uneasy with a strong, independent women''s group, and in 1981, after anti-reservation riots in Ahmedabad in which SEWA stood with lower-caste workers, the two parted ways [3][6]. Bhatt served as SEWA''s general secretary and received the Ramon Magsaysay Award in 1977, the Right Livelihood Award in 1984, and the Padma Shri and Padma Bhushan in 1985 and 1986 [3][6].
 
 SEWA now reports 3.7 million members across more than 125 trades, and sister organisations have formed elsewhere in South Asia, in South Africa and in Latin America [3]. Bhatt later chaired the Sabarmati Ashram trust and served as chancellor of Gujarat Vidyapith; she died in Ahmedabad on 2 November 2022 [5][6].');
+
+-- What it teaches someone building today.
+INSERT INTO lessons (innovation_id, pattern_id, problem, limits, insight) VALUES
+  ('IND-338', 'owned-by-members', 'Self-employed women had no employer to bargain with and no union or bank that would serve them.', 'Tiny, irregular incomes and no collateral.', 'Organise them as their own union and cooperative bank; the bank showed that very poor women repay their loans.');

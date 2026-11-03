@@ -84,3 +84,7 @@ c. 1968: Controlled ORS studies in Dhaka and Calcutta
 2002: WHO and UNICEF recommend reduced-osmolarity ORS
 
 2023: Mahalanabis awarded Padma Vibhushan posthumously');
+
+-- What it teaches someone building today.
+INSERT INTO lessons (innovation_id, pattern_id, problem, limits, insight) VALUES
+  ('IND-142', 'frugal', 'Cholera and diarrhoea kill through dehydration, and intravenous drips were scarce.', 'Refugee camps and villages with few doctors, needles or drip fluids.', 'A drink of clean water, salt and glucose, which anyone can mix and give, replaces most drips.');

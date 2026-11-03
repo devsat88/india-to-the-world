@@ -48,6 +48,10 @@ export default function AboutPage() {
           <li><Link href="/">Atlas</Link>Every innovation as a star in a disc of time.</li>
           <li><Link href="/rangoli/">Eras</Link>Step through history; each age blooms as a rangoli.</li>
           <li><Link href="/play/">Games</Link>Find the old ideas hiding in an ordinary day.</li>
+          <li><Link href="/map/">Map</Link>Where each innovation began, on India&apos;s official map.</li>
+          <li><Link href="/people/">People</Link>The people credited across the atlas.</li>
+          <li><Link href="/lessons/">Lessons for builders</Link>Patterns from modern entries that anyone building today can reuse.</li>
+          <li><Link href="/today/">Innovation of the day</Link>One entry a day, also as an RSS feed.</li>
         </ul>
       </section>
 

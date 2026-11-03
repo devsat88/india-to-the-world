@@ -69,3 +69,7 @@ INSERT INTO outcomes (innovation_id, position, text) VALUES
 
 INSERT INTO relations (from_id, to_id, kind) VALUES
   ('IND-401', 'IND-405', 'related');
+
+-- What it teaches someone building today.
+INSERT INTO lessons (innovation_id, pattern_id, problem, limits, insight) VALUES
+  ('IND-401', 'open-standard', 'Machines could not easily tell what a web page contained or when it changed.', 'Billions of pages written by millions of people, with no one in charge.', 'Keep the shared vocabulary small and get the big search engines to read it, so publishers have a reason to adopt it.');

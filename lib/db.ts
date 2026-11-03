@@ -3,7 +3,8 @@
 import path from 'node:path';
 import { DatabaseSync } from 'node:sqlite';
 import { DB_VERSION } from './db-version';
-import type { Atlas, Branch, Chapter, Discipline, Entry, Era, Item, Journey, JourneyStop, Source } from './types';
+import { placesOf } from './regions';
+import type { Atlas, Branch, Chapter, Discipline, Entry, Era, Item, Journey, JourneyStop, Lesson, Pattern, Person, Source } from './types';
 
 // DB_VERSION changes on every rebuild, which reopens the file and, in
 // development, hot-reloads the pages that read it.
@@ -113,6 +114,8 @@ export function getEntry(slug: string): Entry | null {
     builtOn,
     related,
     journey: stopsFor(id),
+    lesson: lessonOf(id),
+    people: all('SELECT p.id, p.name FROM people p JOIN credits c ON c.person_id = p.id WHERE c.innovation_id = ? ORDER BY p.name', id) as Entry['people'],
   };
 }
 
@@ -126,4 +129,50 @@ export function getJourneys(): Journey[] {
 /** Every "led to" link as [from id, to id], for views that draw connections. */
 export function getLinks(): [string, string][] {
   return all("SELECT from_id, to_id FROM relations WHERE kind = 'led_to'").map((r) => [r.from_id as string, r.to_id as string]);
+}
+
+/** Each entry's map places, by entry id (see lib/regions.ts). */
+export function getPlaces(): Record<string, string[]> {
+  return Object.fromEntries(all('SELECT id, region FROM innovations').map((r) => [r.id as string, placesOf(r.region as string | null)]));
+}
+
+const PERSON_SQL = `
+  SELECT p.id, p.name, p.life, p.blurb, MIN(i.year_start) AS first
+  FROM people p JOIN credits c ON c.person_id = p.id JOIN innovations i ON i.id = c.innovation_id`;
+
+/** Everyone credited, with their entries, oldest work first. */
+export function getPeople(): (Person & { items: Item[] })[] {
+  return (all(`${PERSON_SQL} GROUP BY p.id ORDER BY first, p.name`) as (Person & { first: number })[]).map(({ first, ...p }) => ({ ...p, items: itemsOf(p.id) }));
+}
+
+export function getPerson(id: string): (Person & { items: Item[] }) | null {
+  const p = all('SELECT id, name, life, blurb FROM people WHERE id = ?', id)[0] as Person | undefined;
+  return p ? { ...p, items: itemsOf(id) } : null;
+}
+
+const itemsOf = (person: string) =>
+  all(`${ITEM_SQL} WHERE i.id IN (SELECT innovation_id FROM credits WHERE person_id = ?) ORDER BY i.year_start`, person).map(toItem);
+
+const toLesson = (r: Row): Lesson => ({
+  pattern: { id: r.pattern_id as string, name: r.name as string, blurb: r.blurb as string },
+  problem: r.problem as string,
+  limits: r.limits as string,
+  insight: r.insight as string,
+});
+
+const LESSON_SQL = 'SELECT l.*, p.name, p.blurb FROM lessons l JOIN patterns p ON p.id = l.pattern_id';
+
+function lessonOf(id: string): Lesson | null {
+  const r = all(`${LESSON_SQL} WHERE l.innovation_id = ?`, id)[0];
+  return r ? toLesson(r) : null;
+}
+
+/** Every pattern with the entries that teach it, oldest first. */
+export function getLessons(): (Pattern & { lessons: (Lesson & { item: Item })[] })[] {
+  const items = new Map(getAtlas().items.map((i) => [i.id, i]));
+  const rows = all(`${LESSON_SQL} JOIN innovations i ON i.id = l.innovation_id ORDER BY i.year_start`);
+  return (all('SELECT id, name, blurb FROM patterns ORDER BY rowid') as Pattern[]).map((p) => ({
+    ...p,
+    lessons: rows.filter((r) => r.pattern_id === p.id).map((r) => ({ ...toLesson(r), item: items.get(r.innovation_id as string)! })),
+  }));
 }

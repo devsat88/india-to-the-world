@@ -56,3 +56,7 @@ The court cited survey figures that only about 24% of Indian households, and abo
 'On 12 June 2023, the Malayalam news portal The Fourth reported that a Telegram bot would return the name, date of birth and passport or Aadhaar number of a CoWIN registrant if fed their phone number; The News Minute tested it on several public figures and found the details accurate [6].
 
 The health ministry called the breach reports "without any basis and mischievous in nature" and asked CERT-In, the national cyber-security agency, to investigate. The minister of state for IT, Rajeev Chandrasekhar, said the bot appeared to draw on a database of previously stolen data rather than a direct breach of CoWIN [6]. Where that earlier data came from was not publicly settled, which is why the caveat on this entry remains.');
+
+-- What it teaches someone building today.
+INSERT INTO lessons (innovation_id, pattern_id, problem, limits, insight) VALUES
+  ('IND-360', 'public-rails', 'Book, record and certify COVID-19 vaccinations for well over a billion people.', 'Built at speed during a pandemic, for people with very unequal access to the internet.', 'Run one national registry, issue signed QR-verifiable certificates from open-source tools, and keep walk-in routes for people offline.');

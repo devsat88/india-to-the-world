@@ -56,3 +56,7 @@ INSERT INTO chapters (innovation_id, position, heading, body) VALUES
 15 February 2017: PSLV-C37 launches 104 satellites from Sriharikota.
 
 24 January 2021: SpaceX Transporter-1 launches 143 satellites, surpassing the record.');
+
+-- What it teaches someone building today.
+INSERT INTO lessons (innovation_id, pattern_id, problem, limits, insight) VALUES
+  ('IND-356', 'frugal', 'Small satellites need a ride to orbit, but a whole rocket costs too much for one.', 'Start-ups with small budgets and fixed launch windows.', 'Sell a reliable rocket''s spare capacity to co-passengers; 101 of the 104 satellites belonged to foreign customers.');

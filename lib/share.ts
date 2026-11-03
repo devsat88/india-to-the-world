@@ -1,11 +1,15 @@
-// Shared sheet links: <scene>?open=<slug> lands on that scene with the entry
-// open. The flag stays until the sheet closes, so a reload keeps it open.
-// The value is only ever matched against known slugs, never rendered.
+// Shared sheet links go to /s/<slug>/?in=<scene>, a page carrying the entry's
+// preview that forwards to <scene>?open=<slug>, where the sheet opens. The
+// flag stays until the sheet closes, so a reload keeps it open. Values are
+// only ever matched against known slugs and scenes, never rendered.
 import { useEffect } from 'react';
-import { SITE_URL } from './site';
+import { SCENES, SITE_URL } from './site';
 import type { Item } from './types';
 
-export const sheetLink = (slug: string) => `${SITE_URL}${location.pathname}?open=${encodeURIComponent(slug)}`;
+export function sheetLink(slug: string) {
+  const scene = Object.keys(SCENES).find((k) => SCENES[k] === location.pathname);
+  return `${SITE_URL}/s/${encodeURIComponent(slug)}/${scene && scene !== 'atlas' ? `?in=${scene}` : ''}`;
+}
 
 export function dropLinked() {
   const url = new URL(location.href);

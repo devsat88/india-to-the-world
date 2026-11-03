@@ -83,3 +83,7 @@ February 2024: UPI debuts in France at the Eiffel Tower
 June 2025: IMF describes UPI as largest retail fast-payment system by volume
 
 August 2025: About 20 billion transactions in one month');
+
+-- What it teaches someone building today.
+INSERT INTO lessons (innovation_id, pattern_id, problem, limits, insight) VALUES
+  ('IND-151', 'public-rails', 'Digital payments were split across banks and wallets that could not pay one another.', 'Hundreds of millions of first-time users with small balances, new smartphones and no cards.', 'Run the payment network as a public utility, with one address format and QR code that work across every bank and app, and let apps compete on service.');

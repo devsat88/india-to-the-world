@@ -68,3 +68,7 @@ In the 1980s modern cataract surgery with an implanted lens was expensive becaus
 2004: Featured in Prahalad''s work on the bottom of the pyramid
 
 2006: Death of G. Venkataswamy');
+
+-- What it teaches someone building today.
+INSERT INTO lessons (innovation_id, pattern_id, problem, limits, insight) VALUES
+  ('IND-284', 'assembly-line', 'Cataracts blinded millions of people who could not afford surgery.', 'Too few eye surgeons and costly imported lenses.', 'Standardise the procedure, let trained staff do the preparation so surgeons only operate, make lenses in-house, and let paying patients fund free care.');

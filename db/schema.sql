@@ -116,3 +116,36 @@ CREATE TABLE journey_stops (
   clue           TEXT NOT NULL,       -- riddle shown to players before the stop is revealed
   PRIMARY KEY (innovation_id, step)
 );
+
+-- Patterns a builder can reuse, e.g. 'Public rails'. Kept in db/reference/patterns.sql.
+CREATE TABLE patterns (
+  id     TEXT PRIMARY KEY CHECK (id GLOB '[a-z]*' AND id NOT GLOB '*[^a-z-]*'),
+  name   TEXT NOT NULL UNIQUE,
+  blurb  TEXT NOT NULL
+);
+
+-- What a modern entry teaches someone building today: the problem, the
+-- constraint it had to work within, and the move that cracked it.
+CREATE TABLE lessons (
+  innovation_id  TEXT PRIMARY KEY REFERENCES innovations(id),
+  pattern_id     TEXT NOT NULL REFERENCES patterns(id),
+  problem        TEXT NOT NULL CHECK (length(problem) BETWEEN 20 AND 240),
+  limits         TEXT NOT NULL CHECK (length(limits) BETWEEN 10 AND 240),
+  insight        TEXT NOT NULL CHECK (length(insight) BETWEEN 20 AND 280)
+);
+
+-- People credited with entries, kept in db/people.sql and loaded after the
+-- entries. Only named individuals: traditions, dynasties and institutions stay
+-- in an entry's originator text.
+CREATE TABLE people (
+  id     TEXT PRIMARY KEY CHECK (id GLOB '[a-z]*' AND id NOT GLOB '*[^a-z0-9-]*'),
+  name   TEXT NOT NULL,
+  life   TEXT,                        -- '1887-1920', 'b. 1955', 'c. 5th century BCE'
+  blurb  TEXT NOT NULL CHECK (length(blurb) BETWEEN 20 AND 220)
+);
+
+CREATE TABLE credits (
+  person_id      TEXT NOT NULL REFERENCES people(id),
+  innovation_id  TEXT NOT NULL REFERENCES innovations(id),
+  PRIMARY KEY (person_id, innovation_id)
+);

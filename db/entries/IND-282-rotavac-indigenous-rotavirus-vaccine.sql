@@ -74,3 +74,7 @@ March 2015: Vaccine formally launched in New Delhi
 2016: Introduced into India''s national immunisation programme
 
 January 2018: WHO prequalification announced');
+
+-- What it teaches someone building today.
+INSERT INTO lessons (innovation_id, pattern_id, problem, limits, insight) VALUES
+  ('IND-282', 'frugal', 'Rotavirus diarrhoea kills many young children, and imported vaccines were costly.', 'A price that public immunisation programmes could pay at national scale.', 'Develop the vaccine through a long public partnership from a strain found in Delhi, and commit to about a dollar a dose.');

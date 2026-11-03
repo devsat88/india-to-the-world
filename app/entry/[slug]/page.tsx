@@ -6,7 +6,7 @@ import EntryView from '@/components/EntryView';
 import ReadingPlace from '@/components/ReadingPlace';
 import Share from '@/components/Share';
 import { getAtlas, getEntry, getSlugs } from '@/lib/db';
-import { entryLink, shareText } from '@/lib/site';
+import { entryLink, entryMeta, shareText } from '@/lib/site';
 import { formatYear } from '@/lib/time';
 import styles from './entry.module.css';
 
@@ -17,14 +17,7 @@ type Params = { params: Promise<{ slug: string }> };
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const entry = getEntry((await params).slug);
-  if (!entry) return {};
-  const images = entry.image ? [entry.image] : undefined;
-  return {
-    title: entry.title,
-    description: entry.description,
-    openGraph: { title: entry.title, description: entry.description, url: entryLink(entry.slug), type: 'article', images },
-    twitter: { card: images ? 'summary_large_image' : 'summary', title: entry.title, description: entry.description, images },
-  };
+  return entry ? entryMeta(entry, entryLink(entry.slug)) : {};
 }
 
 export default async function EntryPage({ params }: Params) {

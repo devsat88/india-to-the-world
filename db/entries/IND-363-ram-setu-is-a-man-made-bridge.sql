@@ -11,9 +11,9 @@ INSERT INTO innovations (
   'modern claim',                              -- period
   1950,                                        -- year_start
   2025,                                        -- year_end
-  'Adam''s Bridge (Rama Setu) shoals',         -- source_text
+  'Ramayana; popular belief',                  -- source_text
   'Claims the shoal chain between India and Sri Lanka is an engineered bridge.', -- description
-  'Adam''s Bridge, also called Rama Setu, is a chain of shoals about 48 km long between Pamban (Rameswaram) Island in Tamil Nadu and Mannar Island in Sri Lanka. A popular claim holds that it is an engineered bridge, identified with the causeway that Rama''s army built in the Ramayana. Geological and archaeological study describes it as a natural formation, and no physical evidence of human construction has been found.', -- background
+  'Ram Setu is a chain of shoals about 48 km long between Pamban (Rameswaram) Island in Tamil Nadu and Mannar Island in Sri Lanka. A popular claim holds that it is an engineered bridge, identified with the causeway that Rama''s army built in the Ramayana. Geological and archaeological study describes it as a natural formation, and no physical evidence of human construction has been found.', -- background
   NULL,                                        -- significance
   NULL,                                        -- western_parallel
   NULL,                                        -- transmission_note
@@ -24,25 +24,24 @@ INSERT INTO innovations (
   'Geologists describe it as a natural chain of limestone shoals and sandbanks; its religious significance is a matter of faith, not engineering evidence.', -- caveat
   'Pan-Indian / unspecified',                  -- region
   'Reference-cited',                           -- verification
-  'Adam''s_Bridge',                            -- wikipedia
+  'Ram_Setu',                                  -- wikipedia
   'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Adams_Bridge_aerial.jpg/500px-Adams_Bridge_aerial.jpg', -- image_url
-  'Wikimedia Commons, via Wikipedia: Adam''s Bridge' -- image_credit
+  'Wikimedia Commons, via Wikipedia: Ram Setu' -- image_credit
 );
 
 INSERT INTO sources (innovation_id, position, kind, title, url) VALUES
   ('IND-363', 1, 'reference', 'Geological Survey of India', NULL),
   ('IND-363', 2, 'reference', 'NRSC mapping (2024)', NULL),
-  ('IND-363', 3, 'article', 'Wikipedia: Adam''s Bridge', 'https://en.wikipedia.org/wiki/Adam''s_Bridge');
+  ('IND-363', 3, 'article', 'Wikipedia: Ram Setu', 'https://en.wikipedia.org/wiki/Ram_Setu');
 
 -- Researched sources.
 INSERT INTO sources (innovation_id, position, kind, title, institution, url) VALUES
-  ('IND-363', 4, 'article', 'Wikipedia: Adam''s Bridge', NULL, 'https://en.wikipedia.org/wiki/Adam%27s_Bridge'),
-  ('IND-363', 5, 'reference', 'Archaeological Survey of India; Government of India affidavit to the Supreme Court (2007)', NULL, NULL),
-  ('IND-363', 6, 'reference', 'Scientific Reports (2024), ICESat-2 mapping of Adam''s Bridge', NULL, NULL);
+  ('IND-363', 4, 'reference', 'Archaeological Survey of India; Government of India affidavit to the Supreme Court (2007)', NULL, NULL),
+  ('IND-363', 5, 'article', 'ICESat-2 bathymetry of the ridge (Dandabathula et al.)', 'Scientific Reports (2024)', 'https://www.nature.com/articles/s41598-024-65908-2');
 
 INSERT INTO chapters (innovation_id, position, heading, body) VALUES
   ('IND-363', 1, 'Where the claim comes from',
-'The shoals separate the Gulf of Mannar from the Palk Strait in water typically only 1 to 3 m deep. Early geographers knew the feature: the ninth-century writer Ibn Khordadbeh called it Set Bandhai, and the name Adam''s Bridge, from an Islamic tradition that Adam crossed there, appears around the eleventh century. Temple records suggest the shoals were broken at Pamban by violent storms in 1480. The Ramayana describes Rama building a bridge to Lanka, and popular Hindu belief identifies that Lanka with Sri Lanka, though some scholars dispute the identification.'),
+'The shoals separate the Gulf of Mannar from the Palk Strait in water typically only 1 to 3 m deep. Early geographers knew the feature: the ninth-century writer Ibn Khordadbeh called it Set Bandhai. Temple records suggest the shoals were broken at Pamban by violent storms in 1480. The Ramayana describes Rama building a bridge to Lanka, and popular Hindu belief identifies that Lanka with Sri Lanka, though some scholars dispute the identification.'),
   ('IND-363', 2, 'The idea',
 'Geologists describe the formation as parallel ledges of sandstone and conglomerate that are hard at the surface and become softer and coarser with depth, grading into sandbanks; an ISRO study described it as made of 103 small patch reefs. During the last glacial period, lower sea levels exposed land linking India and Sri Lanka. Rising seas submerged the area roughly 7,000 years ago, and later sea-level changes allowed the islands and shoals to re-emerge. Some researchers favour local uplift over sea-level change as the explanation.'),
   ('IND-363', 3, 'What the evidence shows',

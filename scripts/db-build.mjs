@@ -1,6 +1,6 @@
-// Builds db/indiatotheworld.sqlite from db/schema.sql, db/reference/*.sql and
-// db/entries/*.sql. Fails with a per-file report if any contribution breaks
-// a rule, so a bad pull request can never reach the site.
+// Builds db/indiatotheworld.sqlite from db/schema.sql, db/reference/*.sql,
+// db/entries/*.sql and db/people.sql. Fails with a per-file report if any
+// contribution breaks a rule, so a bad pull request can never reach the site.
 //   node scripts/db-build.mjs
 import fs from 'node:fs';
 import path from 'node:path';
@@ -20,7 +20,7 @@ for (const f of sqlFiles('db/reference')) db.exec(read(`db/reference/${f}`));
 
 const errors = [];
 // Rows an entry file may add, each keyed to its entry id.
-const TABLES = [['innovations', 'id'], ['sources', 'innovation_id'], ['outcomes', 'innovation_id'], ['chapters', 'innovation_id'], ['journey_stops', 'innovation_id'], ['relations', 'from_id']];
+const TABLES = [['innovations', 'id'], ['sources', 'innovation_id'], ['outcomes', 'innovation_id'], ['chapters', 'innovation_id'], ['journey_stops', 'innovation_id'], ['relations', 'from_id'], ['lessons', 'innovation_id']];
 const othersCount = (id) => TABLES.map(([t, col]) => db.prepare(`SELECT COUNT(*) AS n FROM ${t} WHERE ${col} IS NOT ?`).get(id).n).join();
 // One pass, so a '--' inside a string isn't taken for a comment, nor a quote inside a comment for a string.
 const code = (sql) => sql.replace(/'(?:[^']|'')*'|"(?:[^"]|"")*"|--[^\n]*|\/\*[\s\S]*?\*\//g, (m) => (m[0] === "'" || m[0] === '"' ? "''" : ' '));
@@ -46,9 +46,15 @@ for (const file of sqlFiles('db/entries')) {
   db.exec('RELEASE entry');
 }
 
+// People are credited after every entry exists, and the file may touch nothing else.
+const people = read('db/people.sql');
+if (code(people).split(';').map((st) => st.trim()).filter(Boolean).some((st) => !/^INSERT\s+INTO\s+(people|credits)\s*\(/i.test(st) || /\b(CONFLICT|REPLACE)\b/i.test(st)))
+  errors.push('people.sql: only plain INSERT INTO people or credits statements are allowed');
+else try { db.exec(people); } catch (e) { errors.push(`people.sql: ${e.message}`); }
+
 for (const v of db.prepare('PRAGMA foreign_key_check').all()) {
   const row = db.prepare(`SELECT * FROM ${v.table} WHERE rowid = ?`).get(v.rowid) ?? {};
-  errors.push(`${row.innovation_id ?? row.from_id ?? v.table}: ${v.table} points to a missing ${v.parent} row (${JSON.stringify(row.to_id ?? row.discipline_id ?? '')})`);
+  errors.push(`${row.innovation_id ?? row.from_id ?? v.table}${v.table === 'credits' ? ` (people.sql, ${row.person_id})` : ''}: ${v.table} points to a missing ${v.parent} row (${JSON.stringify(row.to_id ?? row.discipline_id ?? row.pattern_id ?? row.innovation_id ?? '')})`);
 }
 
 // Journeys must be numbered 1, 2, 3... without gaps.

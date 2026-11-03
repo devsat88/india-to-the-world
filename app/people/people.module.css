@@ -1,0 +1,24 @@
+.page { max-width: 980px; margin: 0 auto; padding: 120px 24px 80px; }
+.page h1 { font: clamp(56px, 9vw, 120px)/0.9 var(--display); margin: 0; }
+.intro { font-size: 20px; color: var(--muted); max-width: 52ch; margin: 18px 0 36px; }
+.back { position: relative; z-index: 1; display: inline-block; margin-bottom: 18px; color: var(--muted); font-size: 15px; text-decoration: none; }
+.back:hover { color: var(--ink); }
+
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.card {
+  display: flex; flex-direction: column; gap: 6px; padding: 18px 20px; border-radius: 18px;
+  border: 1px solid var(--line); background: var(--night-2); text-decoration: none;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.card:hover { border-color: var(--turmeric); transform: translateY(-2px); }
+.card h2 { margin: 0; font: 24px/1.1 var(--display); }
+.life { color: var(--turmeric); font-size: 14px; font-weight: 600; }
+.card p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.45; }
+.card small { margin-top: auto; padding-top: 6px; color: var(--ink); font-size: 13px; font-weight: 600; }
+
+.person .life { display: block; margin-top: 14px; font-size: 18px; }
+.person h2 { font: 30px/1 var(--display); margin: 40px 0 10px; }
+
+@media (max-width: 640px) {
+  .page { padding: 96px 16px 64px; }
+}

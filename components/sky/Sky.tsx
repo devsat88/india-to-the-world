@@ -7,6 +7,7 @@ import { Stars } from '@react-three/drei';
 import { OrbitControls as Controls } from 'three/examples/jsm/controls/OrbitControls.js';
 import LeafSheet from '@/components/LeafSheet';
 import Peek, { type PeekAt } from '@/components/Peek';
+import { dailyPick } from '@/lib/daily';
 import { useLinkedEntry } from '@/lib/share';
 import { eraScale, formatYear } from '@/lib/time';
 import type { Atlas, Item } from '@/lib/types';
@@ -185,6 +186,7 @@ export default function Sky({ atlas }: { atlas: Atlas }) {
   const [focus, setFocus] = useState(memory.focus);
   const [hover, setHover] = useState<PeekAt | null>(null);
   const [open, setOpen] = useState<Item | null>(memory.open);
+  const today = useMemo(() => dailyPick(atlas.items), [atlas]);
   const yearRef = useRef<HTMLOutputElement>(null);
   const rangeRef = useRef<HTMLInputElement>(null);
   const controls = useRef<Controls>(null);
@@ -247,6 +249,9 @@ export default function Sky({ atlas }: { atlas: Atlas }) {
           <div><dt>Sectors</dt><dd>{Object.keys(atlas.disciplines).length} disciplines</dd></div>
         </dl>
         <p className={styles.hint}>Drag to orbit · Scroll to zoom · Tap a star</p>
+        <button className={styles.today} onClick={() => setOpen(today)}>
+          <small>Today&apos;s pick</small>{today.title}
+        </button>
       </aside>
 
       {hover && <Peek at={hover} color={atlas.disciplines[hover.item.discipline].color} />}

@@ -35,3 +35,7 @@ INSERT INTO sources (innovation_id, position, kind, title, creator, year, url) V
 
 INSERT INTO outcomes (innovation_id, position, text) VALUES
   ('IND-385', 1, 'Paperless admissions, KYC and vehicle checks.');
+
+-- What it teaches someone building today.
+INSERT INTO lessons (innovation_id, pattern_id, problem, limits, insight) VALUES
+  ('IND-385', 'public-rails', 'Every application needed paper copies of certificates, attested by hand.', 'Documents come from thousands of separate agencies and universities.', 'Let issuers push documents straight into a citizen''s account and let others fetch them from the issuer, so the digital copy counts as the original.');

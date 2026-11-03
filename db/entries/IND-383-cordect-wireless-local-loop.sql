@@ -37,3 +37,7 @@ INSERT INTO outcomes (innovation_id, position, text) VALUES
 
 INSERT INTO relations (from_id, to_id, kind) VALUES
   ('IND-383', 'IND-378', 'related');
+
+-- What it teaches someone building today.
+INSERT INTO lessons (innovation_id, pattern_id, problem, limits, insight) VALUES
+  ('IND-383', 'built-for-here', 'Villages had no phones because laying copper to every house cost too much.', 'Low incomes and long distances between homes.', 'Adapt an existing cordless-phone standard into a wireless loop carrying voice and internet over many kilometres.');

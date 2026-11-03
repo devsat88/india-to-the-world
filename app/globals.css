@@ -27,6 +27,7 @@ a { color: inherit; }
 button { font: inherit; color: inherit; cursor: pointer; }
 :focus-visible { outline: 2px solid var(--turmeric); outline-offset: 3px; border-radius: 4px; }
 
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .swatch { display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: var(--c); flex: none; }
 
 /* Palm-leaf surface, shared by the quick-view sheet, entry page and game cards */

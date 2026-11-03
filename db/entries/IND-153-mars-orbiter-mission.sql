@@ -69,3 +69,7 @@ INSERT INTO chapters (innovation_id, position, heading, body) VALUES
 April 2022: Last contact with the spacecraft.
 
 3 October 2022: ISRO declares the mission over.');
+
+-- What it teaches someone building today.
+INSERT INTO lessons (innovation_id, pattern_id, problem, limits, insight) VALUES
+  ('IND-153', 'frugal', 'Reach Mars on a national space budget.', 'About 450 crore rupees, and only one attempt.', 'Keep the spacecraft small and the mission focused, and build on proven designs and launchers.');

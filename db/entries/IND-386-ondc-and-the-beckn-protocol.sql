@@ -35,3 +35,7 @@ INSERT INTO sources (innovation_id, position, kind, title, creator, year, url) V
 
 INSERT INTO outcomes (innovation_id, position, text) VALUES
   ('IND-386', 1, 'Small sellers reach buyers on many apps without paying a single platform.');
+
+-- What it teaches someone building today.
+INSERT INTO lessons (innovation_id, pattern_id, problem, limits, insight) VALUES
+  ('IND-386', 'open-standard', 'Online shopping is locked inside a few large platforms that control buyers, sellers and delivery.', 'Small sellers cannot afford to list on every platform.', 'Split buyer apps, seller apps and logistics apart over an open protocol, as UPI did for payments.');

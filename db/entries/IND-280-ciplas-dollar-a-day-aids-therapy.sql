@@ -78,3 +78,7 @@ April 2001: Drug companies drop their lawsuit against South Africa
 November 2001: WTO Doha Declaration on TRIPS and public health
 
 2005: India introduces product patents for medicines');
+
+-- What it teaches someone building today.
+INSERT INTO lessons (innovation_id, pattern_id, problem, limits, insight) VALUES
+  ('IND-280', 'frugal', 'HIV combination therapy cost about 10,000 dollars a year, far beyond poor countries.', 'The branded drugs were patented in rich countries.', 'India''s process-patent law of the time allowed generic production; selling at about a dollar a day showed mass treatment was affordable.');

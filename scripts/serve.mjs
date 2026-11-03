@@ -5,7 +5,7 @@ import path from 'node:path';
 
 const dir = path.resolve(path.dirname(new URL(import.meta.url).pathname), '../out');
 const port = Number(process.argv[2]) || 5173;
-const TYPES = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg', '.webp': 'image/webp' };
+const TYPES = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.xml': 'application/xml', '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg', '.webp': 'image/webp' };
 
 http
   .createServer((req, res) => {

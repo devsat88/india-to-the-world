@@ -70,3 +70,7 @@ October 1964: Lal Bahadur Shastri visits Anand.
 1996: Phase III, the final phase, ends.
 
 1998: India overtakes the United States as the largest milk producer.');
+
+-- What it teaches someone building today.
+INSERT INTO lessons (innovation_id, pattern_id, problem, limits, insight) VALUES
+  ('IND-353', 'owned-by-members', 'India produced too little milk, and small farmers had no way to reach city buyers.', 'Millions of producers with one or two animals each.', 'Link farmer-owned village cooperatives into a national grid, so producers own the processing and the brand.');

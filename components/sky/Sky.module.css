@@ -12,6 +12,14 @@
 .legend dt { font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; }
 .legend dd { margin: 0; color: var(--ink); font-weight: 600; }
 .hint { margin: 0; font-size: 12px; line-height: 1.6; }
+.today {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 2px; margin-top: 16px; padding: 10px 14px;
+  border-radius: 14px; border: 1px solid var(--line); background: rgba(27, 34, 80, 0.6);
+  color: var(--ink); font: 17px/1.2 var(--display); text-align: left; pointer-events: auto;
+  transition: border-color 0.2s;
+}
+.today:hover { border-color: var(--turmeric); }
+.today small { font: 600 11px/1.4 var(--body); letter-spacing: 0.14em; text-transform: uppercase; color: var(--turmeric); }
 
 /* Timeline controls sit top right, under the site bar and clear of the disc. */
 .scrub {

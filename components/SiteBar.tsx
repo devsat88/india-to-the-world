@@ -6,6 +6,7 @@
 import Link from 'next/link';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
+import Search from '@/components/Search';
 import { noteVisit } from '@/lib/visits';
 import styles from './SiteBar.module.css';
 
@@ -28,6 +29,12 @@ const ICONS = {
       <path d="M12 3c2 3 2 5.5 0 7-2-1.5-2-4 0-7Zm0 18c2-3 2-5.5 0-7-2 1.5-2 4 0 7ZM3 12c3-2 5.5-2 7 0-1.5 2-4 2-7 0Zm18 0c-3-2-5.5-2-7 0 1.5 2 4 2 7 0Z" />
     </>
   ),
+  map: (
+    <>
+      <path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11Z" />
+      <circle cx="12" cy="10" r="2.2" fill="currentColor" />
+    </>
+  ),
   games: (
     <>
       <rect x="3.5" y="3.5" width="17" height="17" rx="4" />
@@ -40,6 +47,7 @@ const LINKS = [
   { href: '/', label: 'Atlas', note: 'Everything at a glance', icon: ICONS.atlas },
   { href: '/lines/', label: 'Lines', note: 'Follow a field through time', icon: ICONS.lines },
   { href: '/rangoli/', label: 'Eras', note: 'One age at a time', icon: ICONS.eras },
+  { href: '/map/', label: 'Map', note: 'Where it began', icon: ICONS.map },
   { href: '/play/', label: 'Games', note: 'Play through history', icon: ICONS.games },
 ];
 
@@ -86,6 +94,7 @@ export default function SiteBar() {
     const place = () => {
       const a = el.querySelector<HTMLElement>('[aria-current]');
       setRibbon(a ? { left: a.offsetLeft + 12, width: a.offsetWidth - 24 } : null);
+      if (a && el.scrollWidth > el.clientWidth) el.scrollTo({ left: a.offsetLeft - (el.clientWidth - a.offsetWidth) / 2 });
     };
     place();
     const ro = new ResizeObserver(place);
@@ -103,7 +112,7 @@ export default function SiteBar() {
   return (
     <header className={styles.bar} data-avoid>
       <Link className={styles.brand} href="/">
-        <span className={styles.name}>India to the World</span>
+        <span className={styles.name}>India to <span className={styles.line2}>the World</span></span>
         <svg className={styles.diya} viewBox="0 0 24 30" aria-hidden>
           <path className={styles.flame} d="M12 2c3 4.5 4 7.5 2.6 10.2A3 3 0 0 1 12 14a3 3 0 0 1-2.6-1.8C8 9.5 9 6.5 12 2Z" />
           <path className={styles.lamp} d="M2 17h20c-.8 5.5-4.8 9-10 9S2.8 22.5 2 17Zm8 9h4l1 3H9Z" />
@@ -119,10 +128,13 @@ export default function SiteBar() {
         ))}
         {ribbon && <span className={styles.ribbon} style={ribbon} aria-hidden />}
       </nav>
-      <Link href="/about/" className={styles.about} aria-current={path.startsWith('/about') ? 'page' : undefined}>
-        <svg className={styles.icon} viewBox="0 0 24 24" aria-hidden><circle cx="12" cy="12" r="8.5" /><path d="M12 11v5.5" /><circle cx="12" cy="7.8" r="1" fill="currentColor" /></svg>
-        <span className={styles.aboutLabel}>About</span>
-      </Link>
+      <div className={styles.end}>
+        <Search className={styles.search} />
+        <Link href="/about/" className={styles.about} aria-current={path.startsWith('/about') ? 'page' : undefined}>
+          <svg className={styles.icon} viewBox="0 0 24 24" aria-hidden><circle cx="12" cy="12" r="8.5" /><path d="M12 11v5.5" /><circle cx="12" cy="7.8" r="1" fill="currentColor" /></svg>
+          <span className={styles.aboutLabel}>About</span>
+        </Link>
+      </div>
       <div ref={layer} className={styles.layer} aria-hidden />
     </header>
   );

@@ -71,3 +71,7 @@ early 1970s: Sethi presents the design to British orthopaedic surgeons
 1981: Sethi receives the Magsaysay Award and Padma Shri
 
 2008: Death of P. K. Sethi');
+
+-- What it teaches someone building today.
+INSERT INTO lessons (innovation_id, pattern_id, problem, limits, insight) VALUES
+  ('IND-283', 'built-for-here', 'Western artificial feet assumed shoes, chairs and money.', 'Users who walk barefoot, squat, sit cross-legged, work in wet fields and cannot pay.', 'Design for how people actually live, from cheap local rubber, and fit it free.');

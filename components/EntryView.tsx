@@ -80,6 +80,7 @@ function Branches({ list, onOpen }: { list: Branch[]; onOpen: Open }) {
 export default function EntryView({ entry, discipline: d, onOpen, failed, detailed }: Props) {
   const full = 'sources' in entry ? entry : null;
   const myth = entry.evidence === 'Contested-Myth';
+  const claim = entry.discipline === 'myth-check';
 
   const of = (...kinds: Source['kind'][]) => full?.sources.filter((s) => kinds.includes(s.kind)) ?? [];
   const primary = of('primary_text', 'translation');
@@ -91,7 +92,7 @@ export default function EntryView({ entry, discipline: d, onOpen, failed, detail
     ['Dated', entry.yearEnd !== entry.year ? formatSpan(entry.year, entry.yearEnd) : formatYear(entry.year)],
     ['As scholars put it', entry.period],
     ['Originator', entry.originator],
-    ['Source text', full.sourceText],
+    ['Source text', claim ? null : full.sourceText],
     ['Region', full.region],
     ['Discipline', d.name],
   ] satisfies [string, string | null][]).filter((f) => f[1]) : [];
@@ -109,16 +110,33 @@ export default function EntryView({ entry, discipline: d, onOpen, failed, detail
         <h1>{entry.title}</h1>
         <p className={styles.when}>
           <strong>{entry.period}</strong>
-          {[entry.originator, full?.sourceText, full?.region].filter(Boolean).map((v) => <span key={v}>{v}</span>)}
+          {[entry.originator, claim ? null : full?.sourceText, full?.region].filter(Boolean).map((v) => <span key={v}>{v}</span>)}
         </p>
         <p className={styles.pills}>
           <span className={styles.year}>{formatYear(entry.year)}</span>
+          {full?.people.map((p) => <Link key={p.id} className={styles.person} href={`/people/${p.id}/`}>{p.name}</Link>)}
         </p>
         <p className={styles.lede}>{entry.description}</p>
+        {myth && (
+          <dl className={styles.verdict}>
+            <div><dt>Verdict</dt><dd>{claim ? 'Not supported by evidence' : 'Origin disputed'}</dd></div>
+            {claim && full?.sourceText && <div><dt>Where the claim appears</dt><dd>{full.sourceText}</dd></div>}
+          </dl>
+        )}
         {facts.length > 0 && (
           <dl className={styles.facts}>
             {facts.map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}
           </dl>
+        )}
+        {full?.lesson && (
+          <aside className={styles.lesson}>
+            <p className={styles.kicker}>For builders · <Link href={`/lessons/#${full.lesson.pattern.id}`}>{full.lesson.pattern.name}</Link></p>
+            <dl>
+              <div><dt>Problem</dt><dd>{full.lesson.problem}</dd></div>
+              <div><dt>Constraint</dt><dd>{full.lesson.limits}</dd></div>
+              <div><dt>The move</dt><dd>{full.lesson.insight}</dd></div>
+            </dl>
+          </aside>
         )}
         {detailed && full && <Chapters list={full.chapters} />}
         {full?.background && <section><h2>Background</h2><p>{full.background}</p></section>}

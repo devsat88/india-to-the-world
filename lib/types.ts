@@ -82,6 +82,16 @@ export type Entry = Item & {
   builtOn: Item[];
   related: Item[];
   journey: JourneyStop[];
+  people: Pick<Person, 'id' | 'name'>[];
+  lesson: Lesson | null;
 };
 
+export type Pattern = { id: string; name: string; blurb: string };
+
+/** What a modern entry teaches someone building today. */
+export type Lesson = { pattern: Pattern; problem: string; limits: string; insight: string };
+
 export type Journey = { item: Item; stops: JourneyStop[] };
+
+/** Someone credited with entries; `life` as written, e.g. '1887-1920' or 'b. 1955'. */
+export type Person = { id: string; name: string; life: string | null; blurb: string };

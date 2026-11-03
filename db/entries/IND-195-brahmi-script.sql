@@ -64,3 +64,8 @@ c. 113 BCE: Heliodorus pillar erected with a Brahmi inscription.
 1830s: James Prinsep deciphers Brahmi in a series of articles.
 
 1895: Georg Buhler publishes his case for a Semitic origin.');
+
+-- Scripts that grew out of Brahmi.
+INSERT INTO relations (from_id, to_id, kind) VALUES
+  ('IND-195', 'IND-415', 'led_to'),
+  ('IND-195', 'IND-416', 'led_to');

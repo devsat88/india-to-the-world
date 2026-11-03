@@ -74,3 +74,7 @@ Critics also note that Narayana Health is a for-profit, publicly listed company,
 2014: Health City Cayman Islands opens.
 
 2016: Narayana Hrudayalaya Ltd lists on Indian stock exchanges.');
+
+-- What it teaches someone building today.
+INSERT INTO lessons (innovation_id, pattern_id, problem, limits, insight) VALUES
+  ('IND-291', 'assembly-line', 'Heart surgery cost far more than most Indian families could pay.', 'Few cardiac surgeons, and patients paying mostly out of their own pockets.', 'Operate in very high volumes so surgeons, equipment and theatres are always in use, which brings down the cost of each operation.');

@@ -79,6 +79,11 @@ INSERT INTO sources (innovation_id, position, kind, title, creator, institution,
 -- INSERT INTO relations (from_id, to_id, kind) VALUES
 --   ('${id}', 'IND-001', 'related');
 
+-- Optional, for modern entries: what it teaches someone building today.
+-- pattern_id: public-rails | open-standard | assembly-line | frugal | built-for-here | owned-by-members
+-- INSERT INTO lessons (innovation_id, pattern_id, problem, limits, insight) VALUES
+--   ('${id}', 'frugal', 'The problem it solved', 'The constraint it had to work within', 'The move that cracked it');
+
 -- Optional: the route it travelled, for the globe game.
 -- INSERT INTO journey_stops (innovation_id, step, place, lat, lon, year, year_label, carrier, story, clue) VALUES
 --   ('${id}', 1, 'Ujjain', 23.18, 75.78, 628, '628 CE', 'Brahmagupta', 'What happened here.', 'A riddle that hints at this place.');

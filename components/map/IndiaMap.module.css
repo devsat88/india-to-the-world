@@ -1,0 +1,70 @@
+.page {
+  display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(320px, 1fr); gap: 32px;
+  max-width: 1320px; margin: 0 auto; padding: 96px 24px 32px;
+}
+
+.stage { position: sticky; top: 88px; align-self: start; }
+.map { display: block; width: 100%; max-height: calc(100vh - 140px); overflow: visible; }
+.border path {
+  fill: none; stroke: color-mix(in srgb, var(--turmeric) 60%, transparent); stroke-width: 3; stroke-linejoin: round;
+  filter: drop-shadow(0 0 14px rgba(232, 163, 23, 0.14));
+}
+.states path {
+  fill: color-mix(in srgb, var(--night-3) 55%, var(--night)); fill-rule: evenodd;
+  stroke: rgba(243, 233, 210, 0.16); stroke-width: 0.7; stroke-linejoin: round;
+  transition: fill 0.25s;
+}
+.states .pinned { cursor: pointer; }
+.states .pinned:hover { fill: color-mix(in srgb, var(--night-3) 85%, var(--night)); }
+.states .picked, .states .picked:hover { fill: color-mix(in srgb, #e86a8a 22%, var(--night-2)); }
+
+.pin { cursor: pointer; outline: none; }
+.dot { fill: var(--turmeric); fill-opacity: 0.85; stroke: var(--night); stroke-width: 2; transition: fill 0.2s, transform 0.25s cubic-bezier(0.3, 1.6, 0.5, 1); }
+.hit { fill: transparent; }
+.halo { fill: var(--turmeric); opacity: 0; transition: opacity 0.2s; }
+.pin:hover .halo { opacity: 0.18; }
+.pin:focus-visible .halo { opacity: 0.35; stroke: var(--ink); stroke-width: 3; }
+.pin:hover .dot, .pin:focus-visible .dot { transform: scale(1.08); }
+.on .dot { fill: #e86a8a; fill-opacity: 1; }
+.on .halo { opacity: 0.25; fill: #e86a8a; animation: breathe 2.4s ease-in-out infinite; }
+@keyframes breathe { 50% { opacity: 0.08; } }
+.count { fill: var(--night); font-size: 17px; font-weight: 700; text-anchor: middle; pointer-events: none; }
+.label {
+  fill: var(--ink); font-size: 22px; font-weight: 700; text-anchor: middle; pointer-events: none;
+  paint-order: stroke; stroke: var(--night); stroke-width: 6px; stroke-linejoin: round;
+}
+
+.credit { margin: 8px 0 0; color: var(--muted); font-size: 12px; }
+
+.side h1 { margin: 0; font: 44px/1.05 var(--display); }
+.kicker { margin: 0 0 6px; color: var(--turmeric); font-size: 13px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; }
+.sub { margin: 6px 0 18px; color: var(--muted); }
+.side h2 { margin: 22px 0 8px; font: 26px/1.2 var(--display); }
+.side h2 small, .groups small { color: var(--muted); font: 600 14px var(--body); }
+
+.groups { display: flex; flex-wrap: wrap; gap: 8px; }
+.groups button {
+  padding: 6px 14px; border-radius: 999px; border: 1px solid var(--line); background: none;
+  font-size: 14px; font-weight: 600;
+}
+.groups button:hover { border-color: var(--muted); }
+.groups button[aria-pressed='true'] { border-color: #e86a8a; background: color-mix(in srgb, #e86a8a 16%, transparent); }
+
+.list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.list button {
+  display: flex; align-items: center; gap: 12px; width: 100%; padding: 11px 4px;
+  border: 0; border-bottom: 1px solid var(--line); background: none; text-align: left;
+}
+.list button:hover .title { color: #fff; text-decoration: underline; text-decoration-color: var(--c); text-underline-offset: 4px; }
+.title { flex: 1; font-weight: 600; }
+.list small { color: var(--muted); font-size: 14px; white-space: nowrap; }
+
+@media (max-width: 860px) {
+  .page { grid-template-columns: 1fr; gap: 12px; padding: 76px 16px 32px; }
+  .stage { position: static; }
+  .map { max-height: 70vh; }
+  .side h1 { font-size: 34px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .on .halo { animation: none; }
+}

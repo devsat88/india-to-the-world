@@ -68,3 +68,7 @@ Requests covered actions such as retrieving, storing, appending, deleting, renam
 1978: Becomes director of an engineering and rural technology institute in Allahabad
 
 2023: Inducted into the Internet Hall of Fame');
+
+-- What it teaches someone building today.
+INSERT INTO lessons (innovation_id, pattern_id, problem, limits, insight) VALUES
+  ('IND-145', 'open-standard', 'Computers on the early ARPANET had no common way to move files between them.', 'Many different machines and operating systems.', 'Publish the protocol as an open specification that any system can implement.');
