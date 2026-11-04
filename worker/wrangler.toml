@@ -1,0 +1,10 @@
+# Cloudflare Worker that keeps the site's visitor count in D1 (free tier).
+name = "itw-counter"
+main = "index.js"
+compatibility_date = "2025-10-01"
+routes = [{ pattern = "count.indiatotheworld.fyi", custom_domain = true }]
+
+[[d1_databases]]
+binding = "DB"
+database_name = "itw-counter"
+database_id = "0311df41-3ebc-4142-9728-52034c5a3ab9"

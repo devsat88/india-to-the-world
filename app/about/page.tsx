@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import ReadingTimeline from '@/components/ReadingTimeline';
+import VisitorCount from '@/components/VisitorCount';
 import { getAtlas } from '@/lib/db';
 import { REPO_URL } from '@/lib/site';
 import { formatYear } from '@/lib/time';
@@ -26,6 +27,7 @@ export default function AboutPage() {
         <div><dt>Disciplines</dt><dd>{Object.keys(disciplines).length}</dd></div>
         <div><dt>Eras</dt><dd>{eras.length}</dd></div>
         <div><dt>Spanning</dt><dd>{formatYear(Math.min(...years))} – {formatYear(Math.max(...years))}</dd></div>
+        <VisitorCount />
       </dl>
 
       <section className={styles.section}>
