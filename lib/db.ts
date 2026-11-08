@@ -176,3 +176,21 @@ export function getLessons(): (Pattern & { lessons: (Lesson & { item: Item })[] 
     lessons: rows.filter((r) => r.pattern_id === p.id).map((r) => ({ ...toLesson(r), item: items.get(r.innovation_id as string)! })),
   }));
 }
+
+/** Extra text for the search index, by entry id: modern names first, then the rest. */
+export function getSearchText(): Record<string, { also: string; extra: string }> {
+  return Object.fromEntries(
+    all(`
+      SELECT i.id, i.today, i.wikipedia,
+        (SELECT group_concat(text, ' · ') FROM outcomes WHERE innovation_id = i.id) AS outcomes,
+        (SELECT group_concat(p.name, ' · ') FROM credits c JOIN people p ON p.id = c.person_id WHERE c.innovation_id = i.id) AS people,
+        i.modern_relevance, i.significance, i.western_parallel, i.transmission_note, i.region, i.period
+      FROM innovations i`).map((r) => [
+      r.id as string,
+      {
+        also: [r.today, (r.wikipedia as string | null)?.replace(/_/g, ' '), r.outcomes, r.people].filter(Boolean).join(' · '),
+        extra: [r.modern_relevance, r.significance, r.western_parallel, r.transmission_note, r.region, r.period].filter(Boolean).join(' · '),
+      },
+    ]),
+  );
+}

@@ -1,7 +1,8 @@
 'use client';
 
 // Find any entry or person from anywhere: the search button in the site bar,
-// or Ctrl/⌘ K. The index is fetched the first time it opens.
+// or Ctrl/⌘ K. The index is fetched the first time it opens. Modern names
+// work too: search ranks what things are called today alongside the titles.
 import { useRouter } from 'next/navigation';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
@@ -78,7 +79,7 @@ export default function Search({ className }: { className?: string }) {
               ref={input}
               className={styles.input}
               value={q}
-              placeholder="Search entries and people"
+              placeholder="Try chess, shampoo, UPI or zero"
               role="combobox"
               aria-expanded
               aria-autocomplete="list"
