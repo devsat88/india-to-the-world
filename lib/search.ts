@@ -3,6 +3,8 @@
 // in `also` as well as its title. Words are matched whole, by prefix (while
 // typing, and plurals) or with a typo or two; filler words are ignored, and a
 // hit that misses one word of a long query still shows, below full matches.
+// A name puts the person first, a year, decade or century finds what happened
+// then, and the top matches bring their linked entries along.
 export type Hit = {
   kind: 'entry' | 'person' | 'page';
   href: string;
@@ -14,8 +16,15 @@ export type Hit = {
   about?: string;
   /** Everything else worth finding it by. */
   extra: string;
+  /** First and last year, for searches by date. */
+  span?: [number, number];
+  /** Hrefs of linked entries, offered after the direct matches. */
+  links?: string[];
   color?: string;
 };
+
+/** A result: a hit, and for a linked entry the title of the match it came from. */
+export type Result = Hit & { via?: string };
 
 const STOP = new Set(
   ('a an and are as at be by did do does for from had has have how i in into is it its me my of on or our than that the their them then '
@@ -109,37 +118,108 @@ function expand(word: string, vocab: string[]) {
   return out;
 }
 
-export function search(hits: Hit[], query: string, limit = 12) {
-  const all = tokens(query);
+type Span = [number, number];
+
+// Dates in the query: '1897', '300 BCE', 'AD 1200', '1890s', '1800s',
+// '5th century BCE'. Returns the spans found and the query without them.
+function dates(query: string): [Span[], string] {
+  const spans: Span[] = [];
+  const bce = (era?: string) => era === 'bce' || era === 'bc';
+  const rest = fold(query)
+    .replace(/\b(\d{1,2})(?:st|nd|rd|th)?\s*(?:century|centuries|cent)\b\s*(bce|bc|ce|ad)?/g, (_, c, era) => {
+      const n = Number(c) * 100;
+      spans.push(bce(era) ? [-n, -n + 99] : [n - 100, n - 1]);
+      return ' ';
+    })
+    .replace(/\b(\d{2,4})0s\b\s*(bce|bc)?/g, (_, d, era) => {
+      const n = Number(d) * 10, w = n % 100 ? 9 : 99;
+      spans.push(bce(era) ? [-n - w, -n] : [n, n + w]);
+      return ' ';
+    })
+    .replace(/\b(?:(ad|ce)\s*(\d{1,4})|(\d{1,7})\s*(bce|bc|ce|ad))\b/g, (_, e1, n1, n2, e2) => {
+      const n = Number(n1 ?? n2);
+      spans.push(bce(e2) ? [-n, -n] : [n, n]);
+      return ' ';
+    })
+    .replace(/\b(\d{4})\b/g, (m, n) => {
+      if (n < 1000 || n > 2100) return m;
+      spans.push([Number(n), Number(n)]);
+      return ' ';
+    });
+  return [spans, rest];
+}
+
+// How close an entry is to a searched span, by the year it began (many
+// entries run to today): 1 inside it, falling off with distance. Old dates
+// are loose, so '300 BCE' reaches further than '1947'.
+function closeness([a]: Span, [s, e]: Span) {
+  if (a >= s && a <= e) return 1;
+  const d = Math.min(Math.abs(a - s), Math.abs(a - e));
+  const tol = Math.max((e - s) / 4, s < 0 ? Math.abs(s) * 0.1 : s < 1500 ? 40 : 3);
+  return d > tol * 3 ? 0 : 1 / (1 + d / tol);
+}
+
+export function search(hits: Hit[], query: string, limit = 12): Result[] {
+  const [spans, text] = dates(query);
+  const all = tokens(text);
   const words = [...new Set(all.filter((w) => !STOP.has(w)))];
-  if (!words.length) words.push(...new Set(all));
-  if (!words.length) return [];
+  if (!words.length && !spans.length) words.push(...new Set(all));
+  if (!words.length && !spans.length) return [];
 
   const { list, vocab } = prepare(hits);
   const matches = words.map((w) => expand(w, vocab));
-  const phrase = fold(query).trim();
-  const need = words.length >= 3 ? words.length - 1 : words.length;
+  const phrase = fold(text).trim();
+  // Rare words tell more than common ones: 'whispering' outweighs 'temple'.
+  const rarity = matches.map((m) => {
+    const n = list.filter(({ fields }) => fields.some((f) => [...m.keys()].some((t) => f.has(t)))).length;
+    return 1 + Math.log((list.length + 1) / (n + 1)) / 3;
+  });
 
-  const scored: [number, number, Hit][] = [];
+  const scored: { found: number; score: number; hit: Hit }[] = [];
   for (const { hit, title, fields } of list) {
-    let found = 0, score = 0;
-    for (const m of matches) {
+    let found = 0, score = 0, inTitle = 0;
+    for (const [i, m] of matches.entries()) {
       // The best field counts in full; every other field it appears in adds a little.
       let best = 0, also = 0;
       FIELDS.forEach(([, weight], f) => {
         let here = 0;
-        for (const [t, q] of m) if (fields[f].has(t)) here = Math.max(here, weight * q);
+        let whole = false;
+        for (const [t, q] of m) if (fields[f].has(t)) { here = Math.max(here, weight * q); whole ||= q >= 0.95; }
+        if (!f && whole) inTitle++;
         if (here > best) { also += best && 1; best = here; } else if (here) also += 1;
       });
-      if (best) { found++; score += best + also; }
+      if (best) { found++; score += (best + also) * rarity[i]; }
     }
-    if (found < need) continue;
-    if (title.startsWith(phrase)) score += 12;
-    else if (title.includes(phrase)) score += 6;
-    scored.push([found, score + (hit.kind === 'person' ? 1 : 0), hit]);
+    if (spans.length) {
+      const near = hit.span ? Math.max(...spans.map((s) => closeness(hit.span!, s))) : 0;
+      if (!words.length && !near) continue;
+      score += 14 * near;
+    }
+    if (!found && words.length) continue;
+    if (phrase && title.startsWith(phrase)) score += 12;
+    else if (phrase && title.includes(phrase)) score += 6;
+    // A name search: the person outranks everything they are credited with.
+    if (hit.kind === 'person' && words.length && inTitle === words.length) score += 40;
+    scored.push({ found, score, hit });
   }
-  return scored
-    .sort((a, b) => b[0] - a[0] || b[1] - a[1] || a[2].title.length - b[2].title.length)
-    .slice(0, limit)
-    .map(([, , h]) => h);
+
+  // Every word should match (all but one in a long query); if nothing does,
+  // show the best partial matches rather than nothing.
+  const need = words.length >= 3 ? words.length - 1 : words.length;
+  const full = scored.filter((r) => r.found >= need);
+  const ranked = (full.length ? full : scored)
+    .sort((a, b) => b.score - a.score || a.hit.title.length - b.hit.title.length)
+    .map((r) => r.hit);
+
+  // Entries linked from the top matches, after the direct results.
+  const byHref = new Map(hits.map((h) => [h.href, h]));
+  const seen = new Set(ranked.slice(0, limit).map((h) => h.href));
+  const linked: Result[] = [];
+  for (const h of ranked.slice(0, 3)) {
+    for (const href of h.links ?? []) {
+      const l = byHref.get(href);
+      if (l && !seen.has(href) && linked.length < 4) { seen.add(href); linked.push({ ...l, via: h.title }); }
+    }
+  }
+  return [...ranked.slice(0, limit - linked.length), ...linked];
 }

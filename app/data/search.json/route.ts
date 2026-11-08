@@ -20,6 +20,8 @@ export function GET() {
         also: text[i.id].also,
         about: [i.originator, i.description].filter(Boolean).join(' · '),
         extra: [d.name, text[i.id].extra].join(' · '),
+        span: [i.year, i.yearEnd] as [number, number],
+        links: text[i.id].links,
         color: d.color,
       };
     }),

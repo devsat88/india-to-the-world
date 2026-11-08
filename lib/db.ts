@@ -178,18 +178,21 @@ export function getLessons(): (Pattern & { lessons: (Lesson & { item: Item })[] 
 }
 
 /** Extra text for the search index, by entry id: modern names first, then the rest. */
-export function getSearchText(): Record<string, { also: string; extra: string }> {
+export function getSearchText(): Record<string, { also: string; extra: string; links: string[] }> {
   return Object.fromEntries(
     all(`
       SELECT i.id, i.today, i.wikipedia,
         (SELECT group_concat(text, ' · ') FROM outcomes WHERE innovation_id = i.id) AS outcomes,
         (SELECT group_concat(p.name, ' · ') FROM credits c JOIN people p ON p.id = c.person_id WHERE c.innovation_id = i.id) AS people,
-        i.modern_relevance, i.significance, i.western_parallel, i.transmission_note, i.region, i.period
+        (SELECT group_concat(j.slug) FROM relations r JOIN innovations j ON j.id = CASE r.from_id WHEN i.id THEN r.to_id ELSE r.from_id END
+          WHERE i.id IN (r.from_id, r.to_id)) AS links,
+        i.background, i.modern_relevance, i.significance, i.western_parallel, i.transmission_note, i.region, i.period
       FROM innovations i`).map((r) => [
       r.id as string,
       {
         also: [r.today, (r.wikipedia as string | null)?.replace(/_/g, ' '), r.outcomes, r.people].filter(Boolean).join(' · '),
-        extra: [r.modern_relevance, r.significance, r.western_parallel, r.transmission_note, r.region, r.period].filter(Boolean).join(' · '),
+        extra: [r.modern_relevance, r.significance, r.western_parallel, r.transmission_note, r.region, r.period, (r.background as string | null)?.slice(0, 600)].filter(Boolean).join(' · '),
+        links: r.links ? (r.links as string).split(',').map((slug) => `/entry/${slug}/`) : [],
       },
     ]),
   );

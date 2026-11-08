@@ -1,12 +1,12 @@
 'use client';
 
 // Find any entry or person from anywhere: the search button in the site bar,
-// or Ctrl/⌘ K. The index is fetched the first time it opens. Modern names
-// work too: search ranks what things are called today alongside the titles.
+// or Ctrl/⌘ K. The index is fetched the first time it opens. Modern names,
+// people and dates all work; see lib/search.ts.
 import { useRouter } from 'next/navigation';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { search, type Hit } from '@/lib/search';
+import { search, type Hit, type Result } from '@/lib/search';
 import { formatYear } from '@/lib/time';
 import styles from './Search.module.css';
 
@@ -53,7 +53,7 @@ export default function Search({ className }: { className?: string }) {
   }, [open]);
 
   const results = useMemo(() => (hits ? search(hits, q) : []), [hits, q]);
-  const list: Hit[] = q.trim() ? results : PAGES.map((p) => ({ kind: 'page', href: p.href, title: p.title, note: null, extra: '' }));
+  const list: Result[] = q.trim() ? results : PAGES.map((p) => ({ kind: 'page', href: p.href, title: p.title, note: null, extra: '' }));
   const found = q.trim() && hits ? results.length : 0;
   useEffect(() => setAt(0), [q]);
 
@@ -79,7 +79,7 @@ export default function Search({ className }: { className?: string }) {
               ref={input}
               className={styles.input}
               value={q}
-              placeholder="Try chess, shampoo, UPI or zero"
+              placeholder="Try chess, UPI, Raman or 1947"
               role="combobox"
               aria-expanded
               aria-autocomplete="list"
@@ -106,7 +106,10 @@ export default function Search({ className }: { className?: string }) {
                   style={h.color ? ({ '--c': h.color } as React.CSSProperties) : undefined}
                 >
                   <span className={styles.tag}>{h.kind === 'entry' ? <span className="swatch" /> : h.kind === 'person' ? 'Person' : 'Page'}</span>
-                  <span className={styles.title}>{h.title}</span>
+                  <span className={styles.title}>
+                    {h.title}
+                    {h.via && <span className={styles.via}>Linked to {h.via}</span>}
+                  </span>
                   {h.note !== null && <small>{typeof h.note === 'number' ? formatYear(h.note) : h.note}</small>}
                 </li>
               ))}
