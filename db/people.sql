@@ -298,4 +298,6 @@ INSERT INTO credits (person_id, innovation_id) VALUES
   ('ashish-vaswani', 'IND-406'),
   ('shubhanshu-shukla', 'IND-350'),
   ('raghunath-murmu', 'IND-417'),
-  ('sugata-mitra', 'IND-414');
+  ('sugata-mitra', 'IND-414'),
+  ('qazi-azizul-haque', 'IND-419'),
+  ('hem-chandra-bose', 'IND-419');
