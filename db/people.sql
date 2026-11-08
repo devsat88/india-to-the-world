@@ -125,7 +125,9 @@ INSERT INTO people (id, name, life, blurb) VALUES
   ('ashish-vaswani', 'Ashish Vaswani', NULL, 'Lead author of the 2017 Transformer paper behind modern AI language models.'),
   ('raghunath-murmu', 'Raghunath Murmu', '1905-1982', 'Teacher and writer who created the Ol Chiki script for Santali in 1925.'),
   ('sugata-mitra', 'Sugata Mitra', 'b. 1952', 'Education researcher whose Hole in the Wall computer showed children teaching themselves.'),
-  ('shubhanshu-shukla', 'Shubhanshu Shukla', 'b. 1985', 'Air Force pilot who in 2025 became the first Indian aboard the International Space Station.');
+  ('shubhanshu-shukla', 'Shubhanshu Shukla', 'b. 1985', 'Air Force pilot who in 2025 became the first Indian aboard the International Space Station.'),
+  ('qazi-azizul-haque', 'Qazi Azizul Haque', 'c. 1872-1935', 'Bengal Police sub-inspector who devised the mathematical scheme that sorts fingerprints into 1,024 groups, the core of the "Henry system".'),
+  ('hem-chandra-bose', 'Hem Chandra Bose', '1867-1949', 'Bengal Police officer who refined fingerprint sub-classification and devised a code for sending prints by telegraph.');
 
 INSERT INTO credits (person_id, innovation_id) VALUES
   ('aryabhata', 'IND-009'),
